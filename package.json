@@ -9,14 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tiptap/extension-bold": "^2.11.7",
+    "@tiptap/extension-bullet-list": "^2.11.7",
+    "@tiptap/extension-heading": "^2.11.7",
+    "@tiptap/extension-italic": "^2.11.7",
+    "@tiptap/extension-list-item": "^2.11.7",
+    "@tiptap/extension-ordered-list": "^2.11.7",
+    "@tiptap/extension-text-align": "^2.11.7",
+    "@tiptap/extension-underline": "^2.11.7",
+    "@tiptap/react": "^2.11.7",
+    "@tiptap/starter-kit": "^2.11.7",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
+    "firebase": "^11.6.0",
+    "html-react-parser": "^5.2.3",
+    "lucide-react": "^0.503.0",
     "mobx": "^6.13.7",
     "mobx-react-lite": "^4.1.0",
     "next": "15.2.4",
+    "next-intl": "^4.0.2",
     "nookies": "^2.5.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.55.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

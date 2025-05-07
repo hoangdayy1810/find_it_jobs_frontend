@@ -1,0 +1,58 @@
+{
+    "home": {
+        "title": "Welcome to my app",
+        "description": "This is a multilingual Next.js app"
+    },
+    "header": {
+        "search_placeholder": "Search...",
+        "notification": "Notification",
+        "user": "User",
+        "vi": "Vietnamese",
+        "en": "English"
+    },
+    "login": {
+        "title": "Log In",
+        "you_are": "You are",
+        "candidate": "Candidate",
+        "employer": "Employer",
+        "userName": "User Name",
+        "password": "Password",
+        "login_button": "Log In",
+        "login_loading": "Logging in...",
+        "username_required": "Please enter your username",
+        "password_required": "Please enter your password",
+        "role_required": "Please select a role",
+        "userName_placeholder": "Enter username",
+        "password_placeholder": "Enter password",
+        "or": "Or",
+        "login_facebook": "Log in with Facebook",
+        "login_google": "Log in with Google",
+        "havent_account": "Don't have an account? ",
+        "register_now": "Register Now"
+    },
+    "register": {
+        "title": "Register",
+        "you_are": "You are",
+        "candidate": "Candidate",
+        "employer": "Employer",
+        "userName": "User Name",
+        "password": "Password",
+        "password_confirm": "Confirm Password",
+        "username_required": "Please enter your username",
+        "username_length": "Username length must be between 8 and 50 characters",
+        "username_alphanumeric": "Username can only contain letters and numbers",
+        "password_required": "Please enter your password",
+        "password_length": "Password length must be between 8 and 50 characters",
+        "password_requirements": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+        "role_required": "Please select a role",
+        "password_confirm_required": "Please confirm your password",
+        "match_password": "Passwords do not match",
+        "userName_placeholder": "Enter username",
+        "password_placeholder": "Enter password",
+        "password_confirm_placeholder": "Re-enter password",
+        "register_button": "Register",
+        "register_loading": "Registering...",
+        "already_have_account": "Already have an account? ",
+        "login_now": "Log in now"
+    }
+}

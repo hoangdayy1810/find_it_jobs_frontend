@@ -1,0 +1,58 @@
+{
+    "home": {
+        "title": "Chào mừng đến với ứng dụng của tôi",
+        "description": "Đây là ứng dụng Next.js đa ngôn ngữ"
+    },
+    "header": {
+        "search_placeholder": "Tìm kiếm...",
+        "notification": "Thông báo",
+        "user": "Người dùng",
+        "vi": "Tiếng Việt",
+        "en": "Tiếng Anh"
+    },
+    "login": {
+        "title": "Đăng nhập",
+        "you_are": "Bạn là",
+        "candidate": "Ứng viên",
+        "employer": "Nhà tuyển dụng",
+        "userName": "Tên đăng nhập",
+        "password": "Mật khẩu",
+        "login_button": "Đăng nhập",
+        "login_loading": "Đang đăng nhập...",
+        "username_required": "Vui lòng nhập tên đăng nhập",
+        "password_required": "Vui lòng nhập mật khẩu",
+        "role_required": "Vui lòng chọn vai trò",
+        "userName_placeholder": "Nhập tên đăng nhập",
+        "password_placeholder": "Nhập mật khẩu",
+        "or": "Hoặc",
+        "login_facebook": "Đăng nhập bằng Facebook",
+        "login_google": "Đăng nhập bằng Google",
+        "havent_account": "Bạn chưa có tài khoản? ",
+        "register_now": "Đăng kí ngay"
+    },
+    "register": {
+        "title": "Đăng kí",
+        "you_are": "Bạn là",
+        "candidate": "Ứng viên",
+        "employer": "Nhà tuyển dụng",
+        "userName": "Tên đăng nhập",
+        "password": "Mật khẩu",
+        "password_confirm": "Xác nhận mật khẩu",
+        "username_required": "Vui lòng nhập tên đăng nhập",
+        "username_length": "Độ dài tên đăng nhập phải từ 8 đến 50 ký tự",
+        "username_alphanumeric": "Tên đăng nhập chỉ được chứa chữ cái và số",
+        "password_required": "Vui lòng nhập mật khẩu",
+        "password_length": "Độ dài mật khẩu phải từ 8 đến 50 ký tự",
+        "password_requirements": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số",
+        "password_confirm_required": "Vui lòng xác nhận mật khẩu",
+        "match_password": "Mật khẩu không khớp",
+        "role_required": "Vui lòng chọn vai trò",
+        "userName_placeholder": "Nhập tên đăng nhập",
+        "password_placeholder": "Nhập mật khẩu",
+        "password_confirm_placeholder": "Nhập lại mật khẩu",
+        "register_button": "Đăng kí",
+        "register_loading": "Đang đăng kí...",
+        "already_have_account": "Bạn đã có tài khoản? ",
+        "login_now": "Đăng nhập ngay"
+    }
+}
