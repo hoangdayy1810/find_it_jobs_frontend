@@ -37,10 +37,13 @@ const Input_Profile: React.FC<InputProfileProps> = ({
     }
 
     if (typeInput === "select" && options.length > 0) {
+      // Convert array value to string for single-select dropdown
+      const selectValue = Array.isArray(value) ? value[0] || "" : value;
+
       return (
         <select
           className="w-full p-2 border rounded-md"
-          value={value}
+          value={selectValue}
           onChange={onChange}
           {...rest}
         >
