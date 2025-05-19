@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { AppProvider } from "@/contexts/AppContext";
 import Header from "@/components/templates/Header";
 import Footer from "@/components/templates/Footer";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,7 +62,7 @@ async function LocaleLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F8FAFC]`}
-        data-new-gr-c-s-check-loaded="14.1102.0"
+        data-new-gr-c-s-check-loaded="14.1104.0"
         data-gr-ext-installed=""
         cz-shortcut-listen="true"
       >
@@ -76,6 +77,7 @@ async function LocaleLayout({
             <footer>
               <Footer />
             </footer>
+            <Toaster position="top-right" />
           </AppProvider>
         </NextIntlClientProvider>
       </body>

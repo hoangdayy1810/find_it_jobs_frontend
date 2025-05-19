@@ -13,8 +13,8 @@ export interface IEmployer {
   email: string;
   website: string;
   address: string;
-  companySize: string[];
-  companyType: string[];
+  companySize: string;
+  companyType: string;
   workingDays: string;
 }
 

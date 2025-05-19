@@ -19,8 +19,8 @@ const LayoutEmployerProfile = ({ children }: { children: React.ReactNode }) => {
               icon="👤"
             />
             <Link_NavBar_Profile
-              href="/employer/saved_job"
-              text="Việc làm của tôi"
+              href="/employer/myjobs"
+              text="Danh sách công việc"
               icon="💼"
             />
             <Link_NavBar_Profile

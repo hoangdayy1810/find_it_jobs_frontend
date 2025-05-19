@@ -31,11 +31,11 @@ const EmployerProfile = observer(() => {
       .required("Email là bắt buộc"),
     website: yup.string().url("Website không hợp lệ"),
     address: yup.string().required("Địa chỉ là bắt buộc"),
-    companySize: yup.array().of(yup.string()),
-    companyType: yup.array().of(yup.string()),
+    companySize: yup.string().required("Quy mô công ty là bắt buộc"),
+    companyType: yup.string().required("Loại hình công ty là bắt buộc"),
     workingDays: yup.array().of(yup.string()),
     description: yup.string(),
-    logo: yup.mixed(),
+    logo: yup.mixed().nullable(),
   });
 
   // Define predefined options for select fields
@@ -81,13 +81,14 @@ const EmployerProfile = observer(() => {
       email: employerStore?.employer?.email || "",
       website: employerStore?.employer?.website || "",
       address: employerStore?.employer?.address || "",
-      companySize: employerStore?.employer?.companySize || [],
-      companyType: employerStore?.employer?.companyType || [],
+      companySize: employerStore?.employer?.companySize || "",
+      companyType: employerStore?.employer?.companyType || "",
       workingDays: employerStore?.employer?.workingDays
         ? parseWorkingDays(employerStore.employer.workingDays)
         : [],
       description: employerStore?.employer?.description || "",
     },
+    mode: "onChange",
   });
 
   // Reset form with employer data when available
@@ -98,8 +99,8 @@ const EmployerProfile = observer(() => {
         email: employerStore.employer.email || "",
         website: employerStore.employer.website || "",
         address: employerStore.employer.address || "",
-        companySize: employerStore.employer.companySize || [],
-        companyType: employerStore.employer.companyType || [],
+        companySize: employerStore.employer.companySize || "",
+        companyType: employerStore.employer.companyType || "",
         workingDays: parseWorkingDays(employerStore.employer.workingDays || ""),
         description: employerStore.employer.description || "",
         logo: employerStore.employer.logo || null,
@@ -125,17 +126,10 @@ const EmployerProfile = observer(() => {
     formData.append("companyCode", data.companyCode);
     formData.append("email", data.email);
     formData.append("website", data.website || "");
-
-    // Handle address
     formData.append("address", data.address || "");
+    formData.append("companySize", data.companySize || "");
+    formData.append("companyType", data.companyType || "");
 
-    // Handle array data
-    if (data.companySize && data.companySize.length > 0) {
-      formData.append("companySize", JSON.stringify(data.companySize));
-    }
-    if (data.companyType && data.companyType.length > 0) {
-      formData.append("companyType", JSON.stringify(data.companyType));
-    }
     if (data.workingDays && data.workingDays.length > 0) {
       // Use formatWorkingDays to convert the array to the human-readable format
       const formattedDays = formatWorkingDays(data.workingDays);
@@ -194,8 +188,10 @@ const EmployerProfile = observer(() => {
                     <div className="relative group cursor-pointer h-full w-full">
                       <Image
                         src={
-                          watch("logo") instanceof FileList
-                            ? URL.createObjectURL(watch("logo")[0])
+                          watch("logo") instanceof FileList && watch("logo")
+                            ? URL.createObjectURL(
+                                (watch("logo") as FileList)[0]
+                              )
                             : employerStore?.employer?.logo ||
                               "/images/avatar_placeholder.png"
                         }
@@ -331,30 +327,18 @@ const EmployerProfile = observer(() => {
                 name="companySize"
                 control={control}
                 render={({ field }) => {
-                  const selectedLabels =
-                    field.value && field.value.length > 0
-                      ? field.value
-                          .map(
-                            (size) =>
-                              companySizeOptions.find(
-                                (option) => option.value === size
-                              )?.label
-                          )
-                          .join(", ")
-                      : "";
-
                   return (
                     <Input_Profile
                       icon={<Network />}
                       {...field}
-                      text={selectedLabels || "Chưa chọn quy mô công ty"}
+                      text={field.value || "Chưa chọn quy mô công ty"}
                       placeholder="Chọn quy mô công ty"
                       isEdit={isEditing}
                       typeInput="select"
                       options={companySizeOptions}
                       onChange={(e) => {
                         // This handles single select
-                        field.onChange([e.target.value]);
+                        field.onChange(e.target.value);
                       }}
                       error={errors.companySize?.message}
                     />
@@ -365,30 +349,18 @@ const EmployerProfile = observer(() => {
                 name="companyType"
                 control={control}
                 render={({ field }) => {
-                  const selectedLabels =
-                    field.value && field.value.length > 0
-                      ? field.value
-                          .map(
-                            (type) =>
-                              companyTypeOptions.find(
-                                (option) => option.value === type
-                              )?.label
-                          )
-                          .join(", ")
-                      : "";
-
                   return (
                     <Input_Profile
                       icon={<Network />}
                       {...field}
-                      text={selectedLabels || "Chưa chọn loại hình công ty"}
+                      text={field.value || "Chưa chọn loại hình công ty"}
                       placeholder="Chọn loại hình công ty"
                       isEdit={isEditing}
                       typeInput="select"
                       options={companyTypeOptions}
                       onChange={(e) => {
                         // This handles single select
-                        field.onChange([e.target.value]);
+                        field.onChange(e.target.value);
                       }}
                       error={errors.companyType?.message}
                     />
