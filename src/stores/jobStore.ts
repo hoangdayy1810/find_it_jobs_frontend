@@ -2,6 +2,7 @@ import api from "@/utils/axios_catch_error_token";
 import axiosInstance from "@/utils/axiosInstance";
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import { tagStore } from "./tagStore";
 
 export interface IJob {
   _id: string;
@@ -14,6 +15,8 @@ export interface IJob {
         address: string;
         companySize: string;
         companyType: string;
+        workingDays: string;
+        website: string;
       };
   title: string;
   description: string;
@@ -27,15 +30,80 @@ export interface IJob {
   views: number;
   tags?: { key: string; value: string }[];
   specializationId?: { _id: string; name: string };
-  applicationCount: number;
+  applicationCount?: number;
+}
+
+interface IJobSearch {
+  _id: string;
+  title: string;
+  specializationId?: { _id: string; name: string };
+  location: string;
+  salary: { min: number; max: number };
+  experience: (string | undefined)[];
+  jobType: string;
 }
 
 class JobStore {
+  jobs: IJob[] = [];
   jobsEmployer: IJob[] = [];
   jobDetail: IJob | null = null;
+  similarJobs: IJob[] = [];
+  jobsBySearch: IJobSearch[] = [];
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  async getFilteredJobs(data: any) {
+    console.log("data", data);
+    try {
+      const response = await axiosInstance.get("/api/jobs", {
+        params: data,
+      });
+      if (response.data && response.data.jobs) {
+        runInAction(() => {
+          this.jobs = response.data.jobs;
+        });
+        if (response.data.tags) {
+          tagStore.getTagKeysByJobs(response.data.tags);
+        }
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Lỗi lấy danh sách công việc:", error);
+      if (
+        axios.isAxiosError(error) &&
+        typeof error.response?.data === "object"
+      ) {
+        return error.response.data;
+      }
+    }
+  }
+
+  async getJobsBySearch(data: { q: string }) {
+    try {
+      const response = await axiosInstance.get("/api/jobs/search", {
+        params: data,
+      });
+      if (response.data && response.data.jobs) {
+        runInAction(() => {
+          this.jobsBySearch = response.data.jobs;
+        });
+
+        if (response.data.tags) {
+          tagStore.getTagValuesBySearch(response.data.tags);
+        }
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Lỗi tìm kiếm công việc:", error);
+      if (
+        axios.isAxiosError(error) &&
+        typeof error.response?.data === "object"
+      ) {
+        return error.response.data;
+      }
+    }
   }
 
   async getPrivateJobsByEmployer() {
@@ -92,6 +160,7 @@ class JobStore {
       if (response.data) {
         runInAction(() => {
           this.jobDetail = response.data.job;
+          this.similarJobs = response.data.similarJobs;
         });
         return response.data;
       }

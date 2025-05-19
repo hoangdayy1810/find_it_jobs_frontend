@@ -57,7 +57,7 @@ const EmployerJobs = observer(() => {
           (job) =>
             !job.isShow &&
             (new Date(job.expiresAt || Date.now()) < new Date() ||
-              job.applicationCount > 0)
+              (job.applicationCount && job.applicationCount > 0))
         );
       default:
         return plainArray;

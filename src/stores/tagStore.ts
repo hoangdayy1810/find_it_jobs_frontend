@@ -2,6 +2,7 @@ import api from "@/utils/axios_catch_error_token";
 import axiosInstance from "@/utils/axiosInstance";
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import { run } from "node:test";
 
 export interface ITagKey {
   _id: string;
@@ -19,7 +20,8 @@ export interface ITagValue {
 
 class TagStore {
   tagKeys: ITagKey[] | null = null;
-  tagValues: ITagValue[] | null = null;
+  tagKeysByJobs: ITagKey[] | null = null;
+  tagValuesBySearch: ITagValue[] | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -44,23 +46,17 @@ class TagStore {
     }
   }
 
-  async getTagValues() {
-    try {
-      const response = await axiosInstance.get("/api/tags/values");
-      if (response.data) {
-        runInAction(() => {
-          this.tagValues = response.data;
-        });
-      }
-    } catch (error) {
-      console.error("Lỗi lấy danh sách tag values:", error);
-      if (
-        axios.isAxiosError(error) &&
-        typeof error.response?.data === "object"
-      ) {
-        return error.response.data;
-      }
-    }
+  getTagKeysByJobs(data: any) {
+    runInAction(() => {
+      this.tagKeysByJobs = data;
+    });
+    console.log("tagKeysByJobs", this.tagKeysByJobs);
+  }
+
+  getTagValuesBySearch(data: any) {
+    runInAction(() => {
+      this.tagValuesBySearch = data;
+    });
   }
 }
 

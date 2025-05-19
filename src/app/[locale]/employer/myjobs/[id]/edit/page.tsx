@@ -5,7 +5,6 @@ import { useParams, useRouter } from "next/navigation";
 import { observer } from "mobx-react-lite";
 import { useJob, useSpecialization, useTag } from "@/contexts/AppContext";
 import JobForm from "@/components/organisms/JobForm";
-import { Experience } from "@/utils/constant";
 
 const EditJob = observer(() => {
   const params = useParams();

@@ -11,7 +11,7 @@ import {
   useTag,
 } from "@/contexts/AppContext";
 import RichTextEditor from "@/components/atoms/RichText";
-import { Experience } from "@/utils/constant";
+import { EXPERIENCE, JOBTYPE } from "@/utils/constant";
 import { IJob } from "@/stores/jobStore";
 import flattenSpecializations from "@/utils/flattenSpecializations";
 import XIcon from "../atoms/icons/XIcon";
@@ -20,13 +20,6 @@ import { useRouter } from "next/navigation";
 
 import toast from "react-hot-toast";
 import PaymentMethod from "../molecules/PaymentMethod";
-
-// Job Types options
-const JOB_TYPES = [
-  { value: "Full-time", label: "Full-time" },
-  { value: "Part-time", label: "Part-time" },
-  { value: "Linh hoạt", label: "Linh hoạt" },
-];
 
 // Validation schema for the form
 const schema = yup.object({
@@ -377,7 +370,7 @@ const JobForm = ({
             <span className="text-red-500">*</span>
           </label>
           <div className="w-full grid grid-cols-3 gap-2">
-            {Object.entries(Experience).map(([key, label]) => (
+            {Object.entries(EXPERIENCE).map(([key, label]) => (
               <label
                 key={key}
                 className="flex items-center space-x-2 p-1 border rounded-md"
@@ -408,7 +401,7 @@ const JobForm = ({
             className="w-full p-2 border rounded-md"
           >
             <option value="">Select job type</option>
-            {JOB_TYPES.map((option) => (
+            {JOBTYPE.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>

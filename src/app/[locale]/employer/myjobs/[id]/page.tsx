@@ -7,7 +7,7 @@ import { useJob } from "@/contexts/AppContext";
 import Image from "next/image";
 import { formatDate } from "@/utils/fommat_date";
 import VectorLeftIcon from "@/components/atoms/icons/VectorLeftIcon";
-import { Experience } from "@/utils/constant";
+import { EXPERIENCE } from "@/utils/constant";
 
 const PrivateDetailJob = observer(() => {
   const params = useParams();
@@ -122,14 +122,14 @@ const PrivateDetailJob = observer(() => {
           <span
             className={`px-3 py-1 rounded-full text-sm font-medium ${
               isShow ||
-              applicationCount > 0 ||
+              (applicationCount && applicationCount > 0) ||
               new Date(expiresAt || Date.now()) < new Date()
                 ? "bg-green-100 text-green-800"
                 : "bg-yellow-100 text-yellow-800"
             }`}
           >
             {isShow ||
-            applicationCount > 0 ||
+            (applicationCount && applicationCount > 0) ||
             new Date(expiresAt || Date.now()) < new Date()
               ? "Published"
               : "Draft"}
@@ -196,7 +196,7 @@ const PrivateDetailJob = observer(() => {
                 <p>
                   {experience
                     .map((exp) => {
-                      if (exp) return Experience[exp];
+                      if (exp) return EXPERIENCE[exp];
                     })
                     .join(", ")}
                 </p>
