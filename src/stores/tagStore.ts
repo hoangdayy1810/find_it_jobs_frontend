@@ -2,7 +2,6 @@ import api from "@/utils/axios_catch_error_token";
 import axiosInstance from "@/utils/axiosInstance";
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
-import { run } from "node:test";
 
 export interface ITagKey {
   _id: string;
@@ -18,10 +17,17 @@ export interface ITagValue {
   description?: string;
 }
 
+export interface ITagBySearch {
+  _id: string;
+  name: string;
+  keyId: string;
+  keyName: string;
+}
+
 class TagStore {
   tagKeys: ITagKey[] | null = null;
   tagKeysByJobs: ITagKey[] | null = null;
-  tagValuesBySearch: ITagValue[] | null = null;
+  tagValuesBySearch: ITagBySearch[] | null = null;
 
   constructor() {
     makeAutoObservable(this);

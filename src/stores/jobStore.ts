@@ -90,8 +90,8 @@ class JobStore {
           this.jobsBySearch = response.data.jobs;
         });
 
-        if (response.data.tags) {
-          tagStore.getTagValuesBySearch(response.data.tags);
+        if (response.data.tagValues) {
+          tagStore.getTagValuesBySearch(response.data.tagValues);
         }
         return response.data;
       }

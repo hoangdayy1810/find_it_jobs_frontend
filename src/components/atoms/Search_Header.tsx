@@ -1,50 +1,137 @@
-'use client'
-import { useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+"use client";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import React, { useState, useRef, useEffect } from "react";
+
+import { debounce } from "lodash";
+import { useJob } from "@/contexts/AppContext";
+import { ITagBySearch } from "@/stores/tagStore";
+import SearchInput from "./SearchInput";
+import SearchResults from "./SearchResults";
+
+export interface IJobSearch {
+  _id: string;
+  title: string;
+  companyName: string;
+  logo?: string;
+  location: string;
+  jobType: string;
+}
 
 const Search_Header = () => {
-    const router = useRouter();
-    const t = useTranslations();
-    const pathname = usePathname();
+  const t = useTranslations();
+  const router = useRouter();
+  const searchRef = useRef<HTMLDivElement>(null);
+  const jobStore = useJob();
 
-    const [searchName, setSearchName] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const [tagResults, setTagResults] = useState<ITagBySearch[]>([]);
+  const [jobResults, setJobResults] = useState<IJobSearch[]>([]);
 
-    //handleChange
-    const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchName(e.target.value);
+  // Handle outside click to close the search results
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowResults(false);
+      }
     };
 
-    //handleSubmit
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (searchName.length > 0) {
-            if (pathname === '/search') {
-                router.replace(`/search?searchName=${searchName}`);
-            } else {
-                router.push(`/search?searchName=${searchName}`);
-            }
-        }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  // Create a debounced search function
+  const debouncedSearch = useRef(
+    debounce(async (query: string) => {
+      if (query.length === 0) {
+        setTagResults([]);
+        setJobResults([]);
+        setShowResults(false);
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        // Call your backend API here
+        const response = await jobStore?.getJobsBySearch({ q: query });
+
+        // Update the state with the search results
+        setTagResults(response.tagValues || []);
+        setJobResults(response.jobs || []);
+        setShowResults(true);
+      } catch (error) {
+        console.error("Search error:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 300)
+  ).current;
+
+  // Clean up the debounced function on component unmount
+  useEffect(() => {
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [debouncedSearch]);
+
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+    debouncedSearch(query);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim().length > 0) {
+      router.push(`/jobs/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setShowResults(false);
     }
-    return (
-        <form action="" onSubmit={handleSubmit}>
-            <div className="relative h-8 md:h-11 border rounded-xl">
-                <input
-                    type="text"
-                    className="w-full h-full focus:outline-none focus:ring-0 border rounded-lg pl-4 md:pr-12"
-                    placeholder={t('header.search_placeholder')}
-                    onChange={handleChange}
-                />
-                <button className="absolute right-1 top-1 h-4/5 w-1/12 bg-[#C92127] rounded-md cursor-pointer hidden md:block">
-                    <img
-                        className="h-6 w-6 m-auto"
-                        src="/images/header/ico_search_white.svg"
-                        alt="search"
-                    />
-                </button>
-            </div>
-        </form>
-    )
-}
+  };
+
+  // Navigate to job list with selected tag
+  const handleTagClick = (tag: ITagBySearch) => {
+    router.push(`/jobs?${tag.keyName}=${tag.name}`);
+    setShowResults(false);
+  };
+
+  // Navigate to job detail page
+  const handleJobClick = (job: IJobSearch) => {
+    router.push(`/jobs/${job._id}`);
+    setShowResults(false);
+  };
+
+  return (
+    <div className="relative" ref={searchRef}>
+      <SearchInput
+        placeholder={t("header.search_placeholder")}
+        value={searchQuery}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        isLoading={isLoading}
+      />
+
+      {showResults && searchQuery.trim().length > 0 && (
+        <SearchResults
+          query={searchQuery}
+          tagResults={tagResults}
+          jobResults={jobResults}
+          onTagClick={handleTagClick}
+          onJobClick={handleJobClick}
+        />
+      )}
+    </div>
+  );
+};
+
+// Search Input Component
 
 export default Search_Header;

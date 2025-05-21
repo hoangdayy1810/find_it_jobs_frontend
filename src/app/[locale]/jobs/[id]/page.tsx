@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { observer } from "mobx-react-lite";
-import { useJob, useTag } from "@/contexts/AppContext";
+import { useJob, useTag, useUser } from "@/contexts/AppContext";
 import Image from "next/image";
 import { formatDate } from "@/utils/fommat_date";
 import { EXPERIENCE } from "@/utils/constant";
@@ -15,13 +15,13 @@ import CompanySizeIcon from "@/components/atoms/icons/CompanySizeIcon";
 import CalendarIcon from "@/components/atoms/icons/CalendarIcon";
 import GlobalIcon from "@/components/atoms/icons/GlobalIcon";
 import JobListItem from "@/components/molecules/JobListItem";
-import Link from "next/link";
 
 const JobDetailPage = observer(() => {
   const params = useParams();
   const router = useRouter();
   const jobStore = useJob();
   const tagStore = useTag();
+  const userStore = useUser();
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const jobId = params.id as string;
@@ -91,15 +91,16 @@ const JobDetailPage = observer(() => {
         </button>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-4">
         {/* Left section - Job details (2/3 width) */}
         <div className="w-full lg:w-2/3">
           <div className="bg-white p-6 shadow-sm rounded-lg">
             {/* Job title and location */}
-            <div className="mb-6">
+            <div className="mb-2">
               <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
+
               {location && (
-                <div className="flex items-center text-gray-600 mt-2">
+                <div className="flex items-center text-gray-600">
                   <span className="mr-2">📍</span>
                   <span>{location}</span>
                 </div>
@@ -107,7 +108,7 @@ const JobDetailPage = observer(() => {
             </div>
 
             {/* Apply button */}
-            <div className="mt-8 mb-4">
+            <div className="mt-10 mb-4">
               <button
                 onClick={() => {
                   // Handle apply logic here
