@@ -17,7 +17,7 @@ const JobCard = ({
 }) => {
   // Determine job status
   const isExpired = job.expiresAt && new Date(job.expiresAt) < new Date();
-  const isActive = job.isShow && !isExpired && job.applicationCount === 0;
+  const isActive = job.isShow && !isExpired;
   const canDelete = !job.isShow && job.applicationCount === 0;
 
   // Get status display properties
@@ -138,7 +138,7 @@ const JobCard = ({
             onClick={onClose}
             className="px-3 py-1 text-sm text-yellow-600 border border-yellow-600 rounded hover:bg-yellow-50 transition-colors"
           >
-            Inactive
+            Close
           </button>
         )}
 

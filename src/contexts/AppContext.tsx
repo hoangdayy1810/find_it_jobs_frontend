@@ -4,6 +4,7 @@ import { applicationStore } from "@/stores/applicationStore";
 import { candidateStore } from "@/stores/candidateStore";
 import { employerStore } from "@/stores/employerStore";
 import { jobStore } from "@/stores/jobStore";
+import { notificationStore } from "@/stores/notificationStore";
 import { paymentStore } from "@/stores/paymentStore";
 import { specializationStore } from "@/stores/specializationStore";
 import { tagStore } from "@/stores/tagStore";
@@ -19,6 +20,7 @@ export interface AppContextProps {
   specializationStore: typeof specializationStore;
   tagStore: typeof tagStore;
   paymentStore: typeof paymentStore;
+  notificationStore: typeof notificationStore;
 }
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -63,6 +65,11 @@ export const useTag = () => {
   if (context) return context.tagStore;
 };
 
+export const useNotification = () => {
+  const context = useContext(AppContext);
+  if (context) return context.notificationStore;
+};
+
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
@@ -75,6 +82,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         specializationStore,
         paymentStore,
         tagStore,
+        notificationStore,
       }}
     >
       {children}

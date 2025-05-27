@@ -50,7 +50,9 @@ const EmployerJobs = observer(() => {
       case "inactive":
         return plainArray.filter(
           (job) =>
-            !job.isShow && new Date(job.expiresAt || Date.now()) >= new Date()
+            !job.isShow &&
+            new Date(job.expiresAt || Date.now()) >= new Date() &&
+            job.applicationCount === 0
         );
       case "closed":
         return plainArray.filter(
@@ -70,7 +72,11 @@ const EmployerJobs = observer(() => {
   const getStatusDisplay = (job: any) => {
     if (job.isShow && new Date(job.expiresAt || Date.now()) >= new Date())
       return "active";
-    else if (!job.isShow && new Date(job.expiresAt || Date.now()) >= new Date())
+    else if (
+      !job.isShow &&
+      new Date(job.expiresAt || Date.now()) >= new Date() &&
+      job.applicationCount === 0
+    )
       return "inactive";
     else if (
       !job.isShow &&

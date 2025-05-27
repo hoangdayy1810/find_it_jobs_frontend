@@ -8,6 +8,7 @@ import Image from "next/image";
 import { formatDate } from "@/utils/fommat_date";
 import VectorLeftIcon from "@/components/atoms/icons/VectorLeftIcon";
 import { EXPERIENCE } from "@/utils/constant";
+import UsersIcon from "@/components/atoms/icons/UsersIcon";
 
 const PrivateDetailJob = observer(() => {
   const params = useParams();
@@ -41,6 +42,11 @@ const PrivateDetailJob = observer(() => {
 
   const handleEdit = () => {
     router.push(`/employer/myjobs/${jobId}/edit`);
+  };
+
+  // Add a handler for the View Candidates button
+  const handleViewCandidates = () => {
+    router.push(`/employer/myjobs/${jobId}/applications`);
   };
 
   if (loading) {
@@ -86,7 +92,7 @@ const PrivateDetailJob = observer(() => {
 
   return (
     <div className="w-full">
-      {/* Top navigation bar with back button and edit button */}
+      {/* Top navigation bar with back button, view applications, and edit button */}
       <div className="flex justify-between items-center mb-4">
         <button
           onClick={() => router.back()}
@@ -96,14 +102,27 @@ const PrivateDetailJob = observer(() => {
           <VectorLeftIcon />
         </button>
 
-        {isEditAllowed && (
-          <button
-            onClick={handleEdit}
-            className="px-10 py-1 bg-blue-400 text-white rounded hover:bg-blue-600 transition-colors"
-          >
-            Edit
-          </button>
-        )}
+        <div className="flex space-x-3">
+          {/* Only show view applications button when there are applications */}
+          {applicationCount > 0 && (
+            <button
+              onClick={handleViewCandidates}
+              className="px-6 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors flex items-center"
+            >
+              <UsersIcon className="w-4 h-4 mr-2" />
+              View Candidate List
+            </button>
+          )}
+
+          {isEditAllowed && (
+            <button
+              onClick={handleEdit}
+              className="px-10 py-1 bg-blue-400 text-white rounded hover:bg-blue-600 transition-colors"
+            >
+              Edit
+            </button>
+          )}
+        </div>
       </div>
       <div className="mx-auto p-4 bg-white shadow-md rounded-lg">
         {/* Job title */}

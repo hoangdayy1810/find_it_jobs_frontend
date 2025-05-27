@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { observer } from "mobx-react-lite";
-import { useJob, useTag, useUser } from "@/contexts/AppContext";
+import { useJob, useTag, useUser, useCandidate } from "@/contexts/AppContext";
 import Image from "next/image";
 import { formatDate } from "@/utils/fommat_date";
 import { EXPERIENCE } from "@/utils/constant";
@@ -15,6 +15,8 @@ import CompanySizeIcon from "@/components/atoms/icons/CompanySizeIcon";
 import CalendarIcon from "@/components/atoms/icons/CalendarIcon";
 import GlobalIcon from "@/components/atoms/icons/GlobalIcon";
 import JobListItem from "@/components/molecules/JobListItem";
+import JobApplicationModal from "@/components/molecules/JobApplicationModal";
+import { toast } from "react-hot-toast";
 
 const JobDetailPage = observer(() => {
   const params = useParams();
@@ -22,8 +24,10 @@ const JobDetailPage = observer(() => {
   const jobStore = useJob();
   const tagStore = useTag();
   const userStore = useUser();
+  const candidateStore = useCandidate();
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
   const jobId = params.id as string;
 
   useEffect(() => {
@@ -37,6 +41,36 @@ const JobDetailPage = observer(() => {
 
     fetchJobDetail();
   }, [jobId, jobStore]);
+
+  // Handle apply button click
+  const handleApplyClick = () => {
+    // Check if user is logged in
+    if (!userStore?.user) {
+      toast.error("Please log in to apply for this job");
+      router.push("/login");
+      return;
+    }
+
+    // Check if user is a candidate
+    if (userStore.user.role !== "candidate") {
+      toast.error("Only candidates can apply for jobs");
+      return;
+    }
+
+    // Check if profile is complete
+    if (
+      !candidateStore?.candidate?.fullName ||
+      !candidateStore?.candidate?.email ||
+      !candidateStore?.candidate?.phone
+    ) {
+      toast.error("Please complete your profile before applying");
+      router.push("/candidate/profile");
+      return;
+    }
+
+    // Open application modal
+    setShowApplicationModal(true);
+  };
 
   if (loading) {
     return (
@@ -82,7 +116,7 @@ const JobDetailPage = observer(() => {
       {/* Top navigation bar with back button */}
       <div className="flex justify-start items-center mb-6">
         <button
-          onClick={() => router.back()}
+          onClick={() => router.push("/jobs")}
           className="flex items-center text-gray-600 hover:text-gray-900"
           aria-label="Back"
         >
@@ -110,10 +144,7 @@ const JobDetailPage = observer(() => {
             {/* Apply button */}
             <div className="mt-10 mb-4">
               <button
-                onClick={() => {
-                  // Handle apply logic here
-                  console.log("Apply for job:", jobId);
-                }}
+                onClick={handleApplyClick}
                 className="px-8 py-2 bg-red-500 text-white font-bold rounded-md hover:bg-red-700 transition-colors w-full"
               >
                 Apply Now
@@ -374,6 +405,15 @@ const JobDetailPage = observer(() => {
           </div>
         </div>
       )}
+
+      {/* Job Application Modal */}
+      <JobApplicationModal
+        isOpen={showApplicationModal}
+        onClose={() => setShowApplicationModal(false)}
+        jobId={jobId}
+        jobTitle={title}
+        companyName={companyInfo?.companyName || "Company"}
+      />
     </div>
   );
 });

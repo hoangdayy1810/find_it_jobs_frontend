@@ -23,7 +23,7 @@ const LayoutCandidateProfile = ({
               icon="👤"
             />
             <Link_NavBar_Profile
-              href="/candidate/saved_job"
+              href="/candidate/myapplies"
               text="Việc làm của tôi"
               icon="💼"
             />

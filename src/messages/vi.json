@@ -1,58 +1,121 @@
 {
-    "home": {
-        "title": "Chào mừng đến với ứng dụng của tôi",
-        "description": "Đây là ứng dụng Next.js đa ngôn ngữ"
+  "all": {
+    "VND": "đ"
+  },
+  "home": {
+    "hero": {
+      "title": "FindItJob - Nơi kết nối việc làm",
+      "subtitle": "Kết nối với các công ty công nghệ hàng đầu và khám phá cơ hội nghề nghiệp tiếp theo của bạn",
+      "popularSearches": "Tìm kiếm phổ biến"
     },
-    "header": {
-        "search_placeholder": "Tìm kiếm...",
-        "notification": "Thông báo",
-        "user": "Người dùng",
-        "vi": "Tiếng Việt",
-        "en": "Tiếng Anh"
+    "featuredJobs": {
+      "title": "Công việc mới",
+      "viewAll": "Xem tất cả công việc →",
+      "noJobs": "Hiện tại không có công việc nào phù hợp với bạn."
     },
-    "login": {
-        "title": "Đăng nhập",
-        "you_are": "Bạn là",
-        "candidate": "Ứng viên",
-        "employer": "Nhà tuyển dụng",
-        "userName": "Tên đăng nhập",
-        "password": "Mật khẩu",
-        "login_button": "Đăng nhập",
-        "login_loading": "Đang đăng nhập...",
-        "username_required": "Vui lòng nhập tên đăng nhập",
-        "password_required": "Vui lòng nhập mật khẩu",
-        "role_required": "Vui lòng chọn vai trò",
-        "userName_placeholder": "Nhập tên đăng nhập",
-        "password_placeholder": "Nhập mật khẩu",
-        "or": "Hoặc",
-        "login_facebook": "Đăng nhập bằng Facebook",
-        "login_google": "Đăng nhập bằng Google",
-        "havent_account": "Bạn chưa có tài khoản? ",
-        "register_now": "Đăng kí ngay"
+    "categories": {
+      "title": "Duyệt theo chuyên ngành",
+      "description": "Khám phá các cơ hội trên các chuyên ngành CNTT khác nhau",
+      "jobs": "Công việc",
+      "viewAll": "Xem tất cả chuyên ngành"
     },
-    "register": {
-        "title": "Đăng kí",
-        "you_are": "Bạn là",
-        "candidate": "Ứng viên",
-        "employer": "Nhà tuyển dụng",
-        "userName": "Tên đăng nhập",
-        "password": "Mật khẩu",
-        "password_confirm": "Xác nhận mật khẩu",
-        "username_required": "Vui lòng nhập tên đăng nhập",
-        "username_length": "Độ dài tên đăng nhập phải từ 8 đến 50 ký tự",
-        "username_alphanumeric": "Tên đăng nhập chỉ được chứa chữ cái và số",
-        "password_required": "Vui lòng nhập mật khẩu",
-        "password_length": "Độ dài mật khẩu phải từ 8 đến 50 ký tự",
-        "password_requirements": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số",
-        "password_confirm_required": "Vui lòng xác nhận mật khẩu",
-        "match_password": "Mật khẩu không khớp",
-        "role_required": "Vui lòng chọn vai trò",
-        "userName_placeholder": "Nhập tên đăng nhập",
-        "password_placeholder": "Nhập mật khẩu",
-        "password_confirm_placeholder": "Nhập lại mật khẩu",
-        "register_button": "Đăng kí",
-        "register_loading": "Đang đăng kí...",
-        "already_have_account": "Bạn đã có tài khoản? ",
-        "login_now": "Đăng nhập ngay"
+    "howItWorks": {
+      "title": "Các bước hoạt động",
+      "description": "FindItJob giúp quá trình tìm kiếm việc làm trở nên đơn giản và hiệu quả",
+      "step1": {
+        "title": "Tìm kiếm việc làm",
+        "description": "Duyệt qua hàng nghìn công việc công nghệ trên toàn quốc"
+      },
+      "step2": {
+        "title": "Nộp đơn trực tuyến",
+        "description": "Nộp đơn cho các công việc mà bạn quan tâm chỉ với một vài cú nhấp chuột"
+      },
+      "step3": {
+        "title": "Nhận phỏng vấn",
+        "description": "Các công ty sẽ liên hệ với bạn để tiến hành các bước tiếp theo"
+      },
+      "step4": {
+        "title": "Nhận việc",
+        "description": "Nhận các lời mời làm việc và bắt đầu sự nghiệp mới của bạn"
+      }
+    },
+    "stats": {
+      "title": "Theo số liệu thống kê",
+      "description": " Chúng tôi đã giúp hàng nghìn chuyên gia công nghệ tìm được công việc mơ ước của họ",
+      "jobs": "Công việc",
+      "companies": "Công ty",
+      "candidates": "Ứng viên",
+      "placements": "Việc làm thành công"
+    },
+    "cta": {
+      "candidate": {
+        "title": "Bạn đang tìm việc?",
+        "description": "Tham gia với chúng tôi để tìm công việc IT mơ ước của bạn",
+        "list1": "Truy cập hàng nghìn công việc công nghệ độc quyền",
+        "list2": "Được các nhà tuyển dụng tìm",
+        "list3": "Theo dõi tất cả các đơn ứng tuyển của bạn tại một nơi",
+        "button": "Tìm việc làm"
+      },
+      "employer": {
+        "title": "Bạn đang tìm kiếm nhân tài?",
+        "description": "Đăng tin tuyển dụng của bạn và kết nối với các ứng viên hàng đầu",
+        "list1": "Đăng tin tuyển dụng không giới hạn",
+        "list2": "Tiếp cận hàng nghìn ứng viên công nghệ",
+        "list3": "Quản lý tất cả các công việc được đăng tải của bạn tại một nơi",
+        "button": "Đăng tin tuyển dụng"
+      }
     }
+  },
+  "header": {
+    "search_placeholder": "Tìm kiếm...",
+    "notification": "Thông báo",
+    "user": "Người dùng",
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "you_are": "Bạn là",
+    "candidate": "Ứng viên",
+    "employer": "Nhà tuyển dụng",
+    "userName": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "login_button": "Đăng nhập",
+    "login_loading": "Đang đăng nhập...",
+    "username_required": "Vui lòng nhập tên đăng nhập",
+    "password_required": "Vui lòng nhập mật khẩu",
+    "role_required": "Vui lòng chọn vai trò",
+    "userName_placeholder": "Nhập tên đăng nhập",
+    "password_placeholder": "Nhập mật khẩu",
+    "or": "Hoặc",
+    "login_facebook": "Đăng nhập bằng Facebook",
+    "login_google": "Đăng nhập bằng Google",
+    "havent_account": "Bạn chưa có tài khoản? ",
+    "register_now": "Đăng kí ngay"
+  },
+  "register": {
+    "title": "Đăng kí",
+    "you_are": "Bạn là",
+    "candidate": "Ứng viên",
+    "employer": "Nhà tuyển dụng",
+    "userName": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "password_confirm": "Xác nhận mật khẩu",
+    "username_required": "Vui lòng nhập tên đăng nhập",
+    "username_length": "Độ dài tên đăng nhập phải từ 8 đến 50 ký tự",
+    "username_alphanumeric": "Tên đăng nhập chỉ được chứa chữ cái và số",
+    "password_required": "Vui lòng nhập mật khẩu",
+    "password_length": "Độ dài mật khẩu phải từ 8 đến 50 ký tự",
+    "password_requirements": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số",
+    "password_confirm_required": "Vui lòng xác nhận mật khẩu",
+    "match_password": "Mật khẩu không khớp",
+    "role_required": "Vui lòng chọn vai trò",
+    "userName_placeholder": "Nhập tên đăng nhập",
+    "password_placeholder": "Nhập mật khẩu",
+    "password_confirm_placeholder": "Nhập lại mật khẩu",
+    "register_button": "Đăng kí",
+    "register_loading": "Đang đăng kí...",
+    "already_have_account": "Bạn đã có tài khoản? ",
+    "login_now": "Đăng nhập ngay"
+  }
 }

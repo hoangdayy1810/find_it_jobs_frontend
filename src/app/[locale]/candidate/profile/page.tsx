@@ -412,17 +412,16 @@ const CandidateProfile = observer(() => {
                 control={control}
                 render={({ field }) => {
                   // Convert date object to string for input field
-                  const dateValue =
-                    field.value instanceof Date
-                      ? field.value.toISOString().split("T")[0]
-                      : "";
+                  const dateValue = field.value
+                    ? field.value.toISOString().split("T")[0]
+                    : "";
 
                   return (
                     <Input_Profile
                       icon={<DateIcon />}
                       {...field}
                       value={dateValue}
-                      text={formatDate(field.value)}
+                      text={field.value ? formatDate(field.value) : ""}
                       onChange={(e) => field.onChange(new Date(e.target.value))}
                       placeholder="Nhập ngày sinh của bạn"
                       isEdit={isEditing}
