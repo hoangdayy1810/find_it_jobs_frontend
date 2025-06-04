@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useJob, useSpecialization } from "@/contexts/AppContext";
 import { SpecializationList } from "@/stores/specializationStore";
@@ -14,7 +13,6 @@ import CTASection from "@/components/molecules/CTASection";
 
 export default function Home() {
   const t = useTranslations();
-  const router = useRouter();
   const jobStore = useJob();
   const specializationStore = useSpecialization();
   const [featuredJobs, setFeaturedJobs] = useState([]);

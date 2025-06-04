@@ -72,7 +72,7 @@ async function LocaleLayout({
               <Header />
             </header>
 
-            <main className="bg-gray-100">{children}</main>
+            <main className="bg-gray-100 text-black">{children}</main>
 
             <footer>
               <Footer />
@@ -89,7 +89,7 @@ const getMessages = async (locale: string) => {
   try {
     const messages = (await import(`../../messages/${locale}.json`)).default;
     return messages;
-  } catch (error) {
+  } catch {
     notFound(); // nếu không tìm thấy file locale thì trả về 404
   }
 };

@@ -14,16 +14,17 @@
       "noJobs": "New jobs will appear here."
     },
     "categories": {
-      "title": "Browse by Specialization"
+      "title": "Browse by Specialization",
+      "description": "Explore opportunities across different IT specializations",
+      "jobs": "Jobs",
+      "viewAll": "View All Specializations"
     },
     "howItWorks": {
       "title": "How It Works",
       "description": "Find IT Jobs makes the job search process simple and efficient",
       "step1": {
         "title": "Search Jobs",
-        "description": "Explore opportunities across different IT specializations",
-        "jobs": "Jobs",
-        "viewAll": "View All Specializations"
+        "description": "Find jobs that match your skills and interests"
       },
       "step2": {
         "title": "Apply Online",
