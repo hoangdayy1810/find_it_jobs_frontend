@@ -152,9 +152,11 @@ class UserStore {
 
       runInAction(() => {
         this.user = null;
+        candidateStore.logout();
+        employerStore.logout();
       });
 
-      return { message: "Đăng xuất thành công" };
+      return true;
     } catch (error) {
       console.log("Lỗi đăng xuất ", error);
       if (

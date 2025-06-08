@@ -57,6 +57,12 @@ class CandidateStore {
       console.error("Lỗi khi cập nhật thông tin ứng viên:", error);
     }
   }
+
+  async logout() {
+    runInAction(() => {
+      this.candidate = null;
+    });
+  }
 }
 
 export const candidateStore = new CandidateStore();

@@ -252,34 +252,86 @@ const CandidateProfile = observer(() => {
   return (
     <>
       {!isLoading && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Profile Header Card */}
-          <div className="bg-white p-6 shadow-sm mb-4 rounded-lg relative">
-            <div className="absolute top-4 right-4">
-              <button
-                className="text-red-500"
-                type="button"
-                onClick={() => {
-                  setIsEditing(!isEditing);
-                  reset(resetValues);
-                }}
-              >
-                <Edit />
-              </button>
-            </div>
+        <div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Profile Header Card */}
+            <div className="bg-white p-6 shadow-sm mb-4 rounded-lg relative">
+              <div className="absolute top-4 right-4">
+                <button
+                  className="text-red-500"
+                  type="button"
+                  onClick={() => {
+                    setIsEditing(!isEditing);
+                    reset(resetValues);
+                  }}
+                >
+                  <Edit />
+                </button>
+              </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center">
-              <div className="mr-6 mb-4 sm:mb-0">
-                <div className="w-56 h-64 overflow-hidden relative group">
-                  {/* Add avatar upload functionality */}
-                  {isEditing ? (
-                    <div className="relative group cursor-pointer h-full w-full">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center">
+                <div className="mr-6 mb-4 sm:mb-0">
+                  <div className="w-56 h-64 overflow-hidden relative group">
+                    {/* Add avatar upload functionality */}
+                    {isEditing ? (
+                      <div className="relative group cursor-pointer h-full w-full">
+                        <Image
+                          src={
+                            watch("avatar") instanceof FileList
+                              ? URL.createObjectURL(watch("avatar")[0])
+                              : candidateStore?.candidate?.avatar ||
+                                "/images/avatar_placeholder.png"
+                          }
+                          alt="Profile"
+                          fill={true}
+                          className="object-contain"
+                          priority
+                          unoptimized
+                        />
+                        <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-80 transition-opacity">
+                          <label className="m-auto cursor-pointer bg-white text-blue-500 hover:text-blue-600 px-2 py-1 rounded text-sm font-medium">
+                            Thay đổi
+                            <Controller
+                              name="avatar"
+                              control={control}
+                              render={({
+                                field: { onChange, value, ...field },
+                              }) => (
+                                <input
+                                  {...field}
+                                  onChange={(e) => {
+                                    if (
+                                      e.target.files &&
+                                      e.target.files.length > 0
+                                    ) {
+                                      onChange(e.target.files);
+                                    }
+                                  }}
+                                  type="file"
+                                  accept="image/*"
+                                  className="hidden"
+                                />
+                              )}
+                            />
+                          </label>
+                        </div>
+
+                        {isEditing && watch("avatar") instanceof FileList && (
+                          <div
+                            className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center cursor-pointer"
+                            onClick={() => {
+                              setValue("avatar", null);
+                            }}
+                          >
+                            ×
+                          </div>
+                        )}
+                      </div>
+                    ) : (
                       <Image
                         src={
-                          watch("avatar") instanceof FileList
-                            ? URL.createObjectURL(watch("avatar")[0])
-                            : candidateStore?.candidate?.avatar ||
-                              "/images/avatar_placeholder.png"
+                          candidateStore?.candidate?.avatar ||
+                          "/images/avatar_placeholder.png"
                         }
                         alt="Profile"
                         fill={true}
@@ -287,700 +339,659 @@ const CandidateProfile = observer(() => {
                         priority
                         unoptimized
                       />
-                      <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-80 transition-opacity">
-                        <label className="m-auto cursor-pointer bg-white text-blue-500 hover:text-blue-600 px-2 py-1 rounded text-sm font-medium">
-                          Thay đổi
-                          <Controller
-                            name="avatar"
-                            control={control}
-                            render={({
-                              field: { onChange, value, ...field },
-                            }) => (
-                              <input
-                                {...field}
-                                onChange={(e) => {
-                                  if (
-                                    e.target.files &&
-                                    e.target.files.length > 0
-                                  ) {
-                                    onChange(e.target.files);
-                                  }
-                                }}
-                                type="file"
-                                accept="image/*"
-                                className="hidden"
-                              />
-                            )}
-                          />
-                        </label>
-                      </div>
-
-                      {isEditing && watch("avatar") instanceof FileList && (
-                        <div
-                          className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center cursor-pointer"
-                          onClick={() => {
-                            setValue("avatar", null);
-                          }}
-                        >
-                          ×
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Image
-                      src={
-                        candidateStore?.candidate?.avatar ||
-                        "/images/avatar_placeholder.png"
-                      }
-                      alt="Profile"
-                      fill={true}
-                      className="object-contain"
-                      priority
-                      unoptimized
-                    />
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-              <div>
-                {/* Make fullName editable */}
-                {isEditing ? (
+                <div>
+                  {/* Make fullName editable */}
+                  {isEditing ? (
+                    <Controller
+                      name="fullName"
+                      control={control}
+                      render={({ field }) => (
+                        <input
+                          {...field}
+                          type="text"
+                          className="text-2xl font-bold border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full mb-2"
+                          placeholder="Họ và tên của bạn"
+                        />
+                      )}
+                    />
+                  ) : (
+                    <h2 className="text-2xl font-bold">
+                      {candidateStore?.candidate?.fullName ||
+                        "Họ và tên của bạn"}
+                    </h2>
+                  )}
                   <Controller
-                    name="fullName"
+                    name="jobTitle"
                     control={control}
                     render={({ field }) => (
-                      <input
+                      <Input_Profile
                         {...field}
-                        type="text"
-                        className="text-2xl font-bold border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full mb-2"
-                        placeholder="Họ và tên của bạn"
+                        text={field.value}
+                        placeholder="Nhập chức danh của bạn"
+                        isEdit={isEditing}
+                        error={errors.jobTitle?.message}
                       />
                     )}
                   />
-                ) : (
-                  <h2 className="text-2xl font-bold">
-                    {candidateStore?.candidate?.fullName || "Họ và tên của bạn"}
-                  </h2>
-                )}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                 <Controller
-                  name="jobTitle"
+                  name="email"
                   control={control}
                   render={({ field }) => (
                     <Input_Profile
+                      icon={<Email />}
                       {...field}
                       text={field.value}
-                      placeholder="Nhập chức danh của bạn"
+                      placeholder="Nhập email của bạn"
                       isEdit={isEditing}
-                      error={errors.jobTitle?.message}
+                      error={errors.email?.message}
                     />
                   )}
+                />
+                <Controller
+                  name="phone"
+                  control={control}
+                  render={({ field }) => (
+                    <Input_Profile
+                      icon={<Phone />}
+                      {...field}
+                      text={field.value}
+                      placeholder="Nhập số điện thoại của bạn"
+                      typeInput="tel"
+                      isEdit={isEditing}
+                      error={errors.phone?.message}
+                    />
+                  )}
+                />
+                <Controller
+                  name="dateOfBirth"
+                  control={control}
+                  render={({ field }) => {
+                    // Convert date object to string for input field
+                    const dateValue = field.value
+                      ? field.value.toISOString().split("T")[0]
+                      : "";
+
+                    return (
+                      <Input_Profile
+                        icon={<DateIcon />}
+                        {...field}
+                        value={dateValue}
+                        text={field.value ? formatDate(field.value) : ""}
+                        onChange={(e) =>
+                          field.onChange(new Date(e.target.value))
+                        }
+                        placeholder="Nhập ngày sinh của bạn"
+                        isEdit={isEditing}
+                        typeInput="date"
+                        error={errors.dateOfBirth?.message}
+                      />
+                    );
+                  }}
+                />
+                <Controller
+                  name="gender"
+                  control={control}
+                  render={({ field }) => {
+                    // Find the matching option and get its label
+                    const genderOption = [
+                      { value: "Male", label: "Nam" },
+                      { value: "Female", label: "Nữ" },
+                      { value: "Other", label: "Khác" },
+                    ];
+
+                    return (
+                      <Input_Profile
+                        icon={<Gender />}
+                        {...field}
+                        text={
+                          genderOption.find(
+                            (option) => option.value === field.value
+                          )?.label || field.value
+                        }
+                        placeholder="Chọn giới tính của bạn"
+                        isEdit={isEditing}
+                        typeInput="select"
+                        options={genderOption}
+                        error={errors.gender?.message}
+                      />
+                    );
+                  }}
+                />
+              </div>
+              <div
+                className={`grid grid-cols-1 ${
+                  !isEditing && "md:grid-cols-2"
+                } gap-4 mt-6`}
+              >
+                <Controller
+                  name="address"
+                  control={control}
+                  render={({ field }) => (
+                    <Input_Profile
+                      icon={<Location />}
+                      {...field}
+                      placeholder="Nhập địa chỉ của bạn"
+                      isEdit={isEditing}
+                      text={field.value}
+                      children={
+                        <Input_Address
+                          onChange={(value) => {
+                            field.onChange(value);
+                            // Force validation after change
+                            setValue("address", value, {
+                              shouldValidate: true,
+                            });
+                          }}
+                          value={field.value}
+                        />
+                      }
+                      error={errors.address?.message}
+                    />
+                  )}
+                />
+                <Controller
+                  name="cvFile"
+                  control={control}
+                  render={({ field: { onChange, value, ...field } }) => {
+                    let displayFileName = null;
+                    if (value instanceof FileList && value.length > 0) {
+                      displayFileName = value[0]?.name;
+                    } else if (typeof value === "string" && value) {
+                      displayFileName = getCleanFileName(value);
+                    }
+
+                    return (
+                      <div className="flex flex-row space-x-4">
+                        <Input_Profile
+                          icon={<Network />}
+                          {...field}
+                          // Use the calculated displayFileName or the default text
+                          text={displayFileName || "Tải lên CV của bạn"}
+                          isEdit={isEditing}
+                          children={
+                            isEditing && (
+                              <div className="flex flex-col">
+                                <div className="flex items-center">
+                                  <label className="bg-blue-100 text-blue-600 px-3 py-1 rounded cursor-pointer hover:bg-blue-200">
+                                    Chọn file
+                                    <input
+                                      type="file"
+                                      accept=".pdf,.doc,.docx"
+                                      className="hidden"
+                                      onClick={(e) => {
+                                        (e.target as HTMLInputElement).value =
+                                          "";
+                                      }}
+                                      onChange={(e) => {
+                                        onChange(e.target.files);
+                                      }}
+                                    />
+                                  </label>
+
+                                  {/* Show filename and delete button only if displayFileName is truthy */}
+                                  {displayFileName && (
+                                    <div className="ml-2 flex items-center">
+                                      <span className="text-sm text-gray-600">
+                                        {displayFileName}
+                                      </span>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+
+                                          // Set value to null and trigger validation/dirty state
+                                          setValue("cvFile", null, {
+                                            shouldValidate: true,
+                                            shouldDirty: true,
+                                          });
+                                        }}
+                                        className="ml-2 text-red-500 hover:text-red-700 text-xs"
+                                      >
+                                        Xóa
+                                      </button>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            )
+                          }
+                        />
+                        {/* Download button logic (checks specifically for initial string value and not editing) */}
+                        {typeof value === "string" && value && !isEditing && (
+                          <div>
+                            <a
+                              href={value}
+                              download={getCleanFileName(value)} // Use cleaned name for download
+                              className="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 flex items-center text-sm"
+                              rel="noopener noreferrer"
+                            >
+                              <span className="mr-1">Tải xuống</span>
+                              <DownloadIcon />
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  }}
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              <Controller
-                name="email"
-                control={control}
-                render={({ field }) => (
-                  <Input_Profile
-                    icon={<Email />}
-                    {...field}
-                    text={field.value}
-                    placeholder="Nhập email của bạn"
-                    isEdit={isEditing}
-                    error={errors.email?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="phone"
-                control={control}
-                render={({ field }) => (
-                  <Input_Profile
-                    icon={<Phone />}
-                    {...field}
-                    text={field.value}
-                    placeholder="Nhập số điện thoại của bạn"
-                    typeInput="tel"
-                    isEdit={isEditing}
-                    error={errors.phone?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="dateOfBirth"
-                control={control}
-                render={({ field }) => {
-                  // Convert date object to string for input field
-                  const dateValue = field.value
-                    ? field.value.toISOString().split("T")[0]
-                    : "";
-
-                  return (
-                    <Input_Profile
-                      icon={<DateIcon />}
-                      {...field}
-                      value={dateValue}
-                      text={field.value ? formatDate(field.value) : ""}
-                      onChange={(e) => field.onChange(new Date(e.target.value))}
-                      placeholder="Nhập ngày sinh của bạn"
-                      isEdit={isEditing}
-                      typeInput="date"
-                      error={errors.dateOfBirth?.message}
-                    />
-                  );
-                }}
-              />
-              <Controller
-                name="gender"
-                control={control}
-                render={({ field }) => {
-                  // Find the matching option and get its label
-                  const genderOption = [
-                    { value: "Male", label: "Nam" },
-                    { value: "Female", label: "Nữ" },
-                    { value: "Other", label: "Khác" },
-                  ];
-
-                  return (
-                    <Input_Profile
-                      icon={<Gender />}
-                      {...field}
-                      text={
-                        genderOption.find(
-                          (option) => option.value === field.value
-                        )?.label || field.value
-                      }
-                      placeholder="Chọn giới tính của bạn"
-                      isEdit={isEditing}
-                      typeInput="select"
-                      options={genderOption}
-                      error={errors.gender?.message}
-                    />
-                  );
-                }}
-              />
-            </div>
-            <div
-              className={`grid grid-cols-1 ${
-                !isEditing && "md:grid-cols-2"
-              } gap-4 mt-6`}
+            {/* About Section */}
+            <Section_Profile
+              title="Giới thiệu bản thân"
+              content="Giới thiệu điểm mạnh và những gì bạn muốn chia sẻ thêm"
             >
               <Controller
-                name="address"
+                name="other"
                 control={control}
-                render={({ field }) => (
-                  <Input_Profile
-                    icon={<Location />}
-                    {...field}
-                    placeholder="Nhập địa chỉ của bạn"
-                    isEdit={isEditing}
-                    text={field.value}
-                    children={
-                      <Input_Address
-                        onChange={(value) => {
-                          field.onChange(value);
-                          // Force validation after change
-                          setValue("address", value, { shouldValidate: true });
-                        }}
-                        value={field.value}
-                      />
-                    }
-                    error={errors.address?.message}
-                  />
-                )}
+                render={({ field }) =>
+                  isEditing ? (
+                    <RichTextEditor
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Giới thiệu bản thân của bạn"
+                    />
+                  ) : (
+                    <div
+                      className="rich-content-display prose max-w-full"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          field.value ||
+                          "<p><em>Chưa có thông tin giới thiệu</em></p>",
+                      }}
+                    />
+                  )
+                }
               />
+            </Section_Profile>
+
+            {/* Education Section */}
+            <Section_Profile
+              title="Học vấn"
+              content="Chia sẻ trình độ học vấn của bạn"
+            >
+              {isEditing ? (
+                educationFields.map((field, index) => (
+                  <div
+                    key={field.id}
+                    className="mb-4 p-4 bg-gray-50 rounded-lg relative"
+                  >
+                    {isEditing && (
+                      <button
+                        type="button"
+                        className="absolute top-2 right-2 text-red-500"
+                        onClick={() => removeEducation(index)}
+                      >
+                        ✕
+                      </button>
+                    )}
+
+                    {/* Updated: All three fields in one row */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <Controller
+                        name={`education.${index}.school`}
+                        control={control}
+                        render={({ field }) => (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Trường học
+                            </label>
+                            <input
+                              {...field}
+                              type="text"
+                              className="w-full p-2 border rounded-md"
+                              placeholder="Nhập tên trường học"
+                              disabled={!isEditing}
+                            />
+                            {errors.education?.[index]?.school && (
+                              <p className="mt-1 text-sm text-red-500">
+                                {errors.education[index]?.school?.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+
+                      <Controller
+                        name={`education.${index}.degree`}
+                        control={control}
+                        render={({ field }) => (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Bằng cấp
+                            </label>
+                            <select
+                              {...field}
+                              className="w-full p-2 border rounded-md"
+                              disabled={!isEditing}
+                            >
+                              <option value="">Chọn bằng cấp</option>
+                              {degreeOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                            {errors.education?.[index]?.degree && (
+                              <p className="mt-1 text-sm text-red-500">
+                                {errors.education[index]?.degree?.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+
+                      <Controller
+                        name={`education.${index}.year`}
+                        control={control}
+                        render={({ field }) => (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Năm tốt nghiệp
+                            </label>
+                            <select
+                              {...field}
+                              className="w-full p-2 border rounded-md"
+                              disabled={!isEditing}
+                            >
+                              <option value="">Chọn năm</option>
+                              {yearOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                            {errors.education?.[index]?.year && (
+                              <p className="mt-1 text-sm text-red-500">
+                                {errors.education[index]?.year?.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div>
+                  {educationFields.length > 0 ? (
+                    educationFields.map((field, index) => (
+                      <div
+                        key={field.id}
+                        className="mb-4 border-l-4 border-blue-500 pl-4"
+                      >
+                        <h3 className="font-semibold text-lg">
+                          {watch(`education.${index}.school`) || "Trường học"}
+                        </h3>
+                        <div className="text-gray-600 flex items-center space-x-2">
+                          <span>
+                            {degreeOptions.find(
+                              (o) =>
+                                o.value === watch(`education.${index}.degree`)
+                            )?.label || "Bằng cấp"}
+                          </span>
+                          <span>•</span>
+                          <span>
+                            {watch(`education.${index}.year`) ||
+                              "Năm tốt nghiệp"}
+                          </span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 italic">
+                      Chưa có thông tin học vấn
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {isEditing && (
+                <button
+                  type="button"
+                  onClick={addEducation}
+                  className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
+                >
+                  <span className="mr-2">+</span> Thêm học vấn
+                </button>
+              )}
+            </Section_Profile>
+
+            {/* Experience Section */}
+            <Section_Profile
+              title="Kinh nghiệm làm việc"
+              content="Chia sẻ kinh nghiệm làm việc của bạn"
+            >
+              {isEditing ? (
+                experienceFields.map((field, index) => (
+                  <div
+                    key={field.id}
+                    className="mb-4 p-4 bg-gray-50 rounded-lg relative"
+                  >
+                    {isEditing && (
+                      <button
+                        type="button"
+                        className="absolute top-2 right-2 text-red-500"
+                        onClick={() => removeExperience(index)}
+                      >
+                        ✕
+                      </button>
+                    )}
+
+                    {/* All three fields in one row */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <Controller
+                        name={`experience.${index}.company`}
+                        control={control}
+                        render={({ field }) => (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Công ty
+                            </label>
+                            <input
+                              {...field}
+                              type="text"
+                              className="w-full p-2 border rounded-md"
+                              placeholder="Nhập tên công ty"
+                              disabled={!isEditing}
+                            />
+                            {errors.experience?.[index]?.company && (
+                              <p className="mt-1 text-sm text-red-500">
+                                {errors.experience[index]?.company?.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+
+                      <Controller
+                        name={`experience.${index}.position`}
+                        control={control}
+                        render={({ field }) => (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Vị trí
+                            </label>
+                            <select
+                              {...field}
+                              className="w-full p-2 border rounded-md"
+                              disabled={!isEditing}
+                            >
+                              <option value="">Chọn vị trí</option>
+                              {positionOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                            {errors.experience?.[index]?.position && (
+                              <p className="mt-1 text-sm text-red-500">
+                                {errors.experience[index]?.position?.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+
+                      <Controller
+                        name={`experience.${index}.duration`}
+                        control={control}
+                        render={({ field }) => (
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Thời gian làm việc
+                            </label>
+                            <select
+                              {...field}
+                              className="w-full p-2 border rounded-md"
+                              disabled={!isEditing}
+                            >
+                              <option value="">Chọn thời gian</option>
+                              {durationOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </select>
+                            {errors.experience?.[index]?.duration && (
+                              <p className="mt-1 text-sm text-red-500">
+                                {errors.experience[index]?.duration?.message}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      />
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div>
+                  {experienceFields.length > 0 ? (
+                    experienceFields.map((field, index) => (
+                      <div
+                        key={field.id}
+                        className="mb-4 border-l-4 border-green-500 pl-4"
+                      >
+                        <h3 className="font-semibold text-lg">
+                          {watch(`experience.${index}.company`) || "Công ty"}
+                        </h3>
+                        <div className="text-gray-600 flex items-center space-x-2">
+                          <span>
+                            {positionOptions.find(
+                              (o) =>
+                                o.value ===
+                                watch(`experience.${index}.position`)
+                            )?.label || "Vị trí"}
+                          </span>
+                          <span>•</span>
+                          <span>
+                            {durationOptions.find(
+                              (o) =>
+                                o.value ===
+                                watch(`experience.${index}.duration`)
+                            )?.label || "Thời gian làm việc"}
+                          </span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 italic">
+                      Chưa có thông tin kinh nghiệm làm việc
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {isEditing && (
+                <button
+                  type="button"
+                  onClick={addExperience}
+                  className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
+                >
+                  <span className="mr-2">+</span> Thêm kinh nghiệm làm việc
+                </button>
+              )}
+            </Section_Profile>
+
+            {/* Skill Section */}
+            <Section_Profile
+              title="Kỹ năng"
+              content="Liệt kê các kỹ năng chuyên môn của bạn"
+            >
               <Controller
-                name="cvFile"
+                name="skills"
                 control={control}
-                render={({ field: { onChange, value, ...field } }) => {
-                  let displayFileName = null;
-                  if (value instanceof FileList && value.length > 0) {
-                    displayFileName = value[0]?.name;
-                  } else if (typeof value === "string" && value) {
-                    displayFileName = getCleanFileName(value);
-                  }
-
-                  return (
-                    <div className="flex flex-row space-x-4">
-                      <Input_Profile
-                        icon={<Network />}
-                        {...field}
-                        // Use the calculated displayFileName or the default text
-                        text={displayFileName || "Tải lên CV của bạn"}
-                        isEdit={isEditing}
-                        children={
-                          isEditing && (
-                            <div className="flex flex-col">
-                              <div className="flex items-center">
-                                <label className="bg-blue-100 text-blue-600 px-3 py-1 rounded cursor-pointer hover:bg-blue-200">
-                                  Chọn file
-                                  <input
-                                    type="file"
-                                    accept=".pdf,.doc,.docx"
-                                    className="hidden"
-                                    onClick={(e) => {
-                                      (e.target as HTMLInputElement).value = "";
-                                    }}
-                                    onChange={(e) => {
-                                      onChange(e.target.files);
-                                    }}
-                                  />
-                                </label>
-
-                                {/* Show filename and delete button only if displayFileName is truthy */}
-                                {displayFileName && (
-                                  <div className="ml-2 flex items-center">
-                                    <span className="text-sm text-gray-600">
-                                      {displayFileName}
-                                    </span>
-                                    <button
-                                      type="button"
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        e.stopPropagation();
-
-                                        // Set value to null and trigger validation/dirty state
-                                        setValue("cvFile", null, {
-                                          shouldValidate: true,
-                                          shouldDirty: true,
-                                        });
-                                      }}
-                                      className="ml-2 text-red-500 hover:text-red-700 text-xs"
-                                    >
-                                      Xóa
-                                    </button>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          )
-                        }
-                      />
-                      {/* Download button logic (checks specifically for initial string value and not editing) */}
-                      {typeof value === "string" && value && !isEditing && (
-                        <div>
-                          <a
-                            href={value}
-                            download={getCleanFileName(value)} // Use cleaned name for download
-                            className="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 flex items-center text-sm"
-                            rel="noopener noreferrer"
-                          >
-                            <span className="mr-1">Tải xuống</span>
-                            <DownloadIcon />
-                          </a>
-                        </div>
-                      )}
-                    </div>
-                  );
-                }}
+                render={({ field }) =>
+                  isEditing ? (
+                    <RichTextEditor
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Liệt kê các kỹ năng của bạn"
+                    />
+                  ) : (
+                    <div
+                      className="rich-content-display prose max-w-full"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          field.value ||
+                          "<p><em>Chưa có thông tin kỹ năng</em></p>",
+                      }}
+                    />
+                  )
+                }
               />
-            </div>
-          </div>
+            </Section_Profile>
 
-          {/* About Section */}
-          <Section_Profile
-            title="Giới thiệu bản thân"
-            content="Giới thiệu điểm mạnh và những gì bạn muốn chia sẻ thêm"
-          >
-            <Controller
-              name="other"
-              control={control}
-              render={({ field }) =>
-                isEditing ? (
-                  <RichTextEditor
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Giới thiệu bản thân của bạn"
-                  />
-                ) : (
-                  <div
-                    className="rich-content-display prose max-w-full"
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        field.value ||
-                        "<p><em>Chưa có thông tin giới thiệu</em></p>",
-                    }}
-                  />
-                )
-              }
-            />
-          </Section_Profile>
-
-          {/* Education Section */}
-          <Section_Profile
-            title="Học vấn"
-            content="Chia sẻ trình độ học vấn của bạn"
-          >
-            {isEditing ? (
-              educationFields.map((field, index) => (
-                <div
-                  key={field.id}
-                  className="mb-4 p-4 bg-gray-50 rounded-lg relative"
-                >
-                  {isEditing && (
-                    <button
-                      type="button"
-                      className="absolute top-2 right-2 text-red-500"
-                      onClick={() => removeEducation(index)}
-                    >
-                      ✕
-                    </button>
-                  )}
-
-                  {/* Updated: All three fields in one row */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <Controller
-                      name={`education.${index}.school`}
-                      control={control}
-                      render={({ field }) => (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Trường học
-                          </label>
-                          <input
-                            {...field}
-                            type="text"
-                            className="w-full p-2 border rounded-md"
-                            placeholder="Nhập tên trường học"
-                            disabled={!isEditing}
-                          />
-                          {errors.education?.[index]?.school && (
-                            <p className="mt-1 text-sm text-red-500">
-                              {errors.education[index]?.school?.message}
-                            </p>
-                          )}
-                        </div>
-                      )}
+            {/* Achievement Section */}
+            <Section_Profile
+              title="Thành tựu"
+              content="Chia sẻ các chứng chỉ, dự án và thành tựu nổi bật của bạn"
+            >
+              <Controller
+                name="achievement"
+                control={control}
+                render={({ field }) =>
+                  isEditing ? (
+                    <RichTextEditor
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="Liệt kê các thành tựu của bạn"
                     />
-
-                    <Controller
-                      name={`education.${index}.degree`}
-                      control={control}
-                      render={({ field }) => (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Bằng cấp
-                          </label>
-                          <select
-                            {...field}
-                            className="w-full p-2 border rounded-md"
-                            disabled={!isEditing}
-                          >
-                            <option value="">Chọn bằng cấp</option>
-                            {degreeOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                          {errors.education?.[index]?.degree && (
-                            <p className="mt-1 text-sm text-red-500">
-                              {errors.education[index]?.degree?.message}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    />
-
-                    <Controller
-                      name={`education.${index}.year`}
-                      control={control}
-                      render={({ field }) => (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Năm tốt nghiệp
-                          </label>
-                          <select
-                            {...field}
-                            className="w-full p-2 border rounded-md"
-                            disabled={!isEditing}
-                          >
-                            <option value="">Chọn năm</option>
-                            {yearOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                          {errors.education?.[index]?.year && (
-                            <p className="mt-1 text-sm text-red-500">
-                              {errors.education[index]?.year?.message}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    />
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div>
-                {educationFields.length > 0 ? (
-                  educationFields.map((field, index) => (
+                  ) : (
                     <div
-                      key={field.id}
-                      className="mb-4 border-l-4 border-blue-500 pl-4"
-                    >
-                      <h3 className="font-semibold text-lg">
-                        {watch(`education.${index}.school`) || "Trường học"}
-                      </h3>
-                      <div className="text-gray-600 flex items-center space-x-2">
-                        <span>
-                          {degreeOptions.find(
-                            (o) =>
-                              o.value === watch(`education.${index}.degree`)
-                          )?.label || "Bằng cấp"}
-                        </span>
-                        <span>•</span>
-                        <span>
-                          {watch(`education.${index}.year`) || "Năm tốt nghiệp"}
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-gray-500 italic">
-                    Chưa có thông tin học vấn
-                  </p>
-                )}
-              </div>
-            )}
+                      className="rich-content-display prose max-w-full"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          field.value ||
+                          "<p><em>Chưa có thông tin thành tựu</em></p>",
+                      }}
+                    />
+                  )
+                }
+              />
+            </Section_Profile>
 
             {isEditing && (
-              <button
-                type="button"
-                onClick={addEducation}
-                className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
-              >
-                <span className="mr-2">+</span> Thêm học vấn
-              </button>
-            )}
-          </Section_Profile>
-
-          {/* Experience Section */}
-          <Section_Profile
-            title="Kinh nghiệm làm việc"
-            content="Chia sẻ kinh nghiệm làm việc của bạn"
-          >
-            {isEditing ? (
-              experienceFields.map((field, index) => (
-                <div
-                  key={field.id}
-                  className="mb-4 p-4 bg-gray-50 rounded-lg relative"
+              <div className="mt-6">
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
                 >
-                  {isEditing && (
-                    <button
-                      type="button"
-                      className="absolute top-2 right-2 text-red-500"
-                      onClick={() => removeExperience(index)}
-                    >
-                      ✕
-                    </button>
-                  )}
-
-                  {/* All three fields in one row */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <Controller
-                      name={`experience.${index}.company`}
-                      control={control}
-                      render={({ field }) => (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Công ty
-                          </label>
-                          <input
-                            {...field}
-                            type="text"
-                            className="w-full p-2 border rounded-md"
-                            placeholder="Nhập tên công ty"
-                            disabled={!isEditing}
-                          />
-                          {errors.experience?.[index]?.company && (
-                            <p className="mt-1 text-sm text-red-500">
-                              {errors.experience[index]?.company?.message}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    />
-
-                    <Controller
-                      name={`experience.${index}.position`}
-                      control={control}
-                      render={({ field }) => (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Vị trí
-                          </label>
-                          <select
-                            {...field}
-                            className="w-full p-2 border rounded-md"
-                            disabled={!isEditing}
-                          >
-                            <option value="">Chọn vị trí</option>
-                            {positionOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                          {errors.experience?.[index]?.position && (
-                            <p className="mt-1 text-sm text-red-500">
-                              {errors.experience[index]?.position?.message}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    />
-
-                    <Controller
-                      name={`experience.${index}.duration`}
-                      control={control}
-                      render={({ field }) => (
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Thời gian làm việc
-                          </label>
-                          <select
-                            {...field}
-                            className="w-full p-2 border rounded-md"
-                            disabled={!isEditing}
-                          >
-                            <option value="">Chọn thời gian</option>
-                            {durationOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </select>
-                          {errors.experience?.[index]?.duration && (
-                            <p className="mt-1 text-sm text-red-500">
-                              {errors.experience[index]?.duration?.message}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    />
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div>
-                {experienceFields.length > 0 ? (
-                  experienceFields.map((field, index) => (
-                    <div
-                      key={field.id}
-                      className="mb-4 border-l-4 border-green-500 pl-4"
-                    >
-                      <h3 className="font-semibold text-lg">
-                        {watch(`experience.${index}.company`) || "Công ty"}
-                      </h3>
-                      <div className="text-gray-600 flex items-center space-x-2">
-                        <span>
-                          {positionOptions.find(
-                            (o) =>
-                              o.value === watch(`experience.${index}.position`)
-                          )?.label || "Vị trí"}
-                        </span>
-                        <span>•</span>
-                        <span>
-                          {durationOptions.find(
-                            (o) =>
-                              o.value === watch(`experience.${index}.duration`)
-                          )?.label || "Thời gian làm việc"}
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-gray-500 italic">
-                    Chưa có thông tin kinh nghiệm làm việc
-                  </p>
-                )}
+                  Lưu thông tin
+                </button>
               </div>
             )}
-
-            {isEditing && (
-              <button
-                type="button"
-                onClick={addExperience}
-                className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
-              >
-                <span className="mr-2">+</span> Thêm kinh nghiệm làm việc
-              </button>
-            )}
-          </Section_Profile>
-
-          {/* Skill Section */}
-          <Section_Profile
-            title="Kỹ năng"
-            content="Liệt kê các kỹ năng chuyên môn của bạn"
-          >
-            <Controller
-              name="skills"
-              control={control}
-              render={({ field }) =>
-                isEditing ? (
-                  <RichTextEditor
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Liệt kê các kỹ năng của bạn"
-                  />
-                ) : (
-                  <div
-                    className="rich-content-display prose max-w-full"
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        field.value ||
-                        "<p><em>Chưa có thông tin kỹ năng</em></p>",
-                    }}
-                  />
-                )
-              }
-            />
-          </Section_Profile>
-
-          {/* Achievement Section */}
-          <Section_Profile
-            title="Thành tựu"
-            content="Chia sẻ các chứng chỉ, dự án và thành tựu nổi bật của bạn"
-          >
-            <Controller
-              name="achievement"
-              control={control}
-              render={({ field }) =>
-                isEditing ? (
-                  <RichTextEditor
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="Liệt kê các thành tựu của bạn"
-                  />
-                ) : (
-                  <div
-                    className="rich-content-display prose max-w-full"
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        field.value ||
-                        "<p><em>Chưa có thông tin thành tựu</em></p>",
-                    }}
-                  />
-                )
-              }
-            />
-          </Section_Profile>
-
-          {isEditing && (
-            <div className="mt-6">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
-              >
-                Lưu thông tin
-              </button>
-            </div>
-          )}
-        </form>
+          </form>
+        </div>
       )}
     </>
   );

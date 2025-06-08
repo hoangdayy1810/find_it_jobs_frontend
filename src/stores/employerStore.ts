@@ -41,6 +41,12 @@ class EmployerStore {
       console.error("Lỗi khi cập nhật thông tin nhà tuyển dụng:", error);
     }
   }
+
+  async logout() {
+    runInAction(() => {
+      this.employer = null;
+    });
+  }
 }
 
 export const employerStore = new EmployerStore();

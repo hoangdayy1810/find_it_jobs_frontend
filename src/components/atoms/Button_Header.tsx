@@ -27,18 +27,12 @@ const Button_Header: React.FC<MyComponentProps> = observer(
             userStore.user._id,
             userStore.user.role
           );
-          console.log("done");
-          console.log(
-            notificationStore?.unreadCount,
-            typeof notificationStore?.unreadCount,
-            "unreadCount"
-          );
-          // notificationStore.getNotifications();
 
           return async () => {
             await notificationStore?.disconnectSocket();
           };
         }
+        await userStore?.getProfile();
       };
 
       fetchData();
