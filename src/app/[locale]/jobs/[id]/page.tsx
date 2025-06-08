@@ -361,7 +361,9 @@ const JobDetailPage = observer(() => {
             {companyInfo?._id && (
               <div className="mt-8 pt-4 border-t border-gray-200">
                 <button
-                  onClick={() => router.push(`/companies/${companyInfo._id}`)}
+                  onClick={() =>
+                    router.push(`/employerDetail/${companyInfo._id}`)
+                  }
                   className="w-full py-2 px-4 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 transition-colors"
                 >
                   View More Jobs From This Company

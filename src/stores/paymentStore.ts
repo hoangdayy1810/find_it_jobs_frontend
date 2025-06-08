@@ -5,8 +5,8 @@ import { makeAutoObservable, runInAction } from "mobx";
 
 export interface IPayment {
   _id: string;
-  employerId: string;
-  jobId: string;
+  employerId: string | { _id: string; companyName: string };
+  jobId: { _id: string; title: string };
   transactionId: string;
   payerId: string;
   amount: number;
@@ -50,6 +50,38 @@ class PaymentStore {
       ) {
         return error.response.data;
       }
+    }
+  }
+
+  async getPaymentHistory(params: any = {}) {
+    try {
+      const response = await api.get("/api/payments/history", { params });
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching payment history:", error);
+      if (
+        axios.isAxiosError(error) &&
+        typeof error.response?.data === "object"
+      ) {
+        return error.response.data;
+      }
+      return { success: false, message: "Failed to fetch payment history" };
+    }
+  }
+
+  async getPaymentDetails(paymentId: string) {
+    try {
+      const response = await api.get(`/api/payments/${paymentId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching payment details:", error);
+      if (
+        axios.isAxiosError(error) &&
+        typeof error.response?.data === "object"
+      ) {
+        return error.response.data;
+      }
+      return { success: false, message: "Failed to fetch payment details" };
     }
   }
 }

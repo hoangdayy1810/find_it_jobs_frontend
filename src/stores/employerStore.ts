@@ -2,6 +2,7 @@ import api from "@/utils/axios_catch_error_token";
 import axiosInstance from "@/utils/axiosInstance";
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import { IJob } from "./jobStore";
 
 export interface IEmployer {
   _id: string;
@@ -18,8 +19,17 @@ export interface IEmployer {
   workingDays: string;
 }
 
+export interface IEmployerWithJobs {
+  employer: IEmployer;
+  jobs: IJob[];
+  totalJobs: number;
+}
+
 class EmployerStore {
   employer: IEmployer | null = null;
+  employerJobs: IJob[] = [];
+  totalJobs: number = 0;
+  currentEmployer: IEmployer | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -39,6 +49,36 @@ class EmployerStore {
       }
     } catch (error) {
       console.error("Lỗi khi cập nhật thông tin nhà tuyển dụng:", error);
+    }
+  }
+
+  async getEmployerDetailsWithJobs(
+    employerId: string,
+    page: number = 1,
+    limit: number = 5
+  ) {
+    try {
+      const response = await axiosInstance.get(
+        `/api/jobs/employer/${employerId}`
+      );
+
+      if (response.data) {
+        runInAction(() => {
+          this.currentEmployer = response.data.employer;
+          this.employerJobs = response.data.jobs;
+          this.totalJobs = response.data.totalJobs;
+        });
+        return response.data;
+      }
+    } catch (error) {
+      console.error("Error fetching employer details:", error);
+      if (
+        axios.isAxiosError(error) &&
+        typeof error.response?.data === "object"
+      ) {
+        return error.response.data;
+      }
+      return { success: false, message: "Failed to load employer details" };
     }
   }
 
