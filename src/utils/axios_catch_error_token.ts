@@ -1,5 +1,5 @@
 import axios from "axios";
-import { destroyCookie } from "nookies";
+import nookies from "nookies";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_URL_BACKEND,
@@ -18,8 +18,11 @@ api.interceptors.response.use(
       (error.response.status === 401 || error.response.status === 403) &&
       currentUrl !== "/login"
     ) {
-      destroyCookie(null, "token"); // Xóa token nếu hết hạn hoặc không hợp lệ
-      window.location.href = "/login"; // Điều hướng sang trang đăng nhập
+      nookies.destroy(null, "token", {
+        path: "/",
+      });
+      window.location.href = "/login";
+      alert(error.response.data.message || "Có lỗi xảy ra (401 | 403)");
     }
     if (
       error.response &&

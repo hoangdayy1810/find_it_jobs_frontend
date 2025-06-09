@@ -49,6 +49,15 @@ class UserStore {
           });
         }
 
+        if (response.data.personalInfo) {
+          if (this.user?.role === "candidate") {
+            candidateStore.getProfile(response.data.personalInfo);
+          }
+          if (this.user?.role === "employer") {
+            employerStore.getProfile(response.data.personalInfo);
+          }
+        }
+
         if (response.data.token) {
           nookies.set(null, "token", response.data.token, {
             maxAge: 30 * 24 * 60 * 60,
