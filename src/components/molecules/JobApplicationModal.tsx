@@ -289,17 +289,44 @@ const JobApplicationModal = observer(
                 </div>
 
                 {/* Skills Section */}
-                {candidate.skills && (
+                {candidate.skills && candidate.skills.length > 0 ? (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h3 className="text-lg font-semibold mb-2">Kỹ năng</h3>
-                    <div
-                      className="prose max-w-none"
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          candidate.skills ||
-                          "<p><em>Chưa có thông tin kỹ năng</em></p>",
-                      }}
-                    />
+
+                    {/* Group skills by key */}
+                    {Array.isArray(candidate.skills) ? (
+                      <div className="space-y-4">
+                        {/* Get unique keys */}
+                        {[...new Set(candidate.skills.map((skill) => skill.key))].map(
+                          (key) => (
+                            <div key={key} className="mb-2">
+                              <h4 className="text-sm font-medium text-gray-600 mb-1">
+                                {key}
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {candidate.skills
+                                  .filter((skill) => skill.key === key)
+                                  .map((skill, index) => (
+                                    <span
+                                      key={index}
+                                      className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+                                    >
+                                      {skill.value}
+                                    </span>
+                                  ))}
+                              </div>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 italic">Chưa có thông tin kỹ năng</p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="bg-white p-4 rounded-lg shadow-sm">
+                    <h3 className="text-lg font-semibold mb-2">Kỹ năng</h3>
+                    <p className="text-gray-500 italic">Chưa có thông tin kỹ năng</p>
                   </div>
                 )}
 

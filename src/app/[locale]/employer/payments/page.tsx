@@ -7,6 +7,7 @@ import { IPayment } from "@/stores/paymentStore";
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
 import { formatDate } from "@/utils/fommat_date";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 // PaymentStatusBadge component
 const PaymentStatusBadge = ({ status }: { status: string }) => {
@@ -143,6 +144,7 @@ const FilterSection = ({
 
 // Main Payment History Page
 const PaymentHistoryPage = observer(() => {
+  const t = useTranslations();
   const router = useRouter();
   const paymentStore = usePayment();
   const [loading, setLoading] = useState(true);
@@ -338,6 +340,7 @@ const PaymentHistoryPage = observer(() => {
                 of <span className="font-medium">{totalPayments}</span> payments
               </div>
               <AdvancedPagination
+                t={t}
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}

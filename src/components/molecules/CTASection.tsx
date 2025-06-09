@@ -1,9 +1,25 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import GreenSuccessList from "../atoms/icons/GreenSuccessList";
 import PurpleSuccessList from "../atoms/icons/PurpleSuccessList";
+import { observer } from "mobx-react-lite";
+import { useUser } from "@/contexts/AppContext";
 
-const CTASection = ({ t }: { t: any }) => {
+const CTASection = observer(({ t }: { t: any }) => {
+  const [hasUser, setHasUser] = useState(false);
+  const userStore = useUser();
+
+  useEffect(() => {
+    // Check if user is logged in
+    if (userStore?.user) {
+      setHasUser(true);
+    } else {
+      setHasUser(false);
+    }
+  }, [userStore]);
+
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
@@ -31,14 +47,16 @@ const CTASection = ({ t }: { t: any }) => {
                   <span>{t("home.cta.candidate.list3")}</span>
                 </div>
               </div>
-              <div className="mt-8">
-                <Link
-                  href="/register?role=candidate"
-                  className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  {t("home.cta.candidate.button")}
-                </Link>
-              </div>
+              {!hasUser && (
+                <div className="mt-8">
+                  <Link
+                    href="/register?role=candidate"
+                    className="inline-block px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    {t("home.cta.candidate.button")}
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Right column - For Employers */}
@@ -63,20 +81,22 @@ const CTASection = ({ t }: { t: any }) => {
                   <span>{t("home.cta.employer.list3")}</span>
                 </div>
               </div>
-              <div className="mt-8">
-                <Link
-                  href="/register?role=employer"
-                  className="inline-block px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
-                >
-                  {t("home.cta.employer.button")}
-                </Link>
-              </div>
+              {!hasUser && (
+                <div className="mt-8">
+                  <Link
+                    href="/register?role=employer"
+                    className="inline-block px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                  >
+                    {t("home.cta.employer.button")}
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
+});
 
 export default CTASection;

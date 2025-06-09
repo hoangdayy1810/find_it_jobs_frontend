@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import JobLogoIcon from "../atoms/icons/JobLogoIcon";
 import Image from "next/image";
-import { useApplication, useUser } from "@/contexts/AppContext";
 import { applicationStore } from "@/stores/applicationStore";
 import { userStore } from "@/stores/userStore";
 import { candidateStore } from "@/stores/candidateStore";

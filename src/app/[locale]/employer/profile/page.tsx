@@ -15,6 +15,9 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { formatWorkingDays, parseWorkingDays } from "@/utils/formatWorkingDays";
+import CalendarIcon from "@/components/atoms/icons/CalendarIcon";
+import CompanySizeIcon from "@/components/atoms/icons/CompanySizeIcon";
+import JobIcon from "@/components/atoms/icons/JobIcon";
 
 const EmployerProfile = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
@@ -329,7 +332,7 @@ const EmployerProfile = observer(() => {
                 render={({ field }) => {
                   return (
                     <Input_Profile
-                      icon={<Network />}
+                      icon={<CompanySizeIcon />}
                       {...field}
                       text={field.value || "Chưa chọn quy mô công ty"}
                       placeholder="Chọn quy mô công ty"
@@ -351,7 +354,7 @@ const EmployerProfile = observer(() => {
                 render={({ field }) => {
                   return (
                     <Input_Profile
-                      icon={<Network />}
+                      icon={<JobIcon width="18" height="18" />}
                       {...field}
                       text={field.value || "Chưa chọn loại hình công ty"}
                       placeholder="Chọn loại hình công ty"
@@ -385,7 +388,7 @@ const EmployerProfile = observer(() => {
 
                   return (
                     <Input_Profile
-                      icon={<Network />}
+                      icon={<CalendarIcon />}
                       {...field}
                       text={formattedWorkingDays || "Chưa chọn ngày làm việc"}
                       placeholder="Chọn ngày làm việc"

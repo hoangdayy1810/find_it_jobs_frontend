@@ -4,6 +4,7 @@ import PaginationButton from "../atoms/PaginationButton";
 interface AdvancedPaginationProps {
   currentPage: number;
   totalPages: number;
+  t: any;
   onPageChange: (page: number) => void;
 }
 
@@ -11,6 +12,7 @@ const AdvancedPagination: React.FC<AdvancedPaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
+  t,
 }) => {
   // If no pages, don't render anything
   if (totalPages <= 0) return null;
@@ -74,7 +76,7 @@ const AdvancedPagination: React.FC<AdvancedPaginationProps> = ({
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          Prev
+          {t("pagination.previous")}
         </PaginationButton>
 
         {/* Page numbers */}
@@ -105,7 +107,7 @@ const AdvancedPagination: React.FC<AdvancedPaginationProps> = ({
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          Next
+          {t("pagination.next")}
         </PaginationButton>
       </div>
     </div>

@@ -17,8 +17,10 @@ import GlobalIcon from "@/components/atoms/icons/GlobalIcon";
 import JobListItem from "@/components/molecules/JobListItem";
 import JobApplicationModal from "@/components/molecules/JobApplicationModal";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const JobDetailPage = observer(() => {
+  const t = useTranslations();
   const params = useParams();
   const router = useRouter();
   const jobStore = useJob();
@@ -46,14 +48,14 @@ const JobDetailPage = observer(() => {
   const handleApplyClick = () => {
     // Check if user is logged in
     if (!userStore?.user) {
-      toast.error("Please log in to apply for this job");
+      toast.error(t("detail-job.apply.login-error"), { duration: 3000 });
       router.push("/login");
       return;
     }
 
     // Check if user is a candidate
     if (userStore.user.role !== "candidate") {
-      toast.error("Only candidates can apply for jobs");
+      toast.error(t("detail-job.apply.role-error"), { duration: 3000 });
       return;
     }
 
@@ -63,7 +65,7 @@ const JobDetailPage = observer(() => {
       !candidateStore?.candidate?.email ||
       !candidateStore?.candidate?.phone
     ) {
-      toast.error("Please complete your profile before applying");
+      toast.error(t("detail-job.apply.form-error"), { duration: 3000 });
       router.push("/candidate/profile");
       return;
     }
@@ -83,12 +85,14 @@ const JobDetailPage = observer(() => {
   if (!jobStore?.jobDetail) {
     return (
       <div className="flex flex-col items-center justify-center h-64">
-        <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
+        <h1 className="text-2xl font-bold mb-4">
+          {t("detail-job.job-not-found.title")}
+        </h1>
         <button
           onClick={() => router.back()}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Go Back
+          {t("detail-job.job-not-found.go-back")}
         </button>
       </div>
     );
@@ -116,12 +120,11 @@ const JobDetailPage = observer(() => {
       {/* Top navigation bar with back button */}
       <div className="flex justify-start items-center mb-6">
         <button
-          onClick={() => router.push("/jobs")}
+          onClick={() => router.back()}
           className="flex items-center text-gray-600 hover:text-gray-900"
           aria-label="Back"
         >
           <VectorLeftIcon />
-          <span className="ml-2">Back to Jobs</span>
         </button>
       </div>
 
@@ -147,14 +150,16 @@ const JobDetailPage = observer(() => {
                 onClick={handleApplyClick}
                 className="px-8 py-2 bg-red-500 text-white font-bold rounded-md hover:bg-red-700 transition-colors w-full"
               >
-                Apply Now
+                {t("detail-job.apply.title")}
               </button>
             </div>
 
             {/* Job details in a grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 border-b border-t py-6 border-gray-200">
               <div>
-                <p className="text-gray-500 text-sm">Salary Range</p>
+                <p className="text-gray-500 text-sm">
+                  {t("detail-job.apply.salary-range")}
+                </p>
                 <p className="font-medium">
                   {salary.min.toLocaleString()}đ - {salary.max.toLocaleString()}
                   đ
@@ -162,12 +167,16 @@ const JobDetailPage = observer(() => {
               </div>
 
               <div>
-                <p className="text-gray-500 text-sm">Job Type</p>
+                <p className="text-gray-500 text-sm">
+                  {t("detail-job.apply.job-type")}
+                </p>
                 <p className="font-medium">{jobType}</p>
               </div>
 
               <div>
-                <p className="text-gray-500 text-sm">Posted On</p>
+                <p className="text-gray-500 text-sm">
+                  {t("detail-job.apply.posted-on")}
+                </p>
                 <p className="font-medium">{formatDate(new Date(postedAt))}</p>
               </div>
             </div>
@@ -175,7 +184,9 @@ const JobDetailPage = observer(() => {
             {/* Second line of attributes */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 border-b pb-6 border-gray-200">
               <div>
-                <p className="text-gray-500 text-sm">Specialization</p>
+                <p className="text-gray-500 text-sm">
+                  {t("detail-job.apply.specialization")}
+                </p>
                 <p className="font-medium">
                   {typeof specializationId === "object"
                     ? specializationId.name
@@ -184,7 +195,9 @@ const JobDetailPage = observer(() => {
               </div>
 
               <div>
-                <p className="text-gray-500 text-sm">Experience</p>
+                <p className="text-gray-500 text-sm">
+                  {t("detail-job.apply.experience")}
+                </p>
                 <div className="flex flex-wrap gap-2 mt-1">
                   {experience && experience.length > 0 ? (
                     <p>
@@ -195,12 +208,14 @@ const JobDetailPage = observer(() => {
                         .join(", ")}
                     </p>
                   ) : (
-                    <span>Not specified</span>
+                    <span>{t("detail-job.apply.not-specified")}</span>
                   )}
                 </div>
               </div>
               <div>
-                <p className="text-gray-500 text-sm">Expires On</p>
+                <p className="text-gray-500 text-sm">
+                  {t("detail-job.apply.expires-on")}
+                </p>
                 <p className="font-medium">
                   {expiresAt ? formatDate(new Date(expiresAt)) : "N/A"}
                 </p>
@@ -211,7 +226,7 @@ const JobDetailPage = observer(() => {
             {tags && tags.length > 0 && (
               <div className="mb-6 border-b pb-6 border-gray-200">
                 <p className="text-gray-500 text-sm mb-2">
-                  Skills & Technologies
+                  {t("detail-job.apply.skill-technologies")}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, index) => (
@@ -228,7 +243,9 @@ const JobDetailPage = observer(() => {
 
             {/* Job Description */}
             <div className="mt-6">
-              <h3 className="font-semibold text-lg mb-3">Job Description</h3>
+              <h3 className="font-semibold text-lg mb-3">
+                {t("detail-job.apply.job-description")}
+              </h3>
               <div
                 className={`prose max-w-none overflow-hidden transition-all duration-300 ${
                   expanded ? "" : "max-h-[300px]"
@@ -236,7 +253,9 @@ const JobDetailPage = observer(() => {
               >
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: description || "<p>No description provided</p>",
+                    __html:
+                      description ||
+                      t("detail-job.apply.job-description-placeholder"),
                   }}
                 />
               </div>
@@ -258,7 +277,7 @@ const JobDetailPage = observer(() => {
         <div className="w-full lg:w-1/3">
           <div className="bg-white p-6 shadow-sm rounded-lg">
             <h2 className="text-xl font-semibold mb-6 border-b pb-3 border-gray-200">
-              Company Information
+              {t("detail-job.apply.company.title")}
             </h2>
 
             {/* Company logo and name */}
@@ -279,7 +298,8 @@ const JobDetailPage = observer(() => {
                 )}
               </div>
               <h3 className="text-lg font-bold text-center">
-                {companyInfo?.companyName || "Company Name"}
+                {companyInfo?.companyName ||
+                  t("detail-job.apply.company.company-name")}
               </h3>
             </div>
 
@@ -291,7 +311,9 @@ const JobDetailPage = observer(() => {
                     <JobIcon width="18" height="18" />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Company Type</p>
+                    <p className="text-sm text-gray-500">
+                      {t("detail-job.apply.company.company-type")}
+                    </p>
                     <p>{companyInfo.companyType}</p>
                   </div>
                 </div>
@@ -303,7 +325,9 @@ const JobDetailPage = observer(() => {
                     <Location />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Address</p>
+                    <p className="text-sm text-gray-500">
+                      {t("detail-job.apply.company.address")}
+                    </p>
                     <p>{companyInfo.address}</p>
                   </div>
                 </div>
@@ -315,7 +339,9 @@ const JobDetailPage = observer(() => {
                     <CompanySizeIcon />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Company Size</p>
+                    <p className="text-sm text-gray-500">
+                      {t("detail-job.apply.company.company-size")}
+                    </p>
                     <p>{companyInfo.companySize}</p>
                   </div>
                 </div>
@@ -327,7 +353,9 @@ const JobDetailPage = observer(() => {
                     <CalendarIcon />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Working Days</p>
+                    <p className="text-sm text-gray-500">
+                      {t("detail-job.apply.company.working-days")}
+                    </p>
                     <p>{companyInfo.workingDays}</p>
                   </div>
                 </div>
@@ -339,7 +367,9 @@ const JobDetailPage = observer(() => {
                     <GlobalIcon />
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Website</p>
+                    <p className="text-sm text-gray-500">
+                      {t("detail-job.apply.company.website")}
+                    </p>
                     <a
                       href={
                         companyInfo.website.startsWith("http")
@@ -366,7 +396,7 @@ const JobDetailPage = observer(() => {
                   }
                   className="w-full py-2 px-4 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 transition-colors"
                 >
-                  View More Jobs From This Company
+                  {t("detail-job.apply.company.button")}
                 </button>
               </div>
             )}
@@ -377,7 +407,9 @@ const JobDetailPage = observer(() => {
       {/* Similar Jobs Section */}
       {jobStore.similarJobs && jobStore.similarJobs.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-6">Similar Jobs You May Like</h2>
+          <h2 className="text-2xl font-bold mb-6">
+            {t("detail-job.apply.similar-jobs")}
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {jobStore.similarJobs.map((job) => (
               <div

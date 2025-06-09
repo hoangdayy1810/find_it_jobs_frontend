@@ -12,8 +12,10 @@ import {
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
 import ApplicationListItem from "@/components/molecules/ApplicationListItem";
 import Select from "@/components/atoms/Select";
+import { useTranslations } from "next-intl";
 
 const ApplicationList = observer(() => {
+  const t = useTranslations();
   const params = useParams();
   const router = useRouter();
   const jobId = params.id as string;
@@ -278,6 +280,7 @@ const ApplicationList = observer(() => {
           {/* Pagination */}
           <div className="mt-6">
             <AdvancedPagination
+              t={t}
               currentPage={filters.page || 1}
               totalPages={applicationStore?.pagination.totalPages || 1}
               onPageChange={handlePageChange}

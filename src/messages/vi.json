@@ -118,6 +118,52 @@
     "already_have_account": "Bạn đã có tài khoản? ",
     "login_now": "Đăng nhập ngay"
   },
+  "jobs-list": {
+    "title": "Tìm Cơ Hội Tiếp Theo Của Bạn",
+    "count-1": "Tìm thấy",
+    "count-2": "công việc phù hợp với bạn",
+    "no-jobs-found": "Hiện tại không có công việc nào phù hợp với bạn.",
+    "specializations": "Chuyên ngành",
+    "filters": "Bộ lọc",
+    "reset-filters": "Đặt lại bộ lọc"
+  },
+  "detail-job": {
+    "apply": {
+      "title": "Nộp Đơn Ngay",
+      "salary-range": "Khoảng lương",
+      "job-type": "Loại công việc",
+      "specialization": "Chuyên ngành",
+      "not-specified": "Không xác định",
+      "experience": "Kinh nghiệm",
+      "posted-on": "Đăng vào",
+      "expires-on": "Hết hạn vào",
+      "login-error": "Vui lòng đăng nhập để nộp đơn",
+      "role-error": "Chỉ ứng viên mới có thể nộp đơn",
+      "form-error": "Vui lòng điền đầy đủ thông tin trước khi nộp đơn",
+      "skill-technologies": "Kỹ năng và Công nghệ",
+      "job-description": "Mô tả công việc",
+      "job-description-placeholder": "<p>Không có mô tả nào được cung cấp</p>",
+      "company": {
+        "title": "Thông tin công ty",
+        "company-name": "Tên công ty",
+        "company-type": "Loại hình công ty",
+        "address": "Địa chỉ",
+        "company-size": "Quy mô công ty",
+        "working-days": "Ngày làm việc",
+        "website": "Trang web",
+        "button": "Xem nhiều công việc hơn tại công ty"
+      },
+      "similar-jobs": "Công việc tương tự"
+    },
+    "job-not-found": {
+      "title": "Không Tìm Thấy Công Việc",
+      "go-back": "Quay lại"
+    }
+  },
+  "pagination": {
+    "previous": "Trước",
+    "next": "Sau"
+  },
   "footer": {
     "footer-left": {
       "address": "Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội",

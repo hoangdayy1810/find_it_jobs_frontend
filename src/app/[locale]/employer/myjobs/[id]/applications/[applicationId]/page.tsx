@@ -265,7 +265,7 @@ const DetailApplication = observer(() => {
           {/* Candidate profile card */}
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <div className="flex flex-col items-center mb-6">
-              <div className="w-32 h-32 relative overflow-hidden rounded-full mb-4">
+              <div className="w-48 h-64 relative overflow-hidden mb-4">
                 <Image
                   src={candidate.avatar || "/images/avatar_placeholder.png"}
                   alt={candidate.fullName}
@@ -384,12 +384,38 @@ const DetailApplication = observer(() => {
           {candidate.skills && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h3 className="text-lg font-semibold mb-4">Skills</h3>
-              <div
-                className="prose max-w-none"
-                dangerouslySetInnerHTML={{
-                  __html: candidate.skills,
-                }}
-              />
+
+              {Array.isArray(candidate.skills) &&
+              candidate.skills.length > 0 ? (
+                <div className="space-y-4">
+                  {/* Group skills by category (key) */}
+                  {[...new Set(candidate.skills.map((skill) => skill.key))].map(
+                    (key) => (
+                      <div key={key} className="mb-4">
+                        <h4 className="text-md font-medium text-gray-700 mb-2">
+                          {key}
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {candidate.skills
+                            .filter((skill) => skill.key === key)
+                            .map((skill, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+                              >
+                                {skill.value}
+                              </span>
+                            ))}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              ) : (
+                <p className="text-gray-500 italic">
+                  No skills information available
+                </p>
+              )}
             </div>
           )}
 

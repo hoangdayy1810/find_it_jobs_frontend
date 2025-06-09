@@ -8,11 +8,13 @@ import JobCard from "@/components/molecules/JobCard";
 import Modal_YesNo from "@/components/atoms/Modal_YesNo";
 import { useRouter } from "next/navigation";
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
+import { useTranslations } from "next-intl";
 
 // Define filter options
 type FilterType = "all" | "active" | "inactive" | "closed";
 
 const EmployerJobs = observer(() => {
+  const t = useTranslations();
   const router = useRouter();
   const jobStore = useJob();
   const [isLoading, setIsLoading] = useState(true);
@@ -229,6 +231,7 @@ const EmployerJobs = observer(() => {
           {/* Pagination */}
           {totalPages > 1 && (
             <AdvancedPagination
+              t={t}
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={paginate}

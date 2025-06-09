@@ -7,8 +7,10 @@ import { formatDistance } from "date-fns";
 import { useRouter } from "next/navigation";
 import { INotification } from "@/stores/notificationStore";
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
+import { useTranslations } from "next-intl";
 
 const NotificationsPage = observer(() => {
+  const t = useTranslations();
   const notificationStore = useNotification();
   const userStore = useUser();
   const router = useRouter();
@@ -131,6 +133,7 @@ const NotificationsPage = observer(() => {
           {/* Pagination */}
           <div className="mt-6">
             <AdvancedPagination
+              t={t}
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={handlePageChange}

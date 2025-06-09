@@ -8,6 +8,7 @@ import AdvancedPagination from "@/components/molecules/AdvancedPagination";
 import Image from "next/image";
 import { formatDistance } from "date-fns";
 import { IApplication } from "@/stores/applicationStore";
+import { useTranslations } from "next-intl";
 
 // Status Filter Component
 const StatusFilterButton = ({
@@ -250,9 +251,9 @@ const LoadingState = () => (
 
 // Main Component
 const MyApplicationList = observer(() => {
+  const t = useTranslations();
   const router = useRouter();
   const applicationStore = useApplication();
-  const jobStore = useJob();
 
   const [loading, setLoading] = useState(true);
   const [currentFilter, setCurrentFilter] = useState("all");
@@ -373,6 +374,7 @@ const MyApplicationList = observer(() => {
           {totalPages > 1 && (
             <div className="mt-8">
               <AdvancedPagination
+                t={t}
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}

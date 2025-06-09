@@ -118,6 +118,52 @@
     "already_have_account": "Already have an account? ",
     "login_now": "Log in now"
   },
+  "jobs-list": {
+    "title": "Find Your Next Opportunity",
+    "count-1": "Found",
+    "count-2": "job matching your criteria",
+    "no-jobs-found": "No jobs found matching your criteria",
+    "specializations": "Specializations",
+    "filters": "Filters",
+    "reset-filters": "Reset Filters"
+  },
+  "detail-job": {
+    "apply": {
+      "title": "Apply Now",
+      "salary-range": "Salary range",
+      "job-type": "Job type",
+      "specialization": "Specialization",
+      "not-specified": "Not specified",
+      "experience": "Experience",
+      "posted-on": "Posted on",
+      "expires-on": "Expires on",
+      "login-error": "Please log in to apply for this job",
+      "role-error": "Only candidates can apply for jobs",
+      "form-error": "Please complete your profile before applying",
+      "skill-technologies": "Skills and Technologies",
+      "job-description": "Job Description",
+      "job-description-placeholder": "<p>No description provided</p>",
+      "company": {
+        "title": "Company Information",
+        "company-name": "Company Name",
+        "company-type": "Company Type",
+        "address": "Address",
+        "company-size": "Company Size",
+        "working-days": "Working Days",
+        "website": "Website",
+        "button": "View More Jobs From This Company"
+      },
+      "similar-jobs": "Similar Jobs You May Like"
+    },
+    "job-not-found": {
+      "title": "Job Not Found",
+      "go-back": "Go Back"
+    }
+  },
+  "pagination": {
+    "previous": "Prev",
+    "next": "Next"
+  },
   "footer": {
     "footer-left": {
       "address": "No. 3 Cau Giay Street, Lang Thuong Ward, Dong Da District, Hanoi.",

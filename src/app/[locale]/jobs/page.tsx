@@ -11,8 +11,10 @@ import SpecializationList from "@/components/molecules/SpecializationList";
 import FilterSection from "@/components/molecules/FilterSection";
 import JobListItem from "@/components/molecules/JobListItem";
 import RadioFilterGroup from "@/components/atoms/RadioFilterGroup";
+import { useTranslations } from "next-intl";
 
 const JobsPage = observer(() => {
+  const t = useTranslations();
   const router = useRouter();
   const searchParams = useSearchParams();
   const jobStore = useJob();
@@ -159,10 +161,10 @@ const JobsPage = observer(() => {
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">
-        Find Your Next Opportunity
+        {t("jobs-list.title")}
       </h1>
       <div className="mb-4 text-gray-600">
-        Found {totalJobs} job{totalJobs > 1 ? "s" : ""} matching your criteria
+        {t("jobs-list.count-1")} {totalJobs} {t("jobs-list.count-2")}
       </div>
 
       <div className="flex flex-col lg:flex-row gap-6">
@@ -175,9 +177,9 @@ const JobsPage = observer(() => {
           ) : (
             <>
               {jobs.length === 0 ? (
-                <div className="bg-white p-8 rounded-lg shadow-sm text-center">
+                <div className="bg-white py-20 rounded-lg shadow-sm text-center">
                   <p className="text-lg text-gray-600">
-                    No jobs found matching your criteria
+                    {t("jobs-list.no-jobs-found")}
                   </p>
                 </div>
               ) : (
@@ -196,6 +198,7 @@ const JobsPage = observer(() => {
               {totalPages > 1 && (
                 <div className="mt-8">
                   <AdvancedPagination
+                    t={t}
                     currentPage={currentPage}
                     totalPages={totalPages}
                     onPageChange={handlePageChange}
@@ -210,7 +213,9 @@ const JobsPage = observer(() => {
         <div className="w-full lg:w-1/4">
           {/* Specializations section */}
           <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
-            <h2 className="text-lg font-semibold mb-4">Specializations</h2>
+            <h2 className="text-lg font-semibold mb-4">
+              {t("jobs-list.specializations").toUpperCase()}
+            </h2>
             <SpecializationList
               specializations={specializationStore?.specialization || []}
               selectedId={filters.specializationId}
@@ -220,7 +225,9 @@ const JobsPage = observer(() => {
 
           {/* Filters section */}
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h2 className="text-lg font-semibold mb-4">Filters</h2>
+            <h2 className="text-lg font-semibold mb-4">
+              {t("jobs-list.filters").toUpperCase()}
+            </h2>
 
             {/* Job Type Filter */}
             <FilterSection title="Job Type">
@@ -284,7 +291,7 @@ const JobsPage = observer(() => {
               }}
               className="w-full mt-6 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded transition-colors"
             >
-              Reset Filters
+              {t("jobs-list.reset-filters")}
             </button>
           </div>
         </div>
