@@ -117,5 +117,42 @@
     "register_loading": "Registering...",
     "already_have_account": "Already have an account? ",
     "login_now": "Log in now"
+  },
+  "footer": {
+    "footer-left": {
+      "address": "No. 3 Cau Giay Street, Lang Thuong Ward, Dong Da District, Hanoi.",
+      "name": "University of Transport and Communications",
+      "phone": "Phone: (84.24) 37663311 - Fax: (84.24)37669613",
+      "email": "Email: dhgtvt@utc.edu.vn",
+      "description": "FindITJobs, where you can search for jobs that match your passions or find talent for your company or business."
+    },
+    "footer-right": {
+      "service": {
+        "name": "Services",
+        "item-1": "Terms of Use",
+        "item-2": "Personal Information Privacy Policy",
+        "item-3": "Payment Privacy Policy",
+        "item-4": "About FindITJobs"
+      },
+      "support": {
+        "name": "Support",
+        "item-1": "Return and Refund Policy",
+        "item-2": "Warranty and Compensation Policy",
+        "item-3": "Consulting Policy"
+      },
+      "my-account": {
+        "name": "My Account",
+        "item-1": "Login/Create New Account",
+        "item-2": "Change Customer Address",
+        "item-3": "Account Details",
+        "item-4": "Payment History"
+      },
+      "contact": {
+        "name": "Contact",
+        "item-1": "No. 3 Cau Giay Street, Lang Thuong Ward, Dong Da District, Hanoi.",
+        "item-2": "(84.24) 37663311",
+        "item-3": "dhgtvt@utc.edu.vn"
+      }
+    }
   }
 }

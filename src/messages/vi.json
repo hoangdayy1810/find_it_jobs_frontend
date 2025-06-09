@@ -117,5 +117,42 @@
     "register_loading": "Đang đăng kí...",
     "already_have_account": "Bạn đã có tài khoản? ",
     "login_now": "Đăng nhập ngay"
+  },
+  "footer": {
+    "footer-left": {
+      "address": "Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội",
+      "name": "Trường Đại Học Giao Thông Vận Tải",
+      "phone": "Điện thoại: (84.24) 37663311 - Fax: (84.24)37669613",
+      "email": "Email: dhgtvt@utc.edu.vn",
+      "description": "FindITJobs, nơi bạn có thể tìm kiếm công việc phù hợp với yêu thích của bạn hoặc nơi tìm kiếm tài năng dành cho các công ty và doanh nghiệp."
+    },
+    "footer-right": {
+      "service": {
+        "name": "Dịch vụ",
+        "item-1": "Điều khoản sử dụng",
+        "item-2": "Chính sách bảo mật thông tin cá nhân",
+        "item-3": "Chính sách bảo mật thanh toán",
+        "item-4": "Giới thiệu FindItJobs"
+      },
+      "support": {
+        "name": "Hỗ trợ",
+        "item-1": "Chính sách đổi - trả - hoàn tiền",
+        "item-2": "Chính sách bảo hành - bồi hoàn",
+        "item-3": "Chính sách tư vấn"
+      },
+      "my-account": {
+        "name": "Tài khoản của tôi",
+        "item-1": "Đăng nhập/Tạo mới tài khoản",
+        "item-2": "Thay đổi địa chỉ khách hàng",
+        "item-3": "Chi tiết tài khoản",
+        "item-4": "Lịch sử thanh toán"
+      },
+      "contact": {
+        "name": "Liên hệ",
+        "item-1": "Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội",
+        "item-2": "(84.24) 37663311",
+        "item-3": "dhgtvt@utc.edu.vn"
+      }
+    }
   }
 }
