@@ -26,6 +26,7 @@ const ApplicationList = observer(() => {
     degree: "",
     company: "",
     position: "",
+    tags: {},
     page: 1,
     limit: 10,
   });
@@ -54,7 +55,7 @@ const ApplicationList = observer(() => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: value,
-      page: 1, // Reset to first page when filter changes
+      page: 1,
     }));
   };
 
@@ -66,6 +67,7 @@ const ApplicationList = observer(() => {
       degree: "",
       company: "",
       position: "",
+      tags: {},
       page: 1,
       limit: 10,
     });
@@ -203,12 +205,48 @@ const ApplicationList = observer(() => {
               ]}
             />
           </div>
+
+          {applicationStore?.filterOptions?.tags &&
+            applicationStore.filterOptions.tags.length > 0 &&
+            applicationStore.filterOptions.tags.map(
+              (tagCategory) =>
+                tagCategory?.values.length > 0 && (
+                  <div key={tagCategory.key}>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      {tagCategory.key}
+                    </label>
+                    <Select
+                      value={
+                        (filters.tags && filters.tags[tagCategory.key]) || ""
+                      }
+                      onChange={(e) => {
+                        const newValue = e.target.value;
+                        setFilters((prev) => ({
+                          ...prev,
+                          tags: {
+                            ...(prev.tags || {}),
+                            [tagCategory.key]: newValue,
+                          },
+                          page: 1,
+                        }));
+                      }}
+                      options={[
+                        { value: "", label: `All ${tagCategory.key}` },
+                        ...tagCategory.values.map((value) => ({
+                          value,
+                          label: value,
+                        })),
+                      ]}
+                    />
+                  </div>
+                )
+            )}
         </div>
 
         {/* Reset filters button */}
         <button
           onClick={handleResetFilters}
-          className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+          className="px-4 py-2 text-sm bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors"
         >
           Reset Filters
         </button>

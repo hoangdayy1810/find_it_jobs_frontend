@@ -10,7 +10,7 @@ import Gender from "@/components/atoms/icons/Gender";
 import Location from "@/components/atoms/icons/Location";
 import Network from "@/components/atoms/icons/Network";
 import Section_Profile from "@/components/atoms/Section_Profile";
-import { useCandidate } from "@/contexts/AppContext";
+import { useCandidate, useTag } from "@/contexts/AppContext";
 import { observer } from "mobx-react-lite";
 import RichTextEditor from "@/components/atoms/RichText";
 import Input_Address from "@/components/atoms/Input_Address";
@@ -25,6 +25,11 @@ const CandidateProfile = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const candidateStore = useCandidate();
+  const tagStore = useTag();
+  const [tagKeyOptions, setTagKeyOptions] = useState<string[]>([]);
+  const [tagValueOptions, setTagValueOptions] = useState<
+    Record<string, string[]>
+  >({});
 
   // Define form validation schema
   const validationSchema = yup.object({
@@ -61,7 +66,15 @@ const CandidateProfile = observer(() => {
       })
     ),
     other: yup.string(),
-    skills: yup.string(),
+    skills: yup
+      .array()
+      .of(
+        yup.object({
+          key: yup.string().required("Tag category is required"),
+          value: yup.string().required("Tag value is required"),
+        })
+      )
+      .min(1, "At least one skill is required"),
     achievement: yup.string(),
   });
 
@@ -119,7 +132,7 @@ const CandidateProfile = observer(() => {
       education: candidateStore?.candidate?.education || [],
       experience: candidateStore?.candidate?.experience || [],
       other: candidateStore?.candidate?.other || "",
-      skills: candidateStore?.candidate?.skills || "",
+      skills: candidateStore?.candidate?.skills || [],
       achievement: candidateStore?.candidate?.achievement || "",
     },
   });
@@ -144,6 +157,16 @@ const CandidateProfile = observer(() => {
     name: "experience",
   });
 
+  // Initialize useFieldArray for skills
+  const {
+    fields: skillFields,
+    append: appendSkill,
+    remove: removeSkill,
+  } = useFieldArray({
+    control,
+    name: "skills",
+  });
+
   // Replace your existing functions with these simpler versions
   const addEducation = () => {
     appendEducation({ school: "", degree: "", year: "" });
@@ -151,6 +174,10 @@ const CandidateProfile = observer(() => {
 
   const addExperience = () => {
     appendExperience({ company: "", position: "", duration: "" });
+  };
+
+  const addSkill = () => {
+    appendSkill({ key: "", value: "" });
   };
 
   // Reset form with candidate data when available
@@ -174,7 +201,7 @@ const CandidateProfile = observer(() => {
           ? candidateStore.candidate.experience
           : [],
         other: candidateStore.candidate.other || "",
-        skills: candidateStore.candidate.skills || "",
+        skills: candidateStore.candidate.skills || [],
         achievement: candidateStore.candidate.achievement || "",
       }
     : undefined;
@@ -186,6 +213,35 @@ const CandidateProfile = observer(() => {
       reset(resetValues);
     }
   }, [candidateStore?.candidate, reset]);
+
+  // Add this useEffect to fetch tag keys and values
+  useEffect(() => {
+    const loadTagData = async () => {
+      await tagStore?.getTagKeys();
+    };
+
+    loadTagData();
+  }, [tagStore]);
+
+  // Process tag data to get options for dropdowns
+  useEffect(() => {
+    if (tagStore?.tagKeys) {
+      // Extract tag key names
+      const keys = tagStore.tagKeys.map((tagKey) => tagKey.name);
+      setTagKeyOptions(keys);
+
+      // Create mapping from key names to their values
+      let valuesByKey: Record<string, string[]> = {};
+      tagStore.tagKeys.forEach((tagKey) => {
+        if (tagKey.children && tagKey.children.length > 0) {
+          valuesByKey[tagKey.name] = tagKey.children.map((child) => child.name);
+        } else {
+          valuesByKey[tagKey.name] = [];
+        }
+      });
+      setTagValueOptions(valuesByKey);
+    }
+  }, [tagStore?.tagKeys]);
 
   const onSubmit = async (data: any) => {
     console.log("Form submitted:", data);
@@ -219,18 +275,20 @@ const CandidateProfile = observer(() => {
       formData.append("experience", JSON.stringify(data.experience));
     }
 
+    if (data.skills && data.skills.length > 0) {
+      formData.append("skills", JSON.stringify(data.skills));
+    }
+
     // Rich text content
     formData.append("other", data.other || "");
-    formData.append("skills", data.skills || "");
     formData.append("achievement", data.achievement || "");
 
     // Handle avatar upload with better error handling
     if (data.avatar instanceof FileList && data.avatar.length > 0) {
       const avatarFile = data.avatar[0];
-      // Optional: validate file size
       if (avatarFile.size > 5 * 1024 * 1024) {
         alert("Avatar image should be less than 5MB");
-        return; // Stop form submission
+        return;
       }
       formData.append("avatar", avatarFile);
     }
@@ -927,28 +985,116 @@ const CandidateProfile = observer(() => {
               title="Kỹ năng"
               content="Liệt kê các kỹ năng chuyên môn của bạn"
             >
-              <Controller
-                name="skills"
-                control={control}
-                render={({ field }) =>
-                  isEditing ? (
-                    <RichTextEditor
-                      value={field.value}
-                      onChange={field.onChange}
-                      placeholder="Liệt kê các kỹ năng của bạn"
-                    />
-                  ) : (
+              {isEditing ? (
+                <>
+                  {skillFields.map((field, index) => (
                     <div
-                      className="rich-content-display prose max-w-full"
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          field.value ||
-                          "<p><em>Chưa có thông tin kỹ năng</em></p>",
-                      }}
-                    />
-                  )
-                }
-              />
+                      key={field.id}
+                      className="mb-4 p-4 bg-gray-50 rounded-lg relative"
+                    >
+                      <button
+                        type="button"
+                        className="absolute top-2 right-2 text-red-500"
+                        onClick={() => removeSkill(index)}
+                      >
+                        ✕
+                      </button>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Danh mục
+                          </label>
+                          <Controller
+                            name={`skills.${index}.key`}
+                            control={control}
+                            render={({ field }) => (
+                              <select
+                                {...field}
+                                className="w-full p-2 border rounded-md"
+                                onChange={(e) => {
+                                  field.onChange(e.target.value);
+                                  // Reset value when key changes
+                                  setValue(`skills.${index}.value`, "");
+                                }}
+                              >
+                                <option value="">Chọn danh mục</option>
+                                {tagKeyOptions.map((key) => (
+                                  <option key={key} value={key}>
+                                    {key}
+                                  </option>
+                                ))}
+                              </select>
+                            )}
+                          />
+                          {errors.skills?.[index]?.key && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {errors.skills[index]?.key?.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Kỹ năng
+                          </label>
+                          <Controller
+                            name={`skills.${index}.value`}
+                            control={control}
+                            render={({ field }) => (
+                              <select
+                                {...field}
+                                className="w-full p-2 border rounded-md"
+                                disabled={!watch(`skills.${index}.key`)}
+                              >
+                                <option value="">Chọn kỹ năng</option>
+                                {watch(`skills.${index}.key`) &&
+                                  tagValueOptions[
+                                    watch(`skills.${index}.key`)
+                                  ]?.map((value) => (
+                                    <option key={value} value={value}>
+                                      {value}
+                                    </option>
+                                  ))}
+                              </select>
+                            )}
+                          />
+                          {errors.skills?.[index]?.value && (
+                            <p className="mt-1 text-sm text-red-500">
+                              {errors.skills[index]?.value?.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+
+                  <button
+                    type="button"
+                    onClick={addSkill}
+                    className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
+                  >
+                    <span className="mr-2">+</span> Thêm kỹ năng
+                  </button>
+                </>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {skillFields.length > 0 ? (
+                    skillFields.map((field, index) => (
+                      <span
+                        key={field.id}
+                        className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+                      >
+                        {watch(`skills.${index}.value`)}
+                      </span>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 italic">
+                      Chưa có thông tin kỹ năng
+                    </p>
+                  )}
+                </div>
+              )}
             </Section_Profile>
 
             {/* Achievement Section */}

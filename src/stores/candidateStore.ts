@@ -25,7 +25,7 @@ export interface ICandidate {
   phone: string;
   dateOfBirth: Date;
   address: string;
-  skills: string;
+  skills: { key: string; value: string }[];
   experience: IExperience[];
   education: IEducation[];
   achievement: string;
@@ -46,6 +46,7 @@ class CandidateStore {
   }
 
   async updateCandidateProfile(data: any) {
+    console.log("data", data);
     try {
       const response = await api.put("/api/account/updateCandidate", data);
       if (response.data && response.data.profileInfo) {

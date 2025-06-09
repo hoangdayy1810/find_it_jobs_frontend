@@ -1,5 +1,4 @@
 import api from "@/utils/axios_catch_error_token";
-import axiosInstance from "@/utils/axiosInstance";
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 import { toast } from "react-hot-toast";
@@ -21,6 +20,7 @@ export interface IApplicationFilterOptions {
   degrees: string[];
   companies: string[];
   positions: string[];
+  tags?: { key: string; values: string[] }[];
 }
 
 export interface IApplicationPagination {
@@ -36,6 +36,7 @@ export interface IApplicationQueryParams {
   degree?: string;
   company?: string;
   position?: string;
+  tags?: Record<string, string>;
   page?: number;
   limit?: number;
 }
@@ -48,6 +49,7 @@ class ApplicationStore {
     degrees: [],
     companies: [],
     positions: [],
+    tags: [],
   };
   pagination: IApplicationPagination = {
     totalApplications: 0,
@@ -136,6 +138,15 @@ class ApplicationStore {
       if (query.degree) queryParams.append("degree", query.degree);
       if (query.company) queryParams.append("company", query.company);
       if (query.position) queryParams.append("position", query.position);
+
+      console.log(query.tags);
+      // Add tag filters if present
+      if (query.tags) {
+        for (const [key, value] of Object.entries(query.tags)) {
+          if (value) queryParams.append(`${key}`, value);
+        }
+      }
+
       if (query.page) queryParams.append("page", query.page.toString());
       if (query.limit) queryParams.append("limit", query.limit.toString());
 
@@ -164,6 +175,7 @@ class ApplicationStore {
           degrees: [],
           companies: [],
           positions: [],
+          tags: [],
         },
         pagination: response.data.pagination || {
           totalApplications: 0,
@@ -186,6 +198,7 @@ class ApplicationStore {
           degrees: [],
           companies: [],
           positions: [],
+          tags: [],
         },
         pagination: {
           totalApplications: 0,
