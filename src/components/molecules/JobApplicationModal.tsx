@@ -48,7 +48,6 @@ const JobApplicationModal = observer(
       control,
       handleSubmit,
       setValue,
-      watch,
       formState: { errors },
       reset,
     } = useForm({

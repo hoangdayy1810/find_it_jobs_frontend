@@ -1,9 +1,15 @@
+"use client";
+
 import { IJob } from "@/stores/jobStore";
 import { formatDate } from "@/utils/fommat_date";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import JobLogoIcon from "../atoms/icons/JobLogoIcon";
 import Image from "next/image";
+import { useApplication, useUser } from "@/contexts/AppContext";
+import { applicationStore } from "@/stores/applicationStore";
+import { userStore } from "@/stores/userStore";
+import { candidateStore } from "@/stores/candidateStore";
 
 const JobListItem = ({
   job,
@@ -13,9 +19,41 @@ const JobListItem = ({
   tagKeysByJobs: any[];
 }) => {
   const router = useRouter();
+  const [applicationStatus, setApplicationStatus] = useState<string | null>(
+    null
+  );
 
   // Get employer data
   const employer = typeof job.employerId === "object" ? job.employerId : null;
+
+  // Check if user is logged in as candidate and if they've applied to this job
+  useEffect(() => {
+    const checkApplicationStatus = async () => {
+      // Only check for logged in candidates
+      if (userStore.user?.role === "candidate" && candidateStore.candidate) {
+        try {
+          // Get candidate applications
+          const result = await applicationStore.getCandidateApplications();
+          if (result && result.applications) {
+            // Find if current job is in the applications list
+            const application = result.applications.find(
+              (app: any) =>
+                (typeof app.jobId === "string" && app.jobId === job._id) ||
+                (typeof app.jobId === "object" && app.jobId._id === job._id)
+            );
+
+            if (application) {
+              setApplicationStatus(application.status);
+            }
+          }
+        } catch (error) {
+          console.error("Error checking application status:", error);
+        }
+      }
+    };
+
+    checkApplicationStatus();
+  }, [job._id]);
 
   // Format salary for display
   const formatSalary = (min: number, max: number) => {
@@ -59,15 +97,42 @@ const JobListItem = ({
 
   const relevantTags = getRelevantTags();
 
+  // Generate status badge color based on status
+  const getStatusBadgeColor = (status: string) => {
+    switch (status.toLowerCase()) {
+      case "pending":
+        return "bg-yellow-100 text-yellow-800";
+      case "approved":
+        return "bg-green-100 text-green-800";
+      case "rejected":
+        return "bg-red-100 text-red-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
+
   return (
     <div
       className="bg-white p-5 rounded-lg shadow-sm hover:shadow-xl hover:scale-[0.99] cursor-pointer transition-shadow h-full flex flex-col"
       onClick={() => router.push(`/jobs/${job._id}`)}
     >
-      {/* Posted Date - at the top, faded text */}
-      <span className="text-sm text-gray-400 mb-2">
-        {formatCurrentDate(job.postedAt)}
-      </span>
+      {/* Posted Date and Application Status */}
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-sm text-gray-400">
+          {formatCurrentDate(job.postedAt)}
+        </span>
+
+        {applicationStatus && (
+          <span
+            className={`text-xs px-2 py-1 rounded-full ${getStatusBadgeColor(
+              applicationStatus
+            )}`}
+          >
+            {applicationStatus.charAt(0).toUpperCase() +
+              applicationStatus.slice(1)}
+          </span>
+        )}
+      </div>
 
       {/* Job Title - large font */}
       <h2 className="text-2xl font-semibold text-gray-800 hover:text-red-400 transition-colors mb-3">

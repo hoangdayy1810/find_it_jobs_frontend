@@ -72,6 +72,7 @@ const PrivateDetailJob = observer(() => {
   }
 
   const {
+    _id,
     title,
     employerId,
     salary,
@@ -104,7 +105,7 @@ const PrivateDetailJob = observer(() => {
 
         <div className="flex space-x-3">
           {/* Only show view applications button when there are applications */}
-          {applicationCount > 0 && (
+          {applicationCount && applicationCount > 0 && (
             <button
               onClick={handleViewCandidates}
               className="px-6 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors flex items-center"
@@ -127,7 +128,11 @@ const PrivateDetailJob = observer(() => {
       <div className="mx-auto p-4 bg-white shadow-md rounded-lg">
         {/* Job title */}
         <div className="mb-4">
-          <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
+            <p className="text-sm text-blue-600">#{_id}</p>
+          </div>
+
           {location && (
             <div className="flex items-center text-gray-600">
               <span className="mr-1">📍</span>
