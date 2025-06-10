@@ -33,22 +33,22 @@ const LayoutCandidateProfile = ({
           <nav className="space-y-4">
             <Link_NavBar_Profile
               href="/candidate/profile"
-              text="Hồ sơ của tôi"
+              text={t("navigation.candidate.profile")}
               icon="👤"
             />
             <Link_NavBar_Profile
               href="/candidate/myapplies"
-              text="Việc làm của tôi"
+              text={t("navigation.candidate.my_jobs")}
               icon="💼"
             />
             <Link_NavBar_Profile
               href="/candidate/setting"
-              text="Cài đặt"
+              text={t("navigation.candidate.settings")}
               icon="⚙️"
             />
             <div className="border-t border-gray-200 my-2"></div>
             <LogoutButton
-              text="Đăng xuất"
+              text={t("navigation.candidate.logout")}
               icon="🚪"
               handleClick={() => setShowConfirmModal(true)}
             />

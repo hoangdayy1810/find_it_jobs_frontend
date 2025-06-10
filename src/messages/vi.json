@@ -207,7 +207,12 @@
   },
   "navigation": {
     "hello": "Xin chào",
-    "candidate": {},
+    "candidate": {
+      "profile": "Hồ sơ của tôi",
+      "my_jobs": "Việc làm của tôi",
+      "settings": "Cài đặt",
+      "logout": "Đăng xuất"
+    },
     "employer": {
       "info": "Thông tin công ty",
       "jobs": "Danh sách công việc",
@@ -275,6 +280,62 @@
     "job-not-found": {
       "title": "Không Tìm Thấy Công Việc",
       "go-back": "Quay lại"
+    }
+  },
+  "job_application": {
+    "modal": {
+      "tabs": {
+        "profile": "Thông tin ứng viên",
+        "application": "Nộp đơn ứng tuyển"
+      },
+      "applying_as": "Bạn đang ứng tuyển với tư cách <bold>{name}</bold>. Vui lòng tải lên CV và thêm thư xin việc (tuỳ chọn) để hoàn tất đơn ứng tuyển.",
+      "job_info": "Thông tin công việc",
+      "personal_info": {
+        "email": "Email",
+        "phone": "Điện thoại",
+        "birth_date": "Ngày sinh",
+        "gender": "Giới tính",
+        "address": "Địa chỉ"
+      },
+      "skills": {
+        "title": "Kỹ năng",
+        "no_skills": "Chưa có thông tin kỹ năng"
+      },
+      "education": {
+        "title": "Học vấn"
+      },
+      "experience": {
+        "title": "Kinh nghiệm làm việc"
+      },
+      "about": {
+        "title": "Giới thiệu bản thân",
+        "no_info": "Chưa có thông tin giới thiệu"
+      },
+      "achievements": {
+        "title": "Thành tựu",
+        "no_info": "Chưa có thông tin thành tựu"
+      },
+      "cv": {
+        "title": "CV/Resume",
+        "current": "Đang sử dụng CV từ hồ sơ: {filename}",
+        "download": "Tải xuống",
+        "upload_different": "Tải lên CV khác cho đơn ứng tuyển này (tuỳ chọn)",
+        "upload_new": "Tải lên CV của bạn cho đơn ứng tuyển này",
+        "select_file": "Chọn tệp",
+        "delete": "Xoá"
+      },
+      "cover_letter": {
+        "title": "Thư xin việc (Tuỳ chọn)",
+        "description": "Giới thiệu bản thân và giải thích lý do bạn phù hợp với vị trí này.",
+        "placeholder": "Viết thư xin việc của bạn tại đây..."
+      },
+      "buttons": {
+        "continue": "Tiếp tục nộp đơn",
+        "back": "Quay lại thông tin",
+        "cancel": "Huỷ",
+        "submit": "Nộp đơn ứng tuyển",
+        "submitting": "Đang gửi..."
+      }
     }
   },
   "employer": {

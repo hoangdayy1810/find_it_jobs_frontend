@@ -207,7 +207,12 @@
   },
   "navigation": {
     "hello": "Hello",
-    "candidate": {},
+    "candidate": {
+      "profile": "My Profile",
+      "my_jobs": "My Jobs",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
     "employer": {
       "info": "Company Information",
       "jobs": "Job Listings",
@@ -275,6 +280,62 @@
     "job-not-found": {
       "title": "Job Not Found",
       "go-back": "Go Back"
+    }
+  },
+  "job_application": {
+    "modal": {
+      "tabs": {
+        "profile": "Candidate Information",
+        "application": "Submit Application"
+      },
+      "applying_as": "You are applying as <bold>{name}</bold>. Please upload your CV and add a cover letter (optional) to complete your application.",
+      "job_info": "Job Information",
+      "personal_info": {
+        "email": "Email",
+        "phone": "Phone",
+        "birth_date": "Date of Birth",
+        "gender": "Gender",
+        "address": "Address"
+      },
+      "skills": {
+        "title": "Skills",
+        "no_skills": "No skills information available"
+      },
+      "education": {
+        "title": "Education"
+      },
+      "experience": {
+        "title": "Work Experience"
+      },
+      "about": {
+        "title": "About Me",
+        "no_info": "No information provided"
+      },
+      "achievements": {
+        "title": "Achievements",
+        "no_info": "No achievements information provided"
+      },
+      "cv": {
+        "title": "CV/Resume",
+        "current": "Currently using CV from profile: {filename}",
+        "download": "Download",
+        "upload_different": "Upload a different CV for this application (optional)",
+        "upload_new": "Upload your CV for this application",
+        "select_file": "Select file",
+        "delete": "Delete"
+      },
+      "cover_letter": {
+        "title": "Cover Letter (Optional)",
+        "description": "Introduce yourself and explain why you're a good fit for this position.",
+        "placeholder": "Write your cover letter here..."
+      },
+      "buttons": {
+        "continue": "Continue to Application",
+        "back": "Back to Profile",
+        "cancel": "Cancel",
+        "submit": "Submit Application",
+        "submitting": "Submitting..."
+      }
     }
   },
   "employer": {

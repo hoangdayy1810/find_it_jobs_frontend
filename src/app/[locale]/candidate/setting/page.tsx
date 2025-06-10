@@ -10,6 +10,7 @@ import Modal from "@/components/atoms/Modal";
 import PasswordInput from "@/components/atoms/PasswordInput";
 import { useTranslations } from "next-intl";
 import LoadingIcon from "@/components/atoms/icons/LoadingIcon";
+import InfoIcon from "@/components/atoms/icons/InfoIcon";
 
 const Setting = observer(() => {
   const t = useTranslations();
@@ -120,19 +121,7 @@ const Setting = observer(() => {
             <div className="bg-blue-50 p-4 rounded-md text-blue-700 mb-4">
               <div className="flex">
                 <div className="flex-shrink-0">
-                  <svg
-                    className="h-5 w-5 text-blue-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                  <InfoIcon />
                 </div>
                 <div className="ml-3">
                   <p className="text-sm">

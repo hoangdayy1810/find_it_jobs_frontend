@@ -16,6 +16,10 @@ import Phone from "@/components/atoms/icons/Phone";
 import DateIcon from "@/components/atoms/icons/Date";
 import Gender from "@/components/atoms/icons/Gender";
 import Location from "@/components/atoms/icons/Location";
+import { useTranslations } from "next-intl";
+import { GENDER, DEGREE, POSITION, DURATION } from "@/utils/constant";
+import XIcon from "../atoms/icons/XIcon";
+import LoadingIcon from "../atoms/icons/LoadingIcon";
 
 interface JobApplicationModalProps {
   isOpen: boolean;
@@ -38,6 +42,7 @@ const JobApplicationModal = observer(
     jobTitle,
     companyName,
   }: JobApplicationModalProps) => {
+    const t = useTranslations();
     const candidateStore = useCandidate();
     const applicationStore = useApplication();
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -106,48 +111,15 @@ const JobApplicationModal = observer(
 
     const candidate = candidateStore?.candidate;
 
-    // Find labels for candidate's selection values
-    const getGenderLabel = (value: string) => {
-      const options = [
-        { value: "Male", label: "Nam" },
-        { value: "Female", label: "Nữ" },
-        { value: "Other", label: "Khác" },
-      ];
-      return options.find((opt) => opt.value === value)?.label || value;
-    };
-
-    const getDegreeLabel = (value: string) => {
-      const options = [
-        { value: "high_school", label: "Trung học phổ thông" },
-        { value: "associate", label: "Cao đẳng" },
-        { value: "bachelor", label: "Cử nhân" },
-        { value: "master", label: "Thạc sĩ" },
-        { value: "phd", label: "Tiến sĩ" },
-      ];
-      return options.find((opt) => opt.value === value)?.label || value;
-    };
-
-    const getPositionLabel = (value: string) => {
-      const options = [
-        { value: "intern", label: "Thực tập sinh" },
-        { value: "fresher", label: "Fresher" },
-        { value: "junior", label: "Junior" },
-        { value: "middle", label: "Middle" },
-        { value: "senior", label: "Senior" },
-        { value: "team_lead", label: "Team Lead" },
-        { value: "manager", label: "Manager" },
-      ];
-      return options.find((opt) => opt.value === value)?.label || value;
-    };
-
-    const getDurationLabel = (value: string) => {
-      const options = [
-        { value: "less_than_1", label: "Dưới 1 năm" },
-        { value: "1_3", label: "1-3 năm" },
-        { value: "3_5", label: "3-5 năm" },
-        { value: "more_than_5", label: "Trên 5 năm" },
-      ];
-      return options.find((opt) => opt.value === value)?.label || value;
+    // Get label function using constants
+    const getLabel = (
+      array: Array<{ value: string; label: string }>,
+      value: string
+    ) => {
+      const found = array.find(
+        (item) => item.value.toLowerCase() === value.toLowerCase()
+      );
+      return found ? t(found.label) : value;
     };
 
     return (
@@ -165,7 +137,7 @@ const JobApplicationModal = observer(
                       : "text-gray-500"
                   }`}
                 >
-                  Thông tin ứng viên
+                  {t("job_application.modal.tabs.profile")}
                 </button>
                 <button
                   onClick={() => setTab("application")}
@@ -175,7 +147,7 @@ const JobApplicationModal = observer(
                       : "text-gray-500"
                   }`}
                 >
-                  Nộp đơn ứng tuyển
+                  {t("job_application.modal.tabs.application")}
                 </button>
               </div>
               <button
@@ -183,20 +155,7 @@ const JobApplicationModal = observer(
                 className="text-gray-500 hover:text-gray-700"
                 aria-label="Close"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
+                <XIcon />
               </button>
             </div>
 
@@ -208,7 +167,7 @@ const JobApplicationModal = observer(
 
             {tab === "profile" && candidate && (
               <div className="space-y-6">
-                {/* Profile Header Card - Similar to candidate profile */}
+                {/* Profile Header Card */}
                 <div className="bg-white p-4 rounded-lg shadow-sm relative">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center">
                     <div className="mr-6 mb-4 sm:mb-0">
@@ -239,7 +198,9 @@ const JobApplicationModal = observer(
                         <Email />
                       </span>
                       <div>
-                        <p className="text-sm text-gray-500">Email</p>
+                        <p className="text-sm text-gray-500">
+                          {t("job_application.modal.personal_info.email")}
+                        </p>
                         <p>{candidate.email}</p>
                       </div>
                     </div>
@@ -248,7 +209,9 @@ const JobApplicationModal = observer(
                         <Phone />
                       </span>
                       <div>
-                        <p className="text-sm text-gray-500">Điện thoại</p>
+                        <p className="text-sm text-gray-500">
+                          {t("job_application.modal.personal_info.phone")}
+                        </p>
                         <p>{candidate.phone}</p>
                       </div>
                     </div>
@@ -258,7 +221,11 @@ const JobApplicationModal = observer(
                           <DateIcon />
                         </span>
                         <div>
-                          <p className="text-sm text-gray-500">Ngày sinh</p>
+                          <p className="text-sm text-gray-500">
+                            {t(
+                              "job_application.modal.personal_info.birth_date"
+                            )}
+                          </p>
                           <p>{formatDate(new Date(candidate.dateOfBirth))}</p>
                         </div>
                       </div>
@@ -269,8 +236,10 @@ const JobApplicationModal = observer(
                           <Gender />
                         </span>
                         <div>
-                          <p className="text-sm text-gray-500">Giới tính</p>
-                          <p>{getGenderLabel(candidate.gender)}</p>
+                          <p className="text-sm text-gray-500">
+                            {t("job_application.modal.personal_info.gender")}
+                          </p>
+                          <p>{getLabel(GENDER, candidate.gender)}</p>
                         </div>
                       </div>
                     )}
@@ -280,7 +249,9 @@ const JobApplicationModal = observer(
                           <Location />
                         </span>
                         <div>
-                          <p className="text-sm text-gray-500">Địa chỉ</p>
+                          <p className="text-sm text-gray-500">
+                            {t("job_application.modal.personal_info.address")}
+                          </p>
                           <p>{candidate.address}</p>
                         </div>
                       </div>
@@ -291,49 +262,61 @@ const JobApplicationModal = observer(
                 {/* Skills Section */}
                 {candidate.skills && candidate.skills.length > 0 ? (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">Kỹ năng</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("job_application.modal.skills.title")}
+                    </h3>
 
                     {/* Group skills by key */}
                     {Array.isArray(candidate.skills) ? (
                       <div className="space-y-4">
                         {/* Get unique keys */}
-                        {[...new Set(candidate.skills.map((skill) => skill.key))].map(
-                          (key) => (
-                            <div key={key} className="mb-2">
-                              <h4 className="text-sm font-medium text-gray-600 mb-1">
-                                {key}
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {candidate.skills
-                                  .filter((skill) => skill.key === key)
-                                  .map((skill, index) => (
-                                    <span
-                                      key={index}
-                                      className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
-                                    >
-                                      {skill.value}
-                                    </span>
-                                  ))}
-                              </div>
+                        {[
+                          ...new Set(
+                            candidate.skills.map((skill) => skill.key)
+                          ),
+                        ].map((key) => (
+                          <div key={key} className="mb-2">
+                            <h4 className="text-sm font-medium text-gray-600 mb-1">
+                              {key}
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {candidate.skills
+                                .filter((skill) => skill.key === key)
+                                .map((skill, index) => (
+                                  <span
+                                    key={index}
+                                    className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+                                  >
+                                    {skill.value}
+                                  </span>
+                                ))}
                             </div>
-                          )
-                        )}
+                          </div>
+                        ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 italic">Chưa có thông tin kỹ năng</p>
+                      <p className="text-gray-500 italic">
+                        {t("job_application.modal.skills.no_skills")}
+                      </p>
                     )}
                   </div>
                 ) : (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">Kỹ năng</h3>
-                    <p className="text-gray-500 italic">Chưa có thông tin kỹ năng</p>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("job_application.modal.skills.title")}
+                    </h3>
+                    <p className="text-gray-500 italic">
+                      {t("job_application.modal.skills.no_skills")}
+                    </p>
                   </div>
                 )}
 
                 {/* Education Section */}
                 {candidate.education && candidate.education.length > 0 && (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">Học vấn</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("job_application.modal.education.title")}
+                    </h3>
                     <div className="space-y-3">
                       {candidate.education.map((edu, index) => (
                         <div
@@ -342,7 +325,7 @@ const JobApplicationModal = observer(
                         >
                           <h4 className="font-semibold">{edu.school}</h4>
                           <div className="text-gray-600 flex items-center space-x-2">
-                            <span>{getDegreeLabel(edu.degree)}</span>
+                            <span>{getLabel(DEGREE, edu.degree)}</span>
                             <span>•</span>
                             <span>{edu.year}</span>
                           </div>
@@ -356,7 +339,7 @@ const JobApplicationModal = observer(
                 {candidate.experience && candidate.experience.length > 0 && (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h3 className="text-lg font-semibold mb-2">
-                      Kinh nghiệm làm việc
+                      {t("job_application.modal.experience.title")}
                     </h3>
                     <div className="space-y-3">
                       {candidate.experience.map((exp, index) => (
@@ -366,9 +349,9 @@ const JobApplicationModal = observer(
                         >
                           <h4 className="font-semibold">{exp.company}</h4>
                           <div className="text-gray-600 flex items-center space-x-2">
-                            <span>{getPositionLabel(exp.position)}</span>
+                            <span>{getLabel(POSITION, exp.position)}</span>
                             <span>•</span>
-                            <span>{getDurationLabel(exp.duration)}</span>
+                            <span>{getLabel(DURATION, exp.duration)}</span>
                           </div>
                         </div>
                       ))}
@@ -380,14 +363,16 @@ const JobApplicationModal = observer(
                 {candidate.other && (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h3 className="text-lg font-semibold mb-2">
-                      Giới thiệu bản thân
+                      {t("job_application.modal.about.title")}
                     </h3>
                     <div
                       className="prose max-w-none"
                       dangerouslySetInnerHTML={{
                         __html:
                           candidate.other ||
-                          "<p><em>Chưa có thông tin giới thiệu</em></p>",
+                          `<p><em>${t(
+                            "job_application.modal.about.no_info"
+                          )}</em></p>`,
                       }}
                     />
                   </div>
@@ -396,13 +381,17 @@ const JobApplicationModal = observer(
                 {/* Achievement Section */}
                 {candidate.achievement && (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
-                    <h3 className="text-lg font-semibold mb-2">Thành tựu</h3>
+                    <h3 className="text-lg font-semibold mb-2">
+                      {t("job_application.modal.achievements.title")}
+                    </h3>
                     <div
                       className="prose max-w-none"
                       dangerouslySetInnerHTML={{
                         __html:
                           candidate.achievement ||
-                          "<p><em>Chưa có thông tin thành tựu</em></p>",
+                          `<p><em>${t(
+                            "job_application.modal.achievements.no_info"
+                          )}</em></p>`,
                       }}
                     />
                   </div>
@@ -412,7 +401,7 @@ const JobApplicationModal = observer(
                 {candidate.cvFile && (
                   <div className="bg-white p-4 rounded-lg shadow-sm">
                     <h3 className="text-lg font-semibold mb-2">
-                      CV/Resume hiện tại
+                      {t("job_application.modal.cv.title")}
                     </h3>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
@@ -429,7 +418,9 @@ const JobApplicationModal = observer(
                         className="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 flex items-center text-sm"
                         rel="noopener noreferrer"
                       >
-                        <span className="mr-1">Tải xuống</span>
+                        <span className="mr-1">
+                          {t("job_application.modal.cv.download")}
+                        </span>
                         <DownloadIcon />
                       </a>
                     </div>
@@ -441,7 +432,7 @@ const JobApplicationModal = observer(
                     onClick={() => setTab("application")}
                     className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
                   >
-                    Tiếp tục nộp đơn
+                    {t("job_application.modal.buttons.continue")}
                   </button>
                 </div>
               </div>
@@ -450,18 +441,18 @@ const JobApplicationModal = observer(
             {tab === "application" && (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <p className="text-gray-700">
-                  Bạn đang ứng tuyển với tư cách{" "}
-                  <span className="font-semibold">
-                    {candidateStore?.candidate?.fullName}
-                  </span>
-                  . Vui lòng tải lên CV và thêm thư xin việc (tuỳ chọn) để hoàn
-                  tất đơn ứng tuyển.
+                  {t.rich("job_application.modal.applying_as", {
+                    name: candidateStore?.candidate?.fullName || "",
+                    bold: (chunks) => (
+                      <span className="font-semibold">{chunks}</span>
+                    ),
+                  })}
                 </p>
 
                 {/* CV Upload */}
                 <div className="p-4 bg-white rounded-lg shadow-sm">
                   <h3 className="text-lg font-medium mb-4">
-                    CV/Resume (Tùy chọn)
+                    {t("job_application.modal.cv.title")}
                   </h3>
                   <Controller
                     name="cvFile"
@@ -483,7 +474,11 @@ const JobApplicationModal = observer(
                                 <div className="flex items-center">
                                   <Network />
                                   <span className="ml-2 text-sm text-gray-600">
-                                    Đang sử dụng CV từ hồ sơ: {displayFileName}
+                                    {t("job_application.modal.cv.current", {
+                                      filename:
+                                        displayFileName ||
+                                        t("job_application.modal.cv.no_file"),
+                                    })}
                                   </span>
                                 </div>
                                 <div className="flex space-x-2">
@@ -493,7 +488,9 @@ const JobApplicationModal = observer(
                                     className="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 flex items-center text-sm"
                                     rel="noopener noreferrer"
                                   >
-                                    <span className="mr-1">Tải xuống</span>
+                                    <span className="mr-1">
+                                      {t("job_application.modal.cv.download")}
+                                    </span>
                                     <DownloadIcon />
                                   </a>
                                 </div>
@@ -505,12 +502,12 @@ const JobApplicationModal = observer(
                           <div className="flex flex-col">
                             <p className="text-sm text-gray-600 mb-2">
                               {typeof value === "string" && value
-                                ? "Tải lên CV khác cho đơn ứng tuyển này (tuỳ chọn)"
-                                : "Tải lên CV của bạn cho đơn ứng tuyển này"}
+                                ? t("job_application.modal.cv.upload_different")
+                                : t("job_application.modal.cv.upload_new")}
                             </p>
                             <div className="flex items-center">
                               <label className="bg-blue-100 text-blue-600 px-3 py-1 rounded cursor-pointer hover:bg-blue-200">
-                                Chọn tệp
+                                {t("job_application.modal.cv.select_file")}
                                 <input
                                   type="file"
                                   accept=".pdf,.doc,.docx"
@@ -540,7 +537,7 @@ const JobApplicationModal = observer(
                                       }
                                       className="text-red-500 hover:text-red-700 text-xs"
                                     >
-                                      Xoá
+                                      {t("job_application.modal.cv.delete")}
                                     </button>
                                   </div>
                                 )}
@@ -563,11 +560,10 @@ const JobApplicationModal = observer(
                 {/* Cover Letter */}
                 <div className="p-4 bg-white rounded-lg shadow-sm">
                   <label className="block text-lg font-medium mb-2">
-                    Thư xin việc (Tuỳ chọn)
+                    {t("job_application.modal.cover_letter.title")}
                   </label>
                   <p className="text-sm text-gray-600 mb-3">
-                    Giới thiệu bản thân và giải thích lý do bạn phù hợp với vị
-                    trí này.
+                    {t("job_application.modal.cover_letter.description")}
                   </p>
                   <Controller
                     name="coverLetter"
@@ -576,7 +572,9 @@ const JobApplicationModal = observer(
                       <textarea
                         {...field}
                         className="w-full p-3 border rounded-md h-40"
-                        placeholder="Viết thư xin việc của bạn tại đây..."
+                        placeholder={t(
+                          "job_application.modal.cover_letter.placeholder"
+                        )}
                       />
                     )}
                   />
@@ -589,7 +587,7 @@ const JobApplicationModal = observer(
                     onClick={() => setTab("profile")}
                     className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
                   >
-                    Quay lại thông tin
+                    {t("job_application.modal.buttons.back")}
                   </button>
                   <div className="flex space-x-2">
                     <button
@@ -598,7 +596,7 @@ const JobApplicationModal = observer(
                       className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
                       disabled={isSubmitting}
                     >
-                      Huỷ
+                      {t("job_application.modal.buttons.cancel")}
                     </button>
                     <button
                       type="submit"
@@ -607,30 +605,11 @@ const JobApplicationModal = observer(
                     >
                       {isSubmitting ? (
                         <>
-                          <svg
-                            className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            ></circle>
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                            ></path>
-                          </svg>
-                          Đang gửi...
+                          <LoadingIcon />
+                          {t("job_application.modal.buttons.submitting")}
                         </>
                       ) : (
-                        "Nộp đơn ứng tuyển"
+                        t("job_application.modal.buttons.submit")
                       )}
                     </button>
                   </div>
