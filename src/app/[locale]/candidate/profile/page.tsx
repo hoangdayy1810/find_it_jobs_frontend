@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import Edit from "@/components/atoms/icons/Edit";
 import Input_Profile from "@/components/atoms/Input_Profile";
 import Email from "@/components/atoms/icons/Email";
@@ -20,8 +21,10 @@ import * as yup from "yup";
 import { formatDate } from "@/utils/fommat_date";
 import { getCleanFileName } from "@/utils/getCleanFilename";
 import DownloadIcon from "@/components/atoms/icons/DownloadIcon";
+import { DEGREE, POSITION, DURATION } from "@/utils/constant";
 
 const CandidateProfile = observer(() => {
+  const t = useTranslations();
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const candidateStore = useCandidate();
@@ -31,38 +34,58 @@ const CandidateProfile = observer(() => {
     Record<string, string[]>
   >({});
 
-  // Define form validation schema
+  // Define form validation schema with translations
   const validationSchema = yup.object({
-    fullName: yup.string().required("Họ và tên là bắt buộc"),
-    jobTitle: yup.string().required("Chức danh là bắt buộc"),
+    fullName: yup
+      .string()
+      .required(t("profile.candidate.validation.full_name_required")),
+    jobTitle: yup
+      .string()
+      .required(t("profile.candidate.validation.job_title_required")),
     email: yup
       .string()
-      .email("Email không hợp lệ")
-      .required("Email là bắt buộc"),
+      .email(t("profile.candidate.validation.email_invalid"))
+      .required(t("profile.candidate.validation.email_required")),
     phone: yup
       .string()
-      .matches(/^[0-9]{6,15}$/, "Số điện thoại phải từ 6-15 chữ số")
-      .required("Số điện thoại là bắt buộc"),
+      .matches(/^[0-9]{6,15}$/, t("profile.candidate.validation.phone_format"))
+      .required(t("profile.candidate.validation.phone_required")),
     dateOfBirth: yup
       .date()
-      .required("Ngày sinh là bắt buộc")
-      .max(new Date(), "Ngày sinh không thể là ngày trong tương lai"),
-    gender: yup.string().required("Giới tính là bắt buộc"),
-    address: yup.string().required("Địa chỉ là bắt buộc"),
+      .required(t("profile.candidate.validation.date_required"))
+      .max(new Date(), t("profile.candidate.validation.date_future")),
+    gender: yup
+      .string()
+      .required(t("profile.candidate.validation.gender_required")),
+    address: yup
+      .string()
+      .required(t("profile.candidate.validation.address_required")),
     avatar: yup.mixed(),
     cvFile: yup.mixed().optional().nullable(),
     education: yup.array().of(
       yup.object().shape({
-        school: yup.string().required("Tên trường là bắt buộc"),
-        degree: yup.string().required("Bằng cấp là bắt buộc"),
-        year: yup.string().required("Năm tốt nghiệp là bắt buộc"),
+        school: yup
+          .string()
+          .required(t("profile.candidate.validation.school_required")),
+        degree: yup
+          .string()
+          .required(t("profile.candidate.validation.degree_required")),
+        year: yup
+          .string()
+          .required(t("profile.candidate.validation.year_required")),
       })
     ),
     experience: yup.array().of(
       yup.object().shape({
-        company: yup.string().required("Tên công ty là bắt buộc"),
-        position: yup.string().required("Vị trí là bắt buộc"),
-        duration: yup.string().required("Thời gian làm việc là bắt buộc"),
+        company: yup
+          .string()
+          .required(t("profile.candidate.validation.company_required")),
+        position: yup
+          .string()
+          .required(t("profile.candidate.validation.position_required")),
+        duration: yup
+          .string()
+          .required(t("profile.candidate.validation.duration_required")),
       })
     ),
     other: yup.string(),
@@ -70,43 +93,43 @@ const CandidateProfile = observer(() => {
       .array()
       .of(
         yup.object({
-          key: yup.string().required("Tag category is required"),
-          value: yup.string().required("Tag value is required"),
+          key: yup
+            .string()
+            .required(t("profile.candidate.validation.category_required")),
+          value: yup
+            .string()
+            .required(t("profile.candidate.validation.value_required")),
         })
       )
-      .min(1, "At least one skill is required"),
+      .min(1, t("profile.candidate.validation.skills_required")),
     achievement: yup.string(),
   });
 
-  // Define predefined options for select fields
-  const degreeOptions = [
-    { value: "high_school", label: "Trung học phổ thông" },
-    { value: "associate", label: "Cao đẳng" },
-    { value: "bachelor", label: "Cử nhân" },
-    { value: "master", label: "Thạc sĩ" },
-    { value: "phd", label: "Tiến sĩ" },
-  ];
+  // Define predefined options for select fields with translations
+  const degreeOptions = DEGREE.map((option) => ({
+    value: option.value,
+    label: t(option.label),
+  }));
 
   const yearOptions = Array.from({ length: 30 }, (_, i) => {
     const year = new Date().getFullYear() - i;
     return { value: year.toString(), label: year.toString() };
   });
 
-  const positionOptions = [
-    { value: "intern", label: "Thực tập sinh" },
-    { value: "fresher", label: "Fresher" },
-    { value: "junior", label: "Junior" },
-    { value: "middle", label: "Middle" },
-    { value: "senior", label: "Senior" },
-    { value: "team_lead", label: "Team Lead" },
-    { value: "manager", label: "Manager" },
-  ];
+  const positionOptions = POSITION.map((option) => ({
+    value: option.value,
+    label: t(option.label),
+  }));
 
-  const durationOptions = [
-    { value: "less_than_1", label: "Dưới 1 năm" },
-    { value: "1_3", label: "1-3 năm" },
-    { value: "3_5", label: "3-5 năm" },
-    { value: "more_than_5", label: "Trên 5 năm" },
+  const durationOptions = DURATION.map((option) => ({
+    value: option.value,
+    label: t(option.label),
+  }));
+
+  const genderOptions = [
+    { value: "Male", label: t("profile.candidate.gender_options.male") },
+    { value: "Female", label: t("profile.candidate.gender_options.female") },
+    { value: "Other", label: t("profile.candidate.gender_options.other") },
   ];
 
   // Initialize useForm
@@ -348,7 +371,7 @@ const CandidateProfile = observer(() => {
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-80 transition-opacity">
                           <label className="m-auto cursor-pointer bg-white text-blue-500 hover:text-blue-600 px-2 py-1 rounded text-sm font-medium">
-                            Thay đổi
+                            {t("profile.candidate.change")}
                             <Controller
                               name="avatar"
                               control={control}
@@ -411,14 +434,16 @@ const CandidateProfile = observer(() => {
                           {...field}
                           type="text"
                           className="text-2xl font-bold border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full mb-2"
-                          placeholder="Họ và tên của bạn"
+                          placeholder={t(
+                            "profile.candidate.placeholders.full_name"
+                          )}
                         />
                       )}
                     />
                   ) : (
                     <h2 className="text-2xl font-bold">
                       {candidateStore?.candidate?.fullName ||
-                        "Họ và tên của bạn"}
+                        t("profile.candidate.placeholders.full_name")}
                     </h2>
                   )}
                   <Controller
@@ -428,7 +453,9 @@ const CandidateProfile = observer(() => {
                       <Input_Profile
                         {...field}
                         text={field.value}
-                        placeholder="Nhập chức danh của bạn"
+                        placeholder={t(
+                          "profile.candidate.placeholders.job_title"
+                        )}
                         isEdit={isEditing}
                         error={errors.jobTitle?.message}
                       />
@@ -446,7 +473,7 @@ const CandidateProfile = observer(() => {
                       icon={<Email />}
                       {...field}
                       text={field.value}
-                      placeholder="Nhập email của bạn"
+                      placeholder={t("profile.candidate.placeholders.email")}
                       isEdit={isEditing}
                       error={errors.email?.message}
                     />
@@ -460,7 +487,7 @@ const CandidateProfile = observer(() => {
                       icon={<Phone />}
                       {...field}
                       text={field.value}
-                      placeholder="Nhập số điện thoại của bạn"
+                      placeholder={t("profile.candidate.placeholders.phone")}
                       typeInput="tel"
                       isEdit={isEditing}
                       error={errors.phone?.message}
@@ -485,7 +512,9 @@ const CandidateProfile = observer(() => {
                         onChange={(e) =>
                           field.onChange(new Date(e.target.value))
                         }
-                        placeholder="Nhập ngày sinh của bạn"
+                        placeholder={t(
+                          "profile.candidate.fields.date_of_birth"
+                        )}
                         isEdit={isEditing}
                         typeInput="date"
                         error={errors.dateOfBirth?.message}
@@ -497,26 +526,19 @@ const CandidateProfile = observer(() => {
                   name="gender"
                   control={control}
                   render={({ field }) => {
-                    // Find the matching option and get its label
-                    const genderOption = [
-                      { value: "Male", label: "Nam" },
-                      { value: "Female", label: "Nữ" },
-                      { value: "Other", label: "Khác" },
-                    ];
-
                     return (
                       <Input_Profile
                         icon={<Gender />}
                         {...field}
                         text={
-                          genderOption.find(
+                          genderOptions.find(
                             (option) => option.value === field.value
                           )?.label || field.value
                         }
-                        placeholder="Chọn giới tính của bạn"
+                        placeholder={t("profile.candidate.fields.gender")}
                         isEdit={isEditing}
                         typeInput="select"
-                        options={genderOption}
+                        options={genderOptions}
                         error={errors.gender?.message}
                       />
                     );
@@ -535,7 +557,7 @@ const CandidateProfile = observer(() => {
                     <Input_Profile
                       icon={<Location />}
                       {...field}
-                      placeholder="Nhập địa chỉ của bạn"
+                      placeholder={t("profile.candidate.placeholders.address")}
                       isEdit={isEditing}
                       text={field.value}
                       children={
@@ -571,14 +593,16 @@ const CandidateProfile = observer(() => {
                           icon={<Network />}
                           {...field}
                           // Use the calculated displayFileName or the default text
-                          text={displayFileName || "Tải lên CV của bạn"}
+                          text={
+                            displayFileName || t("profile.candidate.fields.cv")
+                          }
                           isEdit={isEditing}
                           children={
                             isEditing && (
                               <div className="flex flex-col">
                                 <div className="flex items-center">
                                   <label className="bg-blue-100 text-blue-600 px-3 py-1 rounded cursor-pointer hover:bg-blue-200">
-                                    Chọn file
+                                    {t("profile.candidate.upload")}
                                     <input
                                       type="file"
                                       accept=".pdf,.doc,.docx"
@@ -613,7 +637,7 @@ const CandidateProfile = observer(() => {
                                         }}
                                         className="ml-2 text-red-500 hover:text-red-700 text-xs"
                                       >
-                                        Xóa
+                                        {t("profile.candidate.remove")}
                                       </button>
                                     </div>
                                   )}
@@ -631,7 +655,9 @@ const CandidateProfile = observer(() => {
                               className="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 flex items-center text-sm"
                               rel="noopener noreferrer"
                             >
-                              <span className="mr-1">Tải xuống</span>
+                              <span className="mr-1">
+                                {t("job_application.modal.cv.download")}
+                              </span>
                               <DownloadIcon />
                             </a>
                           </div>
@@ -645,8 +671,8 @@ const CandidateProfile = observer(() => {
 
             {/* About Section */}
             <Section_Profile
-              title="Giới thiệu bản thân"
-              content="Giới thiệu điểm mạnh và những gì bạn muốn chia sẻ thêm"
+              title={t("profile.candidate.sections.about")}
+              content={t("profile.candidate.sections.about_description")}
             >
               <Controller
                 name="other"
@@ -656,7 +682,7 @@ const CandidateProfile = observer(() => {
                     <RichTextEditor
                       value={field.value}
                       onChange={field.onChange}
-                      placeholder="Giới thiệu bản thân của bạn"
+                      placeholder={t("profile.candidate.placeholders.about")}
                     />
                   ) : (
                     <div
@@ -664,7 +690,9 @@ const CandidateProfile = observer(() => {
                       dangerouslySetInnerHTML={{
                         __html:
                           field.value ||
-                          "<p><em>Chưa có thông tin giới thiệu</em></p>",
+                          `<p><em>${t(
+                            "profile.candidate.placeholders.no_about"
+                          )}</em></p>`,
                       }}
                     />
                   )
@@ -674,8 +702,8 @@ const CandidateProfile = observer(() => {
 
             {/* Education Section */}
             <Section_Profile
-              title="Học vấn"
-              content="Chia sẻ trình độ học vấn của bạn"
+              title={t("profile.candidate.sections.education")}
+              content={t("profile.candidate.sections.education_description")}
             >
               {isEditing ? (
                 educationFields.map((field, index) => (
@@ -701,13 +729,15 @@ const CandidateProfile = observer(() => {
                         render={({ field }) => (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Trường học
+                              {t("profile.candidate.fields.school")}
                             </label>
                             <input
                               {...field}
                               type="text"
                               className="w-full p-2 border rounded-md"
-                              placeholder="Nhập tên trường học"
+                              placeholder={t(
+                                "profile.candidate.placeholders.select_school"
+                              )}
                               disabled={!isEditing}
                             />
                             {errors.education?.[index]?.school && (
@@ -725,14 +755,18 @@ const CandidateProfile = observer(() => {
                         render={({ field }) => (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Bằng cấp
+                              {t("profile.candidate.fields.degree")}
                             </label>
                             <select
                               {...field}
                               className="w-full p-2 border rounded-md"
                               disabled={!isEditing}
                             >
-                              <option value="">Chọn bằng cấp</option>
+                              <option value="">
+                                {t(
+                                  "profile.candidate.placeholders.select_degree"
+                                )}
+                              </option>
                               {degreeOptions.map((option) => (
                                 <option key={option.value} value={option.value}>
                                   {option.label}
@@ -754,14 +788,18 @@ const CandidateProfile = observer(() => {
                         render={({ field }) => (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Năm tốt nghiệp
+                              {t("profile.candidate.fields.year")}
                             </label>
                             <select
                               {...field}
                               className="w-full p-2 border rounded-md"
                               disabled={!isEditing}
                             >
-                              <option value="">Chọn năm</option>
+                              <option value="">
+                                {t(
+                                  "profile.candidate.placeholders.select_year"
+                                )}
+                              </option>
                               {yearOptions.map((option) => (
                                 <option key={option.value} value={option.value}>
                                   {option.label}
@@ -788,26 +826,27 @@ const CandidateProfile = observer(() => {
                         className="mb-4 border-l-4 border-blue-500 pl-4"
                       >
                         <h3 className="font-semibold text-lg">
-                          {watch(`education.${index}.school`) || "Trường học"}
+                          {watch(`education.${index}.school`) ||
+                            t("profile.candidate.fields.school")}
                         </h3>
                         <div className="text-gray-600 flex items-center space-x-2">
                           <span>
                             {degreeOptions.find(
                               (o) =>
                                 o.value === watch(`education.${index}.degree`)
-                            )?.label || "Bằng cấp"}
+                            )?.label || t("profile.candidate.fields.degree")}
                           </span>
                           <span>•</span>
                           <span>
                             {watch(`education.${index}.year`) ||
-                              "Năm tốt nghiệp"}
+                              t("profile.candidate.fields.year")}
                           </span>
                         </div>
                       </div>
                     ))
                   ) : (
                     <p className="text-gray-500 italic">
-                      Chưa có thông tin học vấn
+                      {t("profile.candidate.placeholders.no_education")}
                     </p>
                   )}
                 </div>
@@ -819,15 +858,16 @@ const CandidateProfile = observer(() => {
                   onClick={addEducation}
                   className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
                 >
-                  <span className="mr-2">+</span> Thêm học vấn
+                  <span className="mr-2">+</span>{" "}
+                  {t("profile.candidate.add_education")}
                 </button>
               )}
             </Section_Profile>
 
             {/* Experience Section */}
             <Section_Profile
-              title="Kinh nghiệm làm việc"
-              content="Chia sẻ kinh nghiệm làm việc của bạn"
+              title={t("profile.candidate.sections.experience")}
+              content={t("profile.candidate.sections.experience_description")}
             >
               {isEditing ? (
                 experienceFields.map((field, index) => (
@@ -853,13 +893,15 @@ const CandidateProfile = observer(() => {
                         render={({ field }) => (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Công ty
+                              {t("profile.candidate.fields.company")}
                             </label>
                             <input
                               {...field}
                               type="text"
                               className="w-full p-2 border rounded-md"
-                              placeholder="Nhập tên công ty"
+                              placeholder={t(
+                                "profile.candidate.placeholders.select_company"
+                              )}
                               disabled={!isEditing}
                             />
                             {errors.experience?.[index]?.company && (
@@ -877,14 +919,18 @@ const CandidateProfile = observer(() => {
                         render={({ field }) => (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Vị trí
+                              {t("profile.candidate.fields.position")}
                             </label>
                             <select
                               {...field}
                               className="w-full p-2 border rounded-md"
                               disabled={!isEditing}
                             >
-                              <option value="">Chọn vị trí</option>
+                              <option value="">
+                                {t(
+                                  "profile.candidate.placeholders.select_position"
+                                )}
+                              </option>
                               {positionOptions.map((option) => (
                                 <option key={option.value} value={option.value}>
                                   {option.label}
@@ -906,14 +952,18 @@ const CandidateProfile = observer(() => {
                         render={({ field }) => (
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Thời gian làm việc
+                              {t("profile.candidate.fields.duration")}
                             </label>
                             <select
                               {...field}
                               className="w-full p-2 border rounded-md"
                               disabled={!isEditing}
                             >
-                              <option value="">Chọn thời gian</option>
+                              <option value="">
+                                {t(
+                                  "profile.candidate.placeholders.select_duration"
+                                )}
+                              </option>
                               {durationOptions.map((option) => (
                                 <option key={option.value} value={option.value}>
                                   {option.label}
@@ -940,7 +990,8 @@ const CandidateProfile = observer(() => {
                         className="mb-4 border-l-4 border-green-500 pl-4"
                       >
                         <h3 className="font-semibold text-lg">
-                          {watch(`experience.${index}.company`) || "Công ty"}
+                          {watch(`experience.${index}.company`) ||
+                            t("profile.candidate.fields.company")}
                         </h3>
                         <div className="text-gray-600 flex items-center space-x-2">
                           <span>
@@ -948,7 +999,7 @@ const CandidateProfile = observer(() => {
                               (o) =>
                                 o.value ===
                                 watch(`experience.${index}.position`)
-                            )?.label || "Vị trí"}
+                            )?.label || t("profile.candidate.fields.position")}
                           </span>
                           <span>•</span>
                           <span>
@@ -956,14 +1007,14 @@ const CandidateProfile = observer(() => {
                               (o) =>
                                 o.value ===
                                 watch(`experience.${index}.duration`)
-                            )?.label || "Thời gian làm việc"}
+                            )?.label || t("profile.candidate.fields.duration")}
                           </span>
                         </div>
                       </div>
                     ))
                   ) : (
                     <p className="text-gray-500 italic">
-                      Chưa có thông tin kinh nghiệm làm việc
+                      {t("profile.candidate.placeholders.no_experience")}
                     </p>
                   )}
                 </div>
@@ -975,15 +1026,16 @@ const CandidateProfile = observer(() => {
                   onClick={addExperience}
                   className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
                 >
-                  <span className="mr-2">+</span> Thêm kinh nghiệm làm việc
+                  <span className="mr-2">+</span>{" "}
+                  {t("profile.candidate.add_experience")}
                 </button>
               )}
             </Section_Profile>
 
             {/* Skill Section */}
             <Section_Profile
-              title="Kỹ năng"
-              content="Liệt kê các kỹ năng chuyên môn của bạn"
+              title={t("profile.candidate.sections.skills")}
+              content={t("profile.candidate.sections.skills_description")}
             >
               {isEditing ? (
                 <>
@@ -1003,7 +1055,7 @@ const CandidateProfile = observer(() => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Danh mục
+                            {t("profile.candidate.fields.category")}
                           </label>
                           <Controller
                             name={`skills.${index}.key`}
@@ -1018,7 +1070,11 @@ const CandidateProfile = observer(() => {
                                   setValue(`skills.${index}.value`, "");
                                 }}
                               >
-                                <option value="">Chọn danh mục</option>
+                                <option value="">
+                                  {t(
+                                    "profile.candidate.placeholders.select_category"
+                                  )}
+                                </option>
                                 {tagKeyOptions.map((key) => (
                                   <option key={key} value={key}>
                                     {key}
@@ -1036,7 +1092,7 @@ const CandidateProfile = observer(() => {
 
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Kỹ năng
+                            {t("profile.candidate.fields.skill")}
                           </label>
                           <Controller
                             name={`skills.${index}.value`}
@@ -1047,7 +1103,11 @@ const CandidateProfile = observer(() => {
                                 className="w-full p-2 border rounded-md"
                                 disabled={!watch(`skills.${index}.key`)}
                               >
-                                <option value="">Chọn kỹ năng</option>
+                                <option value="">
+                                  {t(
+                                    "profile.candidate.placeholders.select_skill"
+                                  )}
+                                </option>
                                 {watch(`skills.${index}.key`) &&
                                   tagValueOptions[
                                     watch(`skills.${index}.key`)
@@ -1074,7 +1134,8 @@ const CandidateProfile = observer(() => {
                     onClick={addSkill}
                     className="mt-2 flex items-center text-blue-500 hover:text-blue-600"
                   >
-                    <span className="mr-2">+</span> Thêm kỹ năng
+                    <span className="mr-2">+</span>{" "}
+                    {t("profile.candidate.add_skill")}
                   </button>
                 </>
               ) : (
@@ -1090,7 +1151,7 @@ const CandidateProfile = observer(() => {
                     ))
                   ) : (
                     <p className="text-gray-500 italic">
-                      Chưa có thông tin kỹ năng
+                      {t("profile.candidate.placeholders.no_skills")}
                     </p>
                   )}
                 </div>
@@ -1099,8 +1160,8 @@ const CandidateProfile = observer(() => {
 
             {/* Achievement Section */}
             <Section_Profile
-              title="Thành tựu"
-              content="Chia sẻ các chứng chỉ, dự án và thành tựu nổi bật của bạn"
+              title={t("profile.candidate.sections.achievements")}
+              content={t("profile.candidate.sections.achievements_description")}
             >
               <Controller
                 name="achievement"
@@ -1110,7 +1171,9 @@ const CandidateProfile = observer(() => {
                     <RichTextEditor
                       value={field.value}
                       onChange={field.onChange}
-                      placeholder="Liệt kê các thành tựu của bạn"
+                      placeholder={t(
+                        "profile.candidate.placeholders.achievements"
+                      )}
                     />
                   ) : (
                     <div
@@ -1118,7 +1181,9 @@ const CandidateProfile = observer(() => {
                       dangerouslySetInnerHTML={{
                         __html:
                           field.value ||
-                          "<p><em>Chưa có thông tin thành tựu</em></p>",
+                          `<p><em>${t(
+                            "profile.candidate.placeholders.no_achievements"
+                          )}</em></p>`,
                       }}
                     />
                   )
@@ -1127,12 +1192,12 @@ const CandidateProfile = observer(() => {
             </Section_Profile>
 
             {isEditing && (
-              <div className="mt-6">
+              <div className="mt-6 flex justify-end">
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
+                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer"
                 >
-                  Lưu thông tin
+                  {t("profile.candidate.save")}
                 </button>
               </div>
             )}
