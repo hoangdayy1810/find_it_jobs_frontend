@@ -4,13 +4,16 @@ import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { useNotification, useUser } from "@/contexts/AppContext";
 import { formatDistance } from "date-fns";
+import { vi, enUS } from "date-fns/locale";
 import { useRouter } from "next/navigation";
 import { INotification } from "@/stores/notificationStore";
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 const NotificationsPage = observer(() => {
   const t = useTranslations();
+  const locale = useLocale();
+  const dateLocale = locale === "vi" ? vi : enUS;
   const notificationStore = useNotification();
   const userStore = useUser();
   const router = useRouter();
@@ -76,13 +79,13 @@ const NotificationsPage = observer(() => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Notifications</h1>
+        <h1 className="text-2xl font-bold">{t("notifications.title")}</h1>
 
         <button
           onClick={handleMarkAllAsRead}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Mark all as read
+          {t("notifications.mark_all_read")}
         </button>
       </div>
 
@@ -92,7 +95,9 @@ const NotificationsPage = observer(() => {
         </div>
       ) : notificationStore?.notifications.length === 0 ? (
         <div className="min-h-96 bg-white p-8 rounded-lg shadow-sm text-center">
-          <p className="text-lg text-gray-600">No notifications yet</p>
+          <p className="text-lg text-gray-600">
+            {t("notifications.no_notifications")}
+          </p>
         </div>
       ) : (
         <>
@@ -118,7 +123,10 @@ const NotificationsPage = observer(() => {
                       {formatDistance(
                         new Date(notification.createdAt),
                         new Date(),
-                        { addSuffix: true }
+                        {
+                          addSuffix: true,
+                          locale: dateLocale,
+                        }
                       )}
                     </p>
                   </div>

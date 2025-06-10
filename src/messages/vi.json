@@ -507,6 +507,41 @@
       "message": "Bạn đang đăng nhập bằng Google, vì vậy bạn không thể thay đổi mật khẩu tại đây. Để quản lý mật khẩu tài khoản Google, vui lòng truy cập cài đặt tài khoản Google của bạn."
     }
   },
+  "employer_detail": {
+    "back": "Quay lại",
+    "job_openings": "Việc làm đang tuyển ({count})",
+    "company_info": {
+      "company_type": "Loại hình công ty",
+      "address": "Địa chỉ",
+      "company_size": "Quy mô công ty",
+      "working_days": "Ngày làm việc",
+      "website": "Trang web",
+      "email": "Email",
+      "about": "Giới thiệu công ty",
+      "no_description": "Chưa có thông tin giới thiệu"
+    },
+    "job_card": {
+      "posted": "Đăng vào",
+      "expires": "Hết hạn vào",
+      "more_tags": "+{count} thêm"
+    },
+    "empty_jobs": {
+      "title": "Không tìm thấy việc làm nào",
+      "description": "Nhà tuyển dụng này hiện không có việc làm đang tuyển."
+    },
+    "error": {
+      "title": "Không tìm thấy nhà tuyển dụng",
+      "description": "Chúng tôi không thể tìm thấy thông tin nhà tuyển dụng bạn đang tìm kiếm.",
+      "go_back": "Quay lại"
+    }
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "mark_all_read": "Đánh dấu tất cả là đã đọc",
+    "loading": "Đang tải thông báo...",
+    "no_notifications": "Chưa có thông báo nào",
+    "error_loading": "Lỗi khi tải thông báo"
+  },
   "modal": {
     "close": "Đóng"
   },

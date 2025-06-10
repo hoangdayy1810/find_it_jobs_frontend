@@ -10,8 +10,9 @@ import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import PaymentStatusBadge from "@/components/atoms/PaymentStatusBadge";
 import PaymentCard from "@/components/molecules/PaymentCard";
-import EmptyState from "@/components/atoms/EmptyState";
+
 import FilterSection2 from "@/components/molecules/FilterSection2";
+import EmptyState from "@/components/atoms/EmptyState";
 
 const PaymentHistoryPage = observer(() => {
   const t = useTranslations();
@@ -110,7 +111,10 @@ const PaymentHistoryPage = observer(() => {
             </button>
           </div>
         ) : payments.length === 0 ? (
-          <EmptyState t={t} />
+          <EmptyState
+            title={t("payment.empty.title")}
+            description={t("payment.empty.description")}
+          />
         ) : (
           <>
             {/* Desktop view - Table */}

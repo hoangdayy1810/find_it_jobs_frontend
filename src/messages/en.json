@@ -507,6 +507,41 @@
       "message": "You're logged in with Google, so you can't change your password here. To manage your Google account password, please visit your Google account settings."
     }
   },
+  "employer_detail": {
+    "back": "Back",
+    "job_openings": "Job Openings ({count})",
+    "company_info": {
+      "company_type": "Company Type",
+      "address": "Address",
+      "company_size": "Company Size",
+      "working_days": "Working Days",
+      "website": "Website",
+      "email": "Email",
+      "about": "About the Company",
+      "no_description": "No description provided"
+    },
+    "job_card": {
+      "posted": "Posted",
+      "expires": "Expires",
+      "more_tags": "+{count} more"
+    },
+    "empty_jobs": {
+      "title": "No job listings found",
+      "description": "This employer doesn't have any active job postings at the moment."
+    },
+    "error": {
+      "title": "Employer not found",
+      "description": "We couldn't find the employer information you're looking for.",
+      "go_back": "Go Back"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark_all_read": "Mark all as read",
+    "loading": "Loading notifications...",
+    "no_notifications": "No notifications yet",
+    "error_loading": "Error loading notifications"
+  },
   "modal": {
     "close": "Close"
   },
