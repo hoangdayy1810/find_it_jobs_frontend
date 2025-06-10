@@ -54,6 +54,33 @@
         "sunday": "Sunday",
         "none": "Not specified"
       }
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "degree": {
+      "high_school": "High School",
+      "associate": "Associate Degree",
+      "bachelor": "Bachelor's Degree",
+      "master": "Master's Degree",
+      "phd": "PhD"
+    },
+    "position": {
+      "intern": "Intern",
+      "fresher": "Fresher",
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior",
+      "team_lead": "Team Lead",
+      "manager": "Manager"
+    },
+    "duration": {
+      "less_than_1": "Less than 1 year",
+      "1_3": "1-3 years",
+      "3_5": "3-5 years",
+      "more_than_5": "More than 5 years"
     }
   },
   "search": {
@@ -350,6 +377,59 @@
         "payment_success": "Payment successful! Your job has been published.",
         "payment_error": "There was an error publishing your job.",
         "payment_failed": "Payment failed. Your job was not published."
+      },
+      "applications": {
+        "title": "Candidates for {jobTitle}",
+        "filter_section": "Filter Applications",
+        "status": "Status",
+        "school": "School",
+        "degree": "Degree",
+        "company": "Previous Company",
+        "position": "Previous Position",
+        "all_statuses": "All statuses",
+        "all_schools": "All schools",
+        "all_degrees": "All degrees",
+        "all_companies": "All companies",
+        "all_positions": "All positions",
+        "all_category": "All {category}",
+        "reset_filters": "Reset Filters",
+        "no_applications": "No applications found",
+        "candidate": "Candidate",
+        "applicant": "Applicant",
+        "applied": "Applied"
+      },
+      "application_detail": {
+        "title": "Application Details",
+        "not_found": "Application Not Found",
+        "not_found_message": "The application you're looking for does not exist or has been removed.",
+        "candidate_unavailable": "Candidate Information Not Available",
+        "candidate_unavailable_message": "Candidate details could not be loaded for this application.",
+        "go_back": "Go Back",
+        "for_position": "For position: {jobTitle}",
+        "status": {
+          "pending": "Pending Review",
+          "approved": "Approved",
+          "rejected": "Rejected",
+          "unknown": "Unknown"
+        },
+        "actions": {
+          "accept": "Accept",
+          "reject": "Reject"
+        },
+        "sections": {
+          "application_details": "Application Details",
+          "applied_on": "Applied on:",
+          "status": "Status:",
+          "resume": "Resume/CV",
+          "download": "Download",
+          "cover_letter": "Cover Letter",
+          "skills": "Skills",
+          "no_skills": "No skills information available",
+          "education": "Education",
+          "work_experience": "Work Experience",
+          "about": "About",
+          "achievements": "Achievements"
+        }
       }
     }
   },

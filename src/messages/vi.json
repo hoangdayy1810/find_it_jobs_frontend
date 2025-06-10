@@ -54,6 +54,33 @@
         "sunday": "Chủ Nhật",
         "none": "Không xác định"
       }
+    },
+    "gender": {
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác"
+    },
+    "degree": {
+      "high_school": "Trung học phổ thông",
+      "associate": "Cao đẳng",
+      "bachelor": "Cử nhân",
+      "master": "Thạc sĩ",
+      "phd": "Tiến sĩ"
+    },
+    "position": {
+      "intern": "Thực tập sinh",
+      "fresher": "Fresher",
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior",
+      "team_lead": "Team Lead",
+      "manager": "Manager"
+    },
+    "duration": {
+      "less_than_1": "Dưới 1 năm",
+      "1_3": "1-3 năm",
+      "3_5": "3-5 năm",
+      "more_than_5": "Trên 5 năm"
     }
   },
   "search": {
@@ -350,6 +377,59 @@
         "payment_success": "Thanh toán thành công! Công việc của bạn đã được đăng.",
         "payment_error": "Đã xảy ra lỗi khi đăng công việc của bạn.",
         "payment_failed": "Thanh toán thất bại. Công việc của bạn chưa được đăng."
+      },
+      "applications": {
+        "title": "Ứng viên cho {jobTitle}",
+        "filter_section": "Lọc Ứng Viên",
+        "status": "Trạng thái",
+        "school": "Trường học",
+        "degree": "Bằng cấp",
+        "company": "Công ty trước đây",
+        "position": "Vị trí trước đây",
+        "all_statuses": "Tất cả trạng thái",
+        "all_schools": "Tất cả trường học",
+        "all_degrees": "Tất cả bằng cấp",
+        "all_companies": "Tất cả công ty",
+        "all_positions": "Tất cả vị trí",
+        "all_category": "Tất cả {category}",
+        "reset_filters": "Đặt lại bộ lọc",
+        "no_applications": "Không tìm thấy ứng viên nào",
+        "candidate": "Ứng viên",
+        "applicant": "Người ứng tuyển",
+        "applied": "Đã ứng tuyển"
+      },
+      "application_detail": {
+        "title": "Chi Tiết Đơn Ứng Tuyển",
+        "not_found": "Không Tìm Thấy Đơn Ứng Tuyển",
+        "not_found_message": "Đơn ứng tuyển bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
+        "candidate_unavailable": "Thông Tin Ứng Viên Không Khả Dụng",
+        "candidate_unavailable_message": "Không thể tải thông tin chi tiết của ứng viên cho đơn ứng tuyển này.",
+        "go_back": "Quay Lại",
+        "for_position": "Cho vị trí: {jobTitle}",
+        "status": {
+          "pending": "Đang Xem Xét",
+          "approved": "Đã Chấp Nhận",
+          "rejected": "Đã Từ Chối",
+          "unknown": "Không Xác Định"
+        },
+        "actions": {
+          "accept": "Chấp Nhận",
+          "reject": "Từ Chối"
+        },
+        "sections": {
+          "application_details": "Chi Tiết Đơn Ứng Tuyển",
+          "applied_on": "Ngày nộp đơn:",
+          "status": "Trạng thái:",
+          "resume": "Hồ sơ/CV",
+          "download": "Tải xuống",
+          "cover_letter": "Thư Xin Việc",
+          "skills": "Kỹ Năng",
+          "no_skills": "Không có thông tin về kỹ năng",
+          "education": "Học Vấn",
+          "work_experience": "Kinh Nghiệm Làm Việc",
+          "about": "Giới Thiệu",
+          "achievements": "Thành Tích"
+        }
       }
     }
   },

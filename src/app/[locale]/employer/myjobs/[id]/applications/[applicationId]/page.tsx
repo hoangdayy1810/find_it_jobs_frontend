@@ -17,6 +17,7 @@ import Modal_YesNo from "@/components/atoms/Modal_YesNo";
 import DateIcon from "@/components/atoms/icons/Date";
 import Gender from "@/components/atoms/icons/Gender";
 import { useTranslations } from "next-intl";
+import { GENDER, DEGREE, POSITION, DURATION } from "@/utils/constant";
 
 const DetailApplication = observer(() => {
   const t = useTranslations();
@@ -58,7 +59,6 @@ const DetailApplication = observer(() => {
     setProcessingAction(false);
     setShowAcceptModal(false);
     if (result?.application) {
-      // Optional: Wait a moment before going back to give user feedback
       setTimeout(() => router.back(), 1500);
     }
   };
@@ -90,17 +90,16 @@ const DetailApplication = observer(() => {
       <div className="container mx-auto px-4 py-8 text-center">
         <div className="bg-white p-8 rounded-lg shadow-sm">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Application Not Found
+            {t("employer.myjobs.application_detail.not_found")}
           </h2>
           <p className="text-gray-600 mb-6">
-            The application you're looking for does not exist or has been
-            removed.
+            {t("employer.myjobs.application_detail.not_found_message")}
           </p>
           <button
             onClick={handleBack}
             className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
-            Go Back
+            {t("employer.myjobs.application_detail.go_back")}
           </button>
         </div>
       </div>
@@ -119,16 +118,18 @@ const DetailApplication = observer(() => {
       <div className="container mx-auto px-4 py-8 text-center">
         <div className="bg-white p-8 rounded-lg shadow-sm">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            Candidate Information Not Available
+            {t("employer.myjobs.application_detail.candidate_unavailable")}
           </h2>
           <p className="text-gray-600 mb-6">
-            Candidate details could not be loaded for this application.
+            {t(
+              "employer.myjobs.application_detail.candidate_unavailable_message"
+            )}
           </p>
           <button
             onClick={handleBack}
             className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
-            Go Back
+            {t("employer.myjobs.application_detail.go_back")}
           </button>
         </div>
       </div>
@@ -140,76 +141,41 @@ const DetailApplication = observer(() => {
     switch (application.status) {
       case "pending":
         return {
-          text: "Pending Review",
+          text: t("employer.myjobs.application_detail.status.pending"),
           bgColor: "bg-yellow-100",
           textColor: "text-yellow-800",
         };
       case "approved":
         return {
-          text: "Approved",
+          text: t("employer.myjobs.application_detail.status.approved"),
           bgColor: "bg-green-100",
           textColor: "text-green-800",
         };
       case "rejected":
         return {
-          text: "Rejected",
+          text: t("employer.myjobs.application_detail.status.rejected"),
           bgColor: "bg-red-100",
           textColor: "text-red-800",
         };
       default:
         return {
-          text: "Unknown",
+          text: t("employer.myjobs.application_detail.status.unknown"),
           bgColor: "bg-gray-100",
           textColor: "text-gray-800",
         };
     }
   };
 
+  // Replace hardcoded label functions with translations
+  const getLabel = (
+    array: Array<{ value: string; label: string }>,
+    value: string
+  ) => {
+    const found = array.find((item) => item.value === value);
+    return found ? t(found.label) : value;
+  };
+
   const statusDisplay = getStatusDisplay();
-
-  // Find labels for candidate's selection values
-  const getGenderLabel = (value: string) => {
-    const options = [
-      { value: "Male", label: "Nam" },
-      { value: "Female", label: "Nữ" },
-      { value: "Other", label: "Khác" },
-    ];
-    return options.find((opt) => opt.value === value)?.label || value;
-  };
-
-  const getDegreeLabel = (value: string) => {
-    const options = [
-      { value: "high_school", label: "Trung học phổ thông" },
-      { value: "associate", label: "Cao đẳng" },
-      { value: "bachelor", label: "Cử nhân" },
-      { value: "master", label: "Thạc sĩ" },
-      { value: "phd", label: "Tiến sĩ" },
-    ];
-    return options.find((opt) => opt.value === value)?.label || value;
-  };
-
-  const getPositionLabel = (value: string) => {
-    const options = [
-      { value: "intern", label: "Thực tập sinh" },
-      { value: "fresher", label: "Fresher" },
-      { value: "junior", label: "Junior" },
-      { value: "middle", label: "Middle" },
-      { value: "senior", label: "Senior" },
-      { value: "team_lead", label: "Team Lead" },
-      { value: "manager", label: "Manager" },
-    ];
-    return options.find((opt) => opt.value === value)?.label || value;
-  };
-
-  const getDurationLabel = (value: string) => {
-    const options = [
-      { value: "less_than_1", label: "Dưới 1 năm" },
-      { value: "1_3", label: "1-3 năm" },
-      { value: "3_5", label: "3-5 năm" },
-      { value: "more_than_5", label: "Trên 5 năm" },
-    ];
-    return options.find((opt) => opt.value === value)?.label || value;
-  };
 
   return (
     <div className="container mx-auto px-4 py-6">
@@ -225,10 +191,14 @@ const DetailApplication = observer(() => {
           </button>
           <div>
             <h1 className="text-2xl font-bold text-gray-800">
-              Application Details
+              {t("employer.myjobs.application_detail.title")}
             </h1>
             <p className="text-gray-600">
-              For position: <span className="font-medium">{job?.title}</span>
+              {t("employer.myjobs.application_detail.for_position", {
+                jobTitle:
+                  job?.title ||
+                  t("employer.myjobs.application_detail.unknown_job"),
+              })}
             </p>
           </div>
         </div>
@@ -247,14 +217,14 @@ const DetailApplication = observer(() => {
                 disabled={processingAction}
                 className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Accept
+                {t("employer.myjobs.application_detail.actions.accept")}
               </button>
               <button
                 onClick={() => setShowRejectModal(true)}
                 disabled={processingAction}
                 className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Reject
+                {t("employer.myjobs.application_detail.actions.reject")}
               </button>
             </div>
           )}
@@ -311,7 +281,7 @@ const DetailApplication = observer(() => {
                     <Gender />
                   </span>
                   <span className="text-gray-700">
-                    {getGenderLabel(candidate.gender)}
+                    {getLabel(GENDER, candidate.gender)}
                   </span>
                 </div>
               )}
@@ -328,16 +298,24 @@ const DetailApplication = observer(() => {
 
           {/* Application details card */}
           <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="text-lg font-semibold mb-4">Application Details</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              {t(
+                "employer.myjobs.application_detail.sections.application_details"
+              )}
+            </h3>
             <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-gray-600">Applied on:</span>
+                <span className="text-gray-600">
+                  {t("employer.myjobs.application_detail.sections.applied_on")}
+                </span>
                 <span className="font-medium">
                   {formatDate(new Date(application.appliedAt))}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Status:</span>
+                <span className="text-gray-600">
+                  {t("employer.myjobs.application_detail.sections.status")}
+                </span>
                 <span className={`font-medium ${statusDisplay.textColor}`}>
                   {statusDisplay.text}
                 </span>
@@ -346,7 +324,9 @@ const DetailApplication = observer(() => {
 
             {/* CV download section */}
             <div className="mt-6 pt-4 border-t border-gray-100">
-              <h4 className="font-medium mb-2">Resume/CV</h4>
+              <h4 className="font-medium mb-2">
+                {t("employer.myjobs.application_detail.sections.resume")}
+              </h4>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-500">
@@ -362,7 +342,9 @@ const DetailApplication = observer(() => {
                   className="bg-blue-100 text-blue-600 px-3 py-1 rounded hover:bg-blue-200 flex items-center text-sm"
                   rel="noopener noreferrer"
                 >
-                  <span className="mr-1">Download</span>
+                  <span className="mr-1">
+                    {t("employer.myjobs.application_detail.sections.download")}
+                  </span>
                   <DownloadIcon />
                 </a>
               </div>
@@ -375,7 +357,9 @@ const DetailApplication = observer(() => {
           {/* Cover Letter */}
           {application.coverLetter && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">Cover Letter</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {t("employer.myjobs.application_detail.sections.cover_letter")}
+              </h3>
               <div className="prose max-w-none">
                 <p className="whitespace-pre-line">{application.coverLetter}</p>
               </div>
@@ -385,7 +369,9 @@ const DetailApplication = observer(() => {
           {/* Skills */}
           {candidate.skills && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">Skills</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {t("employer.myjobs.application_detail.sections.skills")}
+              </h3>
 
               {Array.isArray(candidate.skills) &&
               candidate.skills.length > 0 ? (
@@ -415,7 +401,7 @@ const DetailApplication = observer(() => {
                 </div>
               ) : (
                 <p className="text-gray-500 italic">
-                  No skills information available
+                  {t("employer.myjobs.application_detail.sections.no_skills")}
                 </p>
               )}
             </div>
@@ -424,13 +410,15 @@ const DetailApplication = observer(() => {
           {/* Education */}
           {candidate.education && candidate.education.length > 0 && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">Education</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {t("employer.myjobs.application_detail.sections.education")}
+              </h3>
               <div className="space-y-4">
                 {candidate.education.map((edu, index) => (
                   <div key={index} className="border-l-4 border-blue-500 pl-4">
                     <h4 className="font-semibold">{edu.school}</h4>
                     <div className="text-gray-600 flex items-center space-x-2">
-                      <span>{getDegreeLabel(edu.degree)}</span>
+                      <span>{getLabel(DEGREE, edu.degree)}</span>
                       <span>•</span>
                       <span>{edu.year}</span>
                     </div>
@@ -443,15 +431,19 @@ const DetailApplication = observer(() => {
           {/* Work Experience */}
           {candidate.experience && candidate.experience.length > 0 && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">Work Experience</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {t(
+                  "employer.myjobs.application_detail.sections.work_experience"
+                )}
+              </h3>
               <div className="space-y-4">
                 {candidate.experience.map((exp, index) => (
                   <div key={index} className="border-l-4 border-green-500 pl-4">
                     <h4 className="font-semibold">{exp.company}</h4>
                     <div className="text-gray-600 flex items-center space-x-2">
-                      <span>{getPositionLabel(exp.position)}</span>
+                      <span>{getLabel(POSITION, exp.position)}</span>
                       <span>•</span>
-                      <span>{getDurationLabel(exp.duration)}</span>
+                      <span>{getLabel(DURATION, exp.duration)}</span>
                     </div>
                   </div>
                 ))}
@@ -462,7 +454,9 @@ const DetailApplication = observer(() => {
           {/* About */}
           {candidate.other && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">About</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {t("employer.myjobs.application_detail.sections.about")}
+              </h3>
               <div
                 className="prose max-w-none"
                 dangerouslySetInnerHTML={{
@@ -475,7 +469,9 @@ const DetailApplication = observer(() => {
           {/* Achievements */}
           {candidate.achievement && (
             <div className="bg-white p-6 rounded-lg shadow-sm">
-              <h3 className="text-lg font-semibold mb-4">Achievements</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                {t("employer.myjobs.application_detail.sections.achievements")}
+              </h3>
               <div
                 className="prose max-w-none"
                 dangerouslySetInnerHTML={{
@@ -493,14 +489,14 @@ const DetailApplication = observer(() => {
                 disabled={processingAction}
                 className="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed w-1/2"
               >
-                Accept
+                {t("employer.myjobs.application_detail.actions.accept")}
               </button>
               <button
                 onClick={() => setShowRejectModal(true)}
                 disabled={processingAction}
                 className="px-6 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed w-1/2"
               >
-                Reject
+                {t("employer.myjobs.application_detail.actions.reject")}
               </button>
             </div>
           )}

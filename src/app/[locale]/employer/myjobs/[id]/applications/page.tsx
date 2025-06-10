@@ -12,10 +12,12 @@ import {
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
 import ApplicationListItem from "@/components/molecules/ApplicationListItem";
 import Select from "@/components/atoms/Select";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { DEGREE, POSITION } from "@/utils/constant";
 
 const ApplicationList = observer(() => {
   const t = useTranslations();
+  const locale = useLocale();
   const params = useParams();
   const router = useRouter();
   const jobId = params.id as string;
@@ -101,29 +103,34 @@ const ApplicationList = observer(() => {
             <VectorLeftIcon />
           </button>
           <h1 className="text-2xl font-bold text-gray-800">
-            Candidates for {jobTitle}
+            {t("employer.myjobs.applications.title", { jobTitle })}
           </h1>
         </div>
       </div>
 
       {/* Filters section */}
       <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
-        <h2 className="text-lg font-medium mb-4">Filter Applications</h2>
+        <h2 className="text-lg font-medium mb-4">
+          {t("employer.myjobs.applications.filter_section")}
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
           {/* Status filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Status
+              {t("employer.myjobs.applications.status")}
             </label>
             <Select
               value={filters.status}
               onChange={(e) => handleFilterChange("status", e.target.value)}
               options={[
-                { value: "", label: "All statuses" },
-                { value: "pending", label: "Pending" },
-                { value: "approved", label: "Approved" },
-                { value: "rejected", label: "Rejected" },
+                {
+                  value: "",
+                  label: t("employer.myjobs.applications.all_statuses"),
+                },
+                { value: "pending", label: t("application.status.pending") },
+                { value: "approved", label: t("application.status.approved") },
+                { value: "rejected", label: t("application.status.rejected") },
               ]}
             />
           </div>
@@ -131,13 +138,16 @@ const ApplicationList = observer(() => {
           {/* School filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              School
+              {t("employer.myjobs.applications.school")}
             </label>
             <Select
               value={filters.school}
               onChange={(e) => handleFilterChange("school", e.target.value)}
               options={[
-                { value: "", label: "All schools" },
+                {
+                  value: "",
+                  label: t("employer.myjobs.applications.all_schools"),
+                },
                 ...(applicationStore?.filterOptions?.schools || []).map(
                   (school) => ({
                     value: school,
@@ -151,18 +161,28 @@ const ApplicationList = observer(() => {
           {/* Degree filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Degree
+              {t("employer.myjobs.applications.degree")}
             </label>
             <Select
               value={filters.degree}
               onChange={(e) => handleFilterChange("degree", e.target.value)}
               options={[
-                { value: "", label: "All degrees" },
+                {
+                  value: "",
+                  label: t("employer.myjobs.applications.all_degrees"),
+                },
                 ...(applicationStore?.filterOptions?.degrees || []).map(
-                  (degree) => ({
-                    value: degree,
-                    label: degree,
-                  })
+                  (degreeValue) => {
+                    const degreeConstant = DEGREE.find(
+                      (d) => d.value === degreeValue
+                    );
+                    return {
+                      value: degreeValue,
+                      label: degreeConstant
+                        ? t(degreeConstant.label)
+                        : degreeValue,
+                    };
+                  }
                 ),
               ]}
             />
@@ -171,13 +191,16 @@ const ApplicationList = observer(() => {
           {/* Company filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Previous Company
+              {t("employer.myjobs.applications.company")}
             </label>
             <Select
               value={filters.company}
               onChange={(e) => handleFilterChange("company", e.target.value)}
               options={[
-                { value: "", label: "All companies" },
+                {
+                  value: "",
+                  label: t("employer.myjobs.applications.all_companies"),
+                },
                 ...(applicationStore?.filterOptions?.companies || []).map(
                   (company) => ({
                     value: company,
@@ -191,18 +214,28 @@ const ApplicationList = observer(() => {
           {/* Position filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Previous Position
+              {t("employer.myjobs.applications.position")}
             </label>
             <Select
               value={filters.position}
               onChange={(e) => handleFilterChange("position", e.target.value)}
               options={[
-                { value: "", label: "All positions" },
+                {
+                  value: "",
+                  label: t("employer.myjobs.applications.all_positions"),
+                },
                 ...(applicationStore?.filterOptions?.positions || []).map(
-                  (position) => ({
-                    value: position,
-                    label: position,
-                  })
+                  (positionValue) => {
+                    const positionConstant = POSITION.find(
+                      (p) => p.value === positionValue
+                    );
+                    return {
+                      value: positionValue,
+                      label: positionConstant
+                        ? t(positionConstant.label)
+                        : positionValue,
+                    };
+                  }
                 ),
               ]}
             />
@@ -233,7 +266,15 @@ const ApplicationList = observer(() => {
                         }));
                       }}
                       options={[
-                        { value: "", label: `All ${tagCategory.key}` },
+                        {
+                          value: "",
+                          label: t(
+                            "employer.myjobs.applications.all_category",
+                            {
+                              category: tagCategory.key,
+                            }
+                          ),
+                        },
                         ...tagCategory.values.map((value) => ({
                           value,
                           label: value,
@@ -250,7 +291,7 @@ const ApplicationList = observer(() => {
           onClick={handleResetFilters}
           className="px-4 py-2 text-sm bg-gray-300 text-gray-700 rounded hover:bg-gray-400 transition-colors"
         >
-          Reset Filters
+          {t("employer.myjobs.applications.reset_filters")}
         </button>
       </div>
 
@@ -261,12 +302,16 @@ const ApplicationList = observer(() => {
         </div>
       ) : applications.length === 0 ? (
         <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-          <p className="text-lg text-gray-600">No applications found</p>
+          <p className="text-lg text-gray-600">
+            {t("employer.myjobs.applications.no_applications")}
+          </p>
         </div>
       ) : (
         <div className="space-y-4">
           {applications.map((application) => (
             <ApplicationListItem
+              t={t}
+              locale={locale}
               key={application._id}
               application={application}
               onClick={() =>

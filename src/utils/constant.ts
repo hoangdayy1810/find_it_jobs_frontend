@@ -61,3 +61,38 @@ export const WORKINGDAYS = [
   { value: "Saturday", label: "application.company.workingDays.saturday" },
   { value: "Sunday", label: "application.company.workingDays.sunday" },
 ];
+
+// Gender options for consistent filtering
+export const GENDER = [
+  { value: "male", label: "application.gender.male" },
+  { value: "female", label: "application.gender.female" },
+  { value: "other", label: "application.gender.other" },
+];
+
+// Degree options for consistent filtering
+export const DEGREE = [
+  { value: "high_school", label: "application.degree.high_school" },
+  { value: "associate", label: "application.degree.associate" },
+  { value: "bachelor", label: "application.degree.bachelor" },
+  { value: "master", label: "application.degree.master" },
+  { value: "phd", label: "application.degree.phd" },
+];
+
+// Position options for consistent filtering
+export const POSITION = [
+  { value: "intern", label: "application.position.intern" },
+  { value: "fresher", label: "application.position.fresher" },
+  { value: "junior", label: "application.position.junior" },
+  { value: "middle", label: "application.position.middle" },
+  { value: "senior", label: "application.position.senior" },
+  { value: "team_lead", label: "application.position.team_lead" },
+  { value: "manager", label: "application.position.manager" },
+];
+
+// Duration options for consistent filtering
+export const DURATION = [
+  { value: "less_than_1", label: "application.duration.less_than_1" },
+  { value: "1_3", label: "application.duration.1_3" },
+  { value: "3_5", label: "application.duration.3_5" },
+  { value: "more_than_5", label: "application.duration.more_than_5" },
+];

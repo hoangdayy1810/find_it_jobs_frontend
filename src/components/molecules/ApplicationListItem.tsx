@@ -1,17 +1,36 @@
+"use client";
 import React from "react";
 import { IApplication } from "@/stores/applicationStore";
 import Image from "next/image";
 import { formatDistance } from "date-fns";
+import { vi, enUS } from "date-fns/locale";
+import { useRouter } from "next/router";
 
 interface ApplicationListItemProps {
   application: IApplication;
   onClick: () => void;
+  t: any;
+  locale?: string;
 }
 
 const ApplicationListItem: React.FC<ApplicationListItemProps> = ({
   application,
   onClick,
+  t,
+  locale = "vi",
 }) => {
+  const dateLocale = locale === "vi" ? vi : enUS;
+
+  // Then use it in formatDistance
+  const formattedDate = formatDistance(
+    new Date(application.appliedAt),
+    new Date(),
+    {
+      addSuffix: true,
+      locale: dateLocale,
+    }
+  );
+
   // Check if candidateId is an object with properties
   const candidate =
     typeof application.candidateId === "object"
@@ -23,25 +42,25 @@ const ApplicationListItem: React.FC<ApplicationListItemProps> = ({
     switch (application.status) {
       case "pending":
         return {
-          text: "Pending",
+          text: t("application.status.pending"),
           bgColor: "bg-yellow-100",
           textColor: "text-yellow-800",
         };
       case "approved":
         return {
-          text: "Approved",
+          text: t("application.status.approved"),
           bgColor: "bg-green-100",
           textColor: "text-green-800",
         };
       case "rejected":
         return {
-          text: "Rejected",
+          text: t("application.status.rejected"),
           bgColor: "bg-red-100",
           textColor: "text-red-800",
         };
       default:
         return {
-          text: "Unknown",
+          text: t("application.status.unknown", { defaultValue: "Unknown" }),
           bgColor: "bg-gray-100",
           textColor: "text-gray-800",
         };
@@ -62,7 +81,10 @@ const ApplicationListItem: React.FC<ApplicationListItemProps> = ({
             {candidate?.avatar ? (
               <Image
                 src={candidate.avatar}
-                alt={candidate.fullName || "Candidate"}
+                alt={
+                  candidate.fullName ||
+                  t("employer.myjobs.applications.candidate")
+                }
                 fill
                 className="object-cover"
                 unoptimized
@@ -91,17 +113,14 @@ const ApplicationListItem: React.FC<ApplicationListItemProps> = ({
         {/* Candidate Info */}
         <div className="flex-1 min-w-0">
           <h3 className="text-lg font-semibold text-gray-800 truncate">
-            {candidate?.fullName || "Candidate"}
+            {candidate?.fullName || t("employer.myjobs.applications.candidate")}
           </h3>
           <p className="text-gray-600 truncate">
-            {candidate?.jobTitle || "Applicant"}
+            {candidate?.jobTitle || t("employer.myjobs.applications.applicant")}
           </p>
           <div className="flex items-center mt-1 text-sm text-gray-500">
             <span>
-              Applied{" "}
-              {formatDistance(new Date(application.appliedAt), new Date(), {
-                addSuffix: true,
-              })}
+              {t("employer.myjobs.applications.applied")} {formattedDate}
             </span>
             {candidate?.education && candidate.education.length > 0 && (
               <>
