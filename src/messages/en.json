@@ -278,6 +278,58 @@
       "message": "We couldn't load the payment details. Please try again."
     }
   },
+  "settings": {
+    "title": "Account Settings",
+    "password": {
+      "title": "Change Password",
+      "current": "Current Password",
+      "new": "New Password",
+      "confirm": "Confirm New Password",
+      "button": "Change Password",
+      "processing": "Processing...",
+      "success": "Password changed successfully!",
+      "error": "Failed to change password. Please try again.",
+      "new_different": "New password must be different from current password",
+      "system_error": "An error occurred. Please try again later.",
+      "current_required": "Current password is required",
+      "new_required": "New password is required",
+      "new_min": "Password must be at least 8 characters",
+      "new_format": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      "confirm_required": "Confirm password is required",
+      "confirm_match": "Passwords must match"
+    },
+    "google_account": {
+      "title": "Google Account",
+      "message": "You're logged in with Google, so you can't change your password here. To manage your Google account password, please visit your Google account settings."
+    }
+  },
+  "modal": {
+    "close": "Close"
+  },
+  "modal-yes-no": {
+    "logout": {
+      "title": "Log Out",
+      "message": "Are you sure you want to log out?"
+    },
+    "delete-job": {
+      "title": "Delete Job",
+      "message": "Are you sure you want to delete this job? This action cannot be undone."
+    },
+    "close-job": {
+      "title": "Close Job",
+      "message": "Are you sure you want to close this job? Candidates will no longer be able to apply."
+    },
+    "accept-application": {
+      "title": "Accept Application",
+      "message": "Are you sure you want to accept this application? The candidate will be notified of your decision."
+    },
+    "reject-application": {
+      "title": "Reject Application",
+      "message": "Are you sure you want to reject this application? The candidate will be notified of your decision."
+    },
+    "yes": "Yes",
+    "no": "No"
+  },
   "pagination": {
     "previous": "Prev",
     "next": "Next"

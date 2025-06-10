@@ -16,8 +16,10 @@ import { getCleanFileName } from "@/utils/getCleanFilename";
 import Modal_YesNo from "@/components/atoms/Modal_YesNo";
 import DateIcon from "@/components/atoms/icons/Date";
 import Gender from "@/components/atoms/icons/Gender";
+import { useTranslations } from "next-intl";
 
 const DetailApplication = observer(() => {
+  const t = useTranslations();
   const params = useParams();
   const router = useRouter();
   const applicationStore = useApplication();
@@ -508,17 +510,21 @@ const DetailApplication = observer(() => {
       {/* Accept Confirmation Modal */}
       <Modal_YesNo
         isOpen={showAcceptModal}
-        modalMessage="Are you sure you want to accept this application?"
+        modalTitle={t("modal-yes-no.accept-application.title")}
+        modalMessage={t("modal-yes-no.accept-application.message")}
         onClose={() => setShowAcceptModal(false)}
         onConfirm={handleAccept}
+        confirmButtonColor="green"
       />
 
       {/* Reject Confirmation Modal */}
       <Modal_YesNo
         isOpen={showRejectModal}
-        modalMessage="Are you sure you want to reject this application?"
+        modalTitle={t("modal-yes-no.reject-application.title")}
+        modalMessage={t("modal-yes-no.reject-application.message")}
         onClose={() => setShowRejectModal(false)}
         onConfirm={handleReject}
+        confirmButtonColor="red"
       />
     </div>
   );

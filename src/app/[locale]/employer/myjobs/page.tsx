@@ -243,17 +243,21 @@ const EmployerJobs = observer(() => {
       {/* Delete Confirmation Modal */}
       <Modal_YesNo
         isOpen={deleteModalOpen}
-        modalMessage="Do you want to delete this job?"
+        modalTitle={t("modal-yes-no.delete-job.title")}
+        modalMessage={t("modal-yes-no.delete-job.message")}
         onClose={cancelDelete}
         onConfirm={confirmDelete}
+        confirmButtonColor="red"
       />
 
       {/* Close Confirmation Modal */}
       <Modal_YesNo
         isOpen={closeModalOpen}
-        modalMessage="Do you want to close this job?"
+        modalTitle={t("modal-yes-no.close-job.title")}
+        modalMessage={t("modal-yes-no.close-job.message")}
         onClose={cancelClose}
         onConfirm={confirmClose}
+        confirmButtonColor="red"
       />
     </div>
   );

@@ -234,7 +234,6 @@
       "go-back": "Quay lại"
     }
   },
-
   "payment": {
     "title": "Lịch sử thanh toán",
     "subtitle": "Xem và quản lý tất cả các giao dịch trước đây của bạn",
@@ -278,6 +277,58 @@
       "title": "Không thể tải thông tin thanh toán",
       "message": "Chúng tôi không thể tải thông tin thanh toán. Vui lòng thử lại."
     }
+  },
+  "settings": {
+    "title": "Cài đặt tài khoản",
+    "password": {
+      "title": "Thay đổi mật khẩu",
+      "current": "Mật khẩu hiện tại",
+      "new": "Mật khẩu mới",
+      "confirm": "Xác nhận mật khẩu mới",
+      "button": "Thay đổi mật khẩu",
+      "processing": "Đang xử lý...",
+      "success": "Thay đổi mật khẩu thành công!",
+      "error": "Không thể thay đổi mật khẩu. Vui lòng thử lại.",
+      "new_different": "Mật khẩu mới phải khác với mật khẩu hiện tại",
+      "system_error": "Đã xảy ra lỗi. Vui lòng thử lại sau.",
+      "current_required": "Vui lòng nhập mật khẩu hiện tại",
+      "new_required": "Vui lòng nhập mật khẩu mới",
+      "new_min": "Mật khẩu phải có ít nhất 8 ký tự",
+      "new_format": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số",
+      "confirm_required": "Vui lòng xác nhận mật khẩu",
+      "confirm_match": "Mật khẩu không khớp"
+    },
+    "google_account": {
+      "title": "Tài khoản Google",
+      "message": "Bạn đang đăng nhập bằng Google, vì vậy bạn không thể thay đổi mật khẩu tại đây. Để quản lý mật khẩu tài khoản Google, vui lòng truy cập cài đặt tài khoản Google của bạn."
+    }
+  },
+  "modal": {
+    "close": "Đóng"
+  },
+  "modal-yes-no": {
+    "logout": {
+      "title": "Đăng xuất",
+      "message": "Bạn có muốn đăng xuất?"
+    },
+    "delete-job": {
+      "title": "Xóa công việc",
+      "message": "Bạn có chắc chắn muốn xóa công việc này? Hành động này không thể hoàn tác."
+    },
+    "close-job": {
+      "title": "Đóng công việc",
+      "message": "Bạn có chắc chắn muốn đóng công việc này? Hành động này sẽ không cho phép ứng viên nộp đơn nữa."
+    },
+    "accept-application": {
+      "title": "Chấp nhận đơn ứng tuyển",
+      "message": "Bạn có chắc chắn muốn chấp nhận đơn ứng tuyển này? Ứng viên sẽ được thông báo về quyết định của bạn."
+    },
+    "reject-application": {
+      "title": "Từ chối đơn ứng tuyển",
+      "message": "Bạn có chắc chắn muốn từ chối đơn ứng tuyển này? Ứng viên sẽ được thông báo về quyết định của bạn."
+    },
+    "yes": "Đồng ý",
+    "no": "Hủy"
   },
   "pagination": {
     "previous": "Trước",

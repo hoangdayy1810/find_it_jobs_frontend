@@ -8,8 +8,11 @@ import { useUser } from "@/contexts/AppContext";
 import { observer } from "mobx-react-lite";
 import Modal from "@/components/atoms/Modal";
 import PasswordInput from "@/components/atoms/PasswordInput";
+import { useTranslations } from "next-intl";
+import LoadingIcon from "@/components/atoms/icons/LoadingIcon";
 
 const Setting = observer(() => {
+  const t = useTranslations();
   const userStore = useUser();
   const [isGoogleAccount, setIsGoogleAccount] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,21 +23,30 @@ const Setting = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  // Form validation schema
+  // Form validation schema with translations
   const schema = yup.object({
-    oldPassword: yup.string().required("Current password is required"),
+    oldPassword: yup.string().required(t("settings.password.current_required")),
     newPassword: yup
       .string()
-      .required("New password is required")
-      .min(8, "Password must be at least 8 characters")
+      .required(t("settings.password.new_required"))
+      .min(8, t("settings.password.new_min"))
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-        "Password must contain at least one uppercase letter, one lowercase letter, and one number"
+        t("settings.password.new_format")
+      )
+      .test(
+        "not-same-as-old",
+        t("settings.password.new_different"),
+        function (value) {
+          // Check that the new password is different from the old password
+          const { oldPassword } = this.parent;
+          return value !== oldPassword;
+        }
       ),
     confirmPassword: yup
       .string()
-      .required("Confirm password is required")
-      .oneOf([yup.ref("newPassword")], "Passwords must match"),
+      .required(t("settings.password.confirm_required"))
+      .oneOf([yup.ref("newPassword")], t("settings.password.confirm_match")),
   });
 
   // Form setup
@@ -68,22 +80,19 @@ const Setting = observer(() => {
         data.oldPassword,
         data.newPassword
       );
-
-      if (response?.success) {
+      if (response?.isSuccess) {
         setSuccess(true);
-        setModalMessage("Password changed successfully!");
+        setModalMessage(t("settings.password.success"));
         setIsModalOpen(true);
         reset();
       } else {
         setSuccess(false);
-        setModalMessage(
-          response?.message || "Failed to change password. Please try again."
-        );
+        setModalMessage(response?.message || t("settings.password.error"));
         setIsModalOpen(true);
       }
     } catch (error) {
       setSuccess(false);
-      setModalMessage("An error occurred. Please try again later.");
+      setModalMessage(t("settings.password.system_error"));
       setIsModalOpen(true);
     } finally {
       setLoading(false);
@@ -98,12 +107,12 @@ const Setting = observer(() => {
     <div className="min-h-screen bg-gray-50 py-4">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-6">
-          Account Settings
+          {t("settings.title")}
         </h1>
 
         <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
           <h2 className="text-xl font-semibold text-gray-800 mb-4">
-            Change Password
+            {t("settings.password.title")}
           </h2>
 
           {isGoogleAccount ? (
@@ -126,9 +135,7 @@ const Setting = observer(() => {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm">
-                    You're logged in with Google, so you can't change your
-                    password here. To manage your Google account password,
-                    please visit your Google account settings.
+                    {t("settings.google_account.message")}
                   </p>
                 </div>
               </div>
@@ -137,34 +144,34 @@ const Setting = observer(() => {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <PasswordInput
                 id="oldPassword"
-                label="Current Password"
+                label={t("settings.password.current")}
                 register={register}
                 errors={errors}
                 showPassword={showOldPassword}
                 toggleVisibility={() => setShowOldPassword(!showOldPassword)}
-                placeholder="Enter your current password"
+                placeholder={t("settings.password.current")}
               />
 
               <PasswordInput
                 id="newPassword"
-                label="New Password"
+                label={t("settings.password.new")}
                 register={register}
                 errors={errors}
                 showPassword={showNewPassword}
                 toggleVisibility={() => setShowNewPassword(!showNewPassword)}
-                placeholder="Enter your new password"
+                placeholder={t("settings.password.new")}
               />
 
               <PasswordInput
                 id="confirmPassword"
-                label="Confirm New Password"
+                label={t("settings.password.confirm")}
                 register={register}
                 errors={errors}
                 showPassword={showConfirmPassword}
                 toggleVisibility={() =>
                   setShowConfirmPassword(!showConfirmPassword)
                 }
-                placeholder="Confirm your new password"
+                placeholder={t("settings.password.confirm")}
               />
 
               <div className="flex items-center justify-end">
@@ -177,30 +184,11 @@ const Setting = observer(() => {
                 >
                   {loading ? (
                     <>
-                      <svg
-                        className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Processing...
+                      <LoadingIcon />
+                      {t("settings.password.processing")}
                     </>
                   ) : (
-                    "Change Password"
+                    t("settings.password.button")
                   )}
                 </button>
               </div>
@@ -210,6 +198,7 @@ const Setting = observer(() => {
 
         {/* Modal for success/error messages */}
         <Modal
+          type={success ? "success" : "error"}
           isOpen={isModalOpen}
           modalMessage={modalMessage}
           onClose={handleCloseModal}

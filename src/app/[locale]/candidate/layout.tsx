@@ -5,6 +5,7 @@ import LogoutButton from "@/components/atoms/LogOutButton";
 import Modal_YesNo from "@/components/atoms/Modal_YesNo";
 import Title_Profile from "@/components/atoms/Title_Profile";
 import { useUser } from "@/contexts/AppContext";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -13,6 +14,7 @@ const LayoutCandidateProfile = ({
 }: {
   children: React.ReactNode;
 }) => {
+  const t = useTranslations();
   const router = useRouter();
   const userStore = useUser();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -55,10 +57,13 @@ const LayoutCandidateProfile = ({
       </div>
       <div className="flex-1 p-4">{children}</div>
       <Modal_YesNo
+        t={t}
         isOpen={showConfirmModal}
-        modalMessage="Bạn có muốn đăng xuất?"
+        modalTitle={t("modal-yes-no.logout.title")}
+        modalMessage={t("modal-yes-no.logout.message")}
         onClose={() => setShowConfirmModal(false)}
         onConfirm={handleLogout}
+        confirmButtonColor="blue"
       />
     </div>
   );

@@ -59,10 +59,13 @@ const LayoutEmployerProfile = ({ children }: { children: React.ReactNode }) => {
       </div>
       <div className="flex-1 p-4">{children}</div>
       <Modal_YesNo
+        t={t}
         isOpen={showConfirmModal}
-        modalMessage="Bạn có muốn đăng xuất?"
+        modalTitle={t("modal-yes-no.logout.title")}
+        modalMessage={t("modal-yes-no.logout.message")}
         onClose={() => setShowConfirmModal(false)}
         onConfirm={handleLogout}
+        confirmButtonColor="blue"
       />
     </div>
   );

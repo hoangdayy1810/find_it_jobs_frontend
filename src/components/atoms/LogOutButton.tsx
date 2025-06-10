@@ -1,9 +1,4 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useUser } from "@/contexts/AppContext";
-import Modal_YesNo from "./Modal_YesNo";
+import React from "react";
 
 interface LogoutButtonProps {
   text: string;
