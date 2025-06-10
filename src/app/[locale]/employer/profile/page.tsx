@@ -71,9 +71,10 @@ const EmployerProfile = observer(() => {
     mode: "onChange",
   });
 
-  // Reset form with employer data when available
-  const resetValues = employerStore?.employer
-    ? {
+  useEffect(() => {
+    // Always update form values when employer data changes
+    if (employerStore?.employer) {
+      reset({
         companyName: employerStore.employer.companyName || "",
         companyCode: employerStore.employer.companyCode || "",
         email: employerStore.employer.email || "",
@@ -84,16 +85,10 @@ const EmployerProfile = observer(() => {
         workingDays: parseWorkingDays(employerStore.employer.workingDays || ""),
         description: employerStore.employer.description || "",
         logo: employerStore.employer.logo || null,
-      }
-    : undefined;
-
-  useEffect(() => {
-    // Set loading state only once
-    if (isLoading) {
+      });
       setIsLoading(false);
-      reset(resetValues);
     }
-  }, [employerStore?.employer, reset, isLoading, resetValues]);
+  }, [employerStore?.employer, reset]);
 
   const onSubmit = async (data: any) => {
     console.log("Form submitted:", data);
@@ -183,7 +178,7 @@ const EmployerProfile = observer(() => {
                 type="button"
                 onClick={() => {
                   setIsEditing(!isEditing);
-                  reset(resetValues);
+                  reset();
                 }}
               >
                 <Edit />
@@ -348,7 +343,7 @@ const EmployerProfile = observer(() => {
                           (option) => option.value === field.value
                         )?.label || "company.size.not-specified"
                       )
-                    : "Chưa chọn quy mô công ty";
+                    : t("profile.employer.placeholder.company-size");
 
                   return (
                     <Input_Profile
@@ -380,7 +375,7 @@ const EmployerProfile = observer(() => {
                           (option) => option.value === field.value
                         )?.label || "company.type.not-specified"
                       )
-                    : "Chưa chọn loại hình công ty";
+                    : t("profile.employer.placeholder.company-type");
 
                   return (
                     <Input_Profile
@@ -476,7 +471,7 @@ const EmployerProfile = observer(() => {
                   <Input_Profile
                     icon={<Location />}
                     {...field}
-                    placeholder="Nhập địa chỉ của công ty"
+                    placeholder={t("profile.employer.placeholder.address")}
                     isEdit={isEditing}
                     text={field.value || ""}
                     children={

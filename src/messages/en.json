@@ -162,6 +162,17 @@
     "already_have_account": "Already have an account? ",
     "login_now": "Log in now"
   },
+  "navigation": {
+    "hello": "Hello",
+    "candidate": {},
+    "employer": {
+      "info": "Company Information",
+      "jobs": "Job Listings",
+      "payment": "Payment History",
+      "setting": "Settings",
+      "logout": "Log Out"
+    }
+  },
   "profile": {
     "candidate": {},
     "employer": {
@@ -169,7 +180,10 @@
         "company-code": "Enter company tax code",
         "company-name": "Enter company name",
         "email": "Enter company email",
+        "company-type": "Select company type",
+        "company-size": "Select company size",
         "website": "Enter company website",
+        "address": "Enter company address",
         "description": "Introduce your company"
       },
       "about-title": "Company Introduction",

@@ -162,14 +162,28 @@
     "already_have_account": "Bạn đã có tài khoản? ",
     "login_now": "Đăng nhập ngay"
   },
+  "navigation": {
+    "hello": "Xin chào",
+    "candidate": {},
+    "employer": {
+      "info": "Thông tin công ty",
+      "jobs": "Danh sách công việc",
+      "payment": "Lịch sử thanh toán",
+      "setting": "Cài đặt",
+      "logout": "Đăng xuất"
+    }
+  },
   "profile": {
     "candidate": {},
     "employer": {
       "placeholder": {
         "company-code": "Nhập mã số thuế công ty",
         "company-name": "Nhập tên công ty",
+        "company-type": "Chọn loại hình công ty",
+        "company-size": "Chọn quy mô công ty",
         "email": "Nhập email công ty",
         "website": "Nhập trang web công ty",
+        "address": "Nhập địa chỉ công ty",
         "description": "Giới thiệu về công ty của bạn"
       },
       "about-title": "Giới thiệu công ty",

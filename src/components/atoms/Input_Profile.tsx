@@ -29,7 +29,8 @@ const Input_Profile: React.FC<InputProfileProps> = ({
   // Rendering logic based on isEdit and typeInput
   const renderInput = () => {
     if (!isEdit) {
-      return <p className="text-gray-700">{text || placeholder}</p>;
+      // Display the text in view mode, fallback to value if text is not provided
+      return <p className="text-gray-700">{text || value || placeholder}</p>;
     }
 
     if (children) {

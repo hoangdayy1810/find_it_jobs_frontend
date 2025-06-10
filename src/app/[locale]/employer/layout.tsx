@@ -5,10 +5,12 @@ import LogoutButton from "@/components/atoms/LogOutButton";
 import Modal_YesNo from "@/components/atoms/Modal_YesNo";
 import Title_Profile from "@/components/atoms/Title_Profile";
 import { useUser } from "@/contexts/AppContext";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const LayoutEmployerProfile = ({ children }: { children: React.ReactNode }) => {
+  const t = useTranslations();
   const router = useRouter();
   const userStore = useUser();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -27,28 +29,28 @@ const LayoutEmployerProfile = ({ children }: { children: React.ReactNode }) => {
           <nav className="space-y-4">
             <Link_NavBar_Profile
               href="/employer/profile"
-              text="Thông tin công ty"
+              text={t("navigation.employer.info")}
               icon="👤"
             />
             <Link_NavBar_Profile
               href="/employer/myjobs"
-              text="Danh sách công việc"
+              text={t("navigation.employer.jobs")}
               icon="💼"
             />
             <Link_NavBar_Profile
               href="/employer/payments"
-              text="Lịch sử thanh toán"
+              text={t("navigation.employer.payment")}
               icon="💳"
             />
             <Link_NavBar_Profile
               href="/employer/setting"
-              text="Cài đặt"
+              text={t("navigation.employer.setting")}
               icon="⚙️"
             />
             <div className="border-t border-gray-200 my-2"></div>
 
             <LogoutButton
-              text="Đăng xuất"
+              text={t("navigation.employer.logout")}
               icon="🚪"
               handleClick={() => setShowConfirmModal(true)}
             />
