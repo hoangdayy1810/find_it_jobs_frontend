@@ -26,7 +26,7 @@ const RadioFilterGroup = ({
             onChange={() => onChange(option.value)}
             className="mt-0.5 h-4 w-4 text-blue-600 focus:ring-blue-500 hover:cursor-pointer"
           />
-          <span className="ml-2 text-sm text-gray-700">{option.label}</span>
+          <span className="ml-2 text-sm">{option.label}</span>
         </label>
       ))}
     </div>

@@ -18,11 +18,14 @@ import { formatWorkingDays, parseWorkingDays } from "@/utils/formatWorkingDays";
 import CalendarIcon from "@/components/atoms/icons/CalendarIcon";
 import CompanySizeIcon from "@/components/atoms/icons/CompanySizeIcon";
 import JobIcon from "@/components/atoms/icons/JobIcon";
+import { COMPANYSIZE, COMPANYTYPE, WORKINGDAYS } from "@/utils/constant";
+import { useTranslations } from "next-intl";
 
 const EmployerProfile = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const employerStore = useEmployer();
+  const t = useTranslations();
 
   // Define form validation schema
   const validationSchema = yup.object({
@@ -40,32 +43,6 @@ const EmployerProfile = observer(() => {
     description: yup.string(),
     logo: yup.mixed().nullable(),
   });
-
-  // Define predefined options for select fields
-  const companySizeOptions = [
-    { value: "1-10", label: "1-10 nhân viên" },
-    { value: "11-50", label: "11-50 nhân viên" },
-    { value: "51-200", label: "51-200 nhân viên" },
-    { value: "201-500", label: "201-500 nhân viên" },
-    { value: "500+", label: "Trên 500 nhân viên" },
-  ];
-
-  const companyTypeOptions = [
-    { value: "Product", label: "Product" },
-    { value: "Outsourcing", label: "Outsourcing" },
-    { value: "Startup", label: "Startup" },
-    { value: "Other", label: "Khác" },
-  ];
-
-  const workingDaysOptions = [
-    { value: "Monday", label: "Thứ Hai" },
-    { value: "Tuesday", label: "Thứ Ba" },
-    { value: "Wednesday", label: "Thứ Tư" },
-    { value: "Thursday", label: "Thứ Năm" },
-    { value: "Friday", label: "Thứ Sáu" },
-    { value: "Saturday", label: "Thứ Bảy" },
-    { value: "Sunday", label: "Chủ Nhật" },
-  ];
 
   // Initialize useForm
   const {
@@ -162,6 +139,36 @@ const EmployerProfile = observer(() => {
 
     // Exit edit mode
     setIsEditing(false);
+  };
+
+  // Add this function within your component
+  const getTranslatedWorkingDays = (days: string[]) => {
+    // First get the formatted string with the original function
+    const formattedDays = formatWorkingDays(days);
+
+    if (!formattedDays) return "";
+
+    // Create a mapping for day name translations
+    const dayTranslations: Record<string, string> = {
+      "Thứ Hai": t("application.company.workingDays.monday"),
+      "Thứ Ba": t("application.company.workingDays.tuesday"),
+      "Thứ Tư": t("application.company.workingDays.wednesday"),
+      "Thứ Năm": t("application.company.workingDays.thursday"),
+      "Thứ Sáu": t("application.company.workingDays.friday"),
+      "Thứ Bảy": t("application.company.workingDays.saturday"),
+      "Chủ Nhật": t("application.company.workingDays.sunday"),
+    };
+
+    // Replace each Vietnamese day name with its translation
+    let translatedString = formattedDays;
+    for (const [vietDay, translatedDay] of Object.entries(dayTranslations)) {
+      translatedString = translatedString.replace(
+        new RegExp(vietDay, "g"),
+        translatedDay
+      );
+    }
+
+    return translatedString;
   };
 
   return (
@@ -269,7 +276,9 @@ const EmployerProfile = observer(() => {
                         {...field}
                         type="text"
                         className="text-2xl font-bold border-b border-gray-300 focus:outline-none focus:border-blue-500 w-full mb-2"
-                        placeholder="Tên công ty của bạn"
+                        placeholder={t(
+                          "profile.employer.placeholder.company-name"
+                        )}
                       />
                     )}
                   />
@@ -285,7 +294,9 @@ const EmployerProfile = observer(() => {
                     <Input_Profile
                       {...field}
                       text={field.value}
-                      placeholder="Mã số công ty của bạn"
+                      placeholder={t(
+                        "profile.employer.placeholder.company-code"
+                      )}
                       isEdit={isEditing}
                       error={errors.companyCode?.message}
                     />
@@ -303,7 +314,7 @@ const EmployerProfile = observer(() => {
                     icon={<Email />}
                     {...field}
                     text={field.value}
-                    placeholder="Nhập email của công ty"
+                    placeholder={t("profile.employer.placeholder.email")}
                     isEdit={isEditing}
                     error={errors.email?.message}
                   />
@@ -317,7 +328,7 @@ const EmployerProfile = observer(() => {
                     icon={<Network />}
                     {...field}
                     text={field.value}
-                    placeholder="Nhập website của công ty"
+                    placeholder={t("profile.employer.placeholder.website")}
                     isEdit={isEditing}
                     error={errors.website?.message}
                   />
@@ -330,17 +341,27 @@ const EmployerProfile = observer(() => {
                 name="companySize"
                 control={control}
                 render={({ field }) => {
+                  // Get display value for non-edit mode
+                  const displayValue = field.value
+                    ? t(
+                        COMPANYSIZE.find(
+                          (option) => option.value === field.value
+                        )?.label || "company.size.not-specified"
+                      )
+                    : "Chưa chọn quy mô công ty";
+
                   return (
                     <Input_Profile
                       icon={<CompanySizeIcon />}
                       {...field}
-                      text={field.value || "Chưa chọn quy mô công ty"}
-                      placeholder="Chọn quy mô công ty"
+                      text={displayValue}
                       isEdit={isEditing}
                       typeInput="select"
-                      options={companySizeOptions}
+                      options={COMPANYSIZE.map((option) => ({
+                        value: option.value,
+                        label: t(option.label),
+                      }))}
                       onChange={(e) => {
-                        // This handles single select
                         field.onChange(e.target.value);
                       }}
                       error={errors.companySize?.message}
@@ -352,17 +373,28 @@ const EmployerProfile = observer(() => {
                 name="companyType"
                 control={control}
                 render={({ field }) => {
+                  // Get display value for non-edit mode
+                  const displayValue = field.value
+                    ? t(
+                        COMPANYTYPE.find(
+                          (option) => option.value === field.value
+                        )?.label || "company.type.not-specified"
+                      )
+                    : "Chưa chọn loại hình công ty";
+
                   return (
                     <Input_Profile
                       icon={<JobIcon width="18" height="18" />}
                       {...field}
-                      text={field.value || "Chưa chọn loại hình công ty"}
+                      text={displayValue}
                       placeholder="Chọn loại hình công ty"
                       isEdit={isEditing}
                       typeInput="select"
-                      options={companyTypeOptions}
+                      options={COMPANYTYPE.map((option) => ({
+                        value: option.value,
+                        label: t(option.label),
+                      }))}
                       onChange={(e) => {
-                        // This handles single select
                         field.onChange(e.target.value);
                       }}
                       error={errors.companyType?.message}
@@ -377,10 +409,8 @@ const EmployerProfile = observer(() => {
                 name="workingDays"
                 control={control}
                 render={({ field }) => {
-                  console.log("Current field value in render:", field.value);
-
-                  // Filter out any undefined values and format the working days
-                  const formattedWorkingDays = formatWorkingDays(
+                  // Get translated working days display
+                  const translatedWorkingDays = getTranslatedWorkingDays(
                     (field.value || []).filter(
                       (day): day is string => day !== undefined
                     )
@@ -390,13 +420,15 @@ const EmployerProfile = observer(() => {
                     <Input_Profile
                       icon={<CalendarIcon />}
                       {...field}
-                      text={formattedWorkingDays || "Chưa chọn ngày làm việc"}
-                      placeholder="Chọn ngày làm việc"
+                      text={
+                        translatedWorkingDays ||
+                        t("application.company.workingDays.none")
+                      }
                       isEdit={isEditing}
                       children={
                         isEditing && (
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                            {workingDaysOptions.map((option) => {
+                            {WORKINGDAYS.map((option) => {
                               const isChecked = field.value?.includes(
                                 option.value
                               );
@@ -421,7 +453,7 @@ const EmployerProfile = observer(() => {
                                     className="h-4 w-4 text-blue-600 focus:ring-blue-500"
                                   />
                                   <span className="text-sm">
-                                    {option.label}
+                                    {t(option.label)}
                                   </span>
                                 </label>
                               );
@@ -451,8 +483,7 @@ const EmployerProfile = observer(() => {
                       isEditing && (
                         <Input_Address
                           onChange={(value) => {
-                            field.onChange(value); // Changed to directly set string value
-                            // Force validation after change
+                            field.onChange(value);
                             setValue("address", value, {
                               shouldValidate: true,
                             });
@@ -470,8 +501,8 @@ const EmployerProfile = observer(() => {
 
           {/* About Section */}
           <Section_Profile
-            title="Giới thiệu công ty"
-            content="Giới thiệu về công ty và những gì bạn muốn chia sẻ thêm"
+            title={t("profile.employer.about-title")}
+            content={t("profile.employer.about-description")}
           >
             <Controller
               name="description"
@@ -481,7 +512,7 @@ const EmployerProfile = observer(() => {
                   <RichTextEditor
                     value={field.value}
                     onChange={field.onChange}
-                    placeholder="Giới thiệu về công ty của bạn"
+                    placeholder={t("profile.employer.placeholder.description")}
                   />
                 ) : (
                   <div
@@ -489,7 +520,9 @@ const EmployerProfile = observer(() => {
                     dangerouslySetInnerHTML={{
                       __html:
                         field.value ||
-                        "<p><em>Chưa có thông tin giới thiệu</em></p>",
+                        `<p><em>${t(
+                          "profile.employer.no-description"
+                        )}</em></p>`,
                     }}
                   />
                 )
@@ -498,12 +531,12 @@ const EmployerProfile = observer(() => {
           </Section_Profile>
 
           {isEditing && (
-            <div className="mt-6">
+            <div className="mt-6 flex justify-end">
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer"
+                className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 cursor-pointer"
               >
-                Lưu thông tin
+                {t("profile.employer.save-button")}
               </button>
             </div>
           )}

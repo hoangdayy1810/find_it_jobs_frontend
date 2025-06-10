@@ -1,6 +1,50 @@
 {
   "all": {
-    "VND": "đ"
+    "VND": "đ",
+    "more": "more",
+    "time": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "days_ago": "{count} days ago"
+    }
+  },
+  "application": {
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "company": {
+      "size": {
+        "1-10": "1-10 employees",
+        "11-50": "11-50 employees",
+        "51-200": "51-200 employees",
+        "201-500": "201-500 employees",
+        "500+": "Over 500 employees"
+      },
+      "type": {
+        "product": "Product",
+        "outsourcing": "Outsourcing",
+        "startup": "Startup",
+        "other": "Other"
+      },
+      "workingDays": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        "none": "Not specified"
+      }
+    }
+  },
+  "search": {
+    "results-for": "Search results for: ",
+    "tags": "Tags",
+    "jobs": "Jobs",
+    "no-results": "No results found for "
   },
   "home": {
     "hero": {
@@ -117,6 +161,22 @@
     "register_loading": "Registering...",
     "already_have_account": "Already have an account? ",
     "login_now": "Log in now"
+  },
+  "profile": {
+    "candidate": {},
+    "employer": {
+      "placeholder": {
+        "company-code": "Enter company tax code",
+        "company-name": "Enter company name",
+        "email": "Enter company email",
+        "website": "Enter company website",
+        "description": "Introduce your company"
+      },
+      "about-title": "Company Introduction",
+      "about-description": "Introduce your company to potential candidates",
+      "no-description": "No description for introduce",
+      "save-button": "Save Changes"
+    }
   },
   "jobs-list": {
     "title": "Find Your Next Opportunity",

@@ -1,6 +1,50 @@
 {
   "all": {
-    "VND": "đ"
+    "VND": "đ",
+    "more": "thêm",
+    "time": {
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua",
+      "days_ago": "{count} ngày trước"
+    }
+  },
+  "application": {
+    "status": {
+      "pending": "Đang xử lý",
+      "approved": "Chấp nhận",
+      "rejected": "Từ chối"
+    },
+    "company": {
+      "size": {
+        "1-10": "1-10 nhân viên",
+        "11-50": "11-50 nhân viên",
+        "51-200": "51-200 nhân viên",
+        "201-500": "201-500 nhân viên",
+        "500+": "Trên 500 nhân viên"
+      },
+      "type": {
+        "product": "Product",
+        "outsourcing": "Outsourcing",
+        "startup": "Startup",
+        "other": "Khác"
+      },
+      "workingDays": {
+        "monday": "Thứ Hai",
+        "tuesday": "Thứ Ba",
+        "wednesday": "Thứ Tư",
+        "thursday": "Thứ Năm",
+        "friday": "Thứ Sáu",
+        "saturday": "Thứ Bảy",
+        "sunday": "Chủ Nhật",
+        "none": "Không xác định"
+      }
+    }
+  },
+  "search": {
+    "results-for": "Tìm kết quả cho: ",
+    "tags": "Thẻ",
+    "jobs": "Công việc",
+    "no-results": "Không tìm thấy kết quả của "
   },
   "home": {
     "hero": {
@@ -117,6 +161,22 @@
     "register_loading": "Đang đăng kí...",
     "already_have_account": "Bạn đã có tài khoản? ",
     "login_now": "Đăng nhập ngay"
+  },
+  "profile": {
+    "candidate": {},
+    "employer": {
+      "placeholder": {
+        "company-code": "Nhập mã số thuế công ty",
+        "company-name": "Nhập tên công ty",
+        "email": "Nhập email công ty",
+        "website": "Nhập trang web công ty",
+        "description": "Giới thiệu về công ty của bạn"
+      },
+      "about-title": "Giới thiệu công ty",
+      "about-description": "Giới thiệu về công ty và những gì bạn muốn chia sẻ thêm",
+      "no-description": "Chưa có thông tin giới thiệu",
+      "save-button": "Lưu thông tin"
+    }
   },
   "jobs-list": {
     "title": "Tìm Cơ Hội Tiếp Theo Của Bạn",

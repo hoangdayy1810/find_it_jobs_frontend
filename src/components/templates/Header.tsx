@@ -44,7 +44,7 @@ const Header = observer(() => {
             <Logo style="w-64" src="/images/Logo.png" />
           </div>
           <div className="w-full flex justify-between items-center">
-            <div className="w-2/3 p-3">
+            <div className="w-3/4 p-3">
               <Search_Header />
             </div>
 

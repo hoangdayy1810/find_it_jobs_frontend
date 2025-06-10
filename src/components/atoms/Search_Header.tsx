@@ -121,6 +121,7 @@ const Search_Header = () => {
 
       {showResults && searchQuery.trim().length > 0 && (
         <SearchResults
+          t={t}
           query={searchQuery}
           tagResults={tagResults}
           jobResults={jobResults}

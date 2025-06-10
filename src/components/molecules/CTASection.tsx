@@ -6,19 +6,15 @@ import GreenSuccessList from "../atoms/icons/GreenSuccessList";
 import PurpleSuccessList from "../atoms/icons/PurpleSuccessList";
 import { observer } from "mobx-react-lite";
 import { useUser } from "@/contexts/AppContext";
+import { set } from "lodash";
 
 const CTASection = observer(({ t }: { t: any }) => {
-  const [hasUser, setHasUser] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const userStore = useUser();
 
   useEffect(() => {
-    // Check if user is logged in
-    if (userStore?.user) {
-      setHasUser(true);
-    } else {
-      setHasUser(false);
-    }
-  }, [userStore]);
+    setIsLoading(true);
+  }, []);
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
@@ -47,7 +43,7 @@ const CTASection = observer(({ t }: { t: any }) => {
                   <span>{t("home.cta.candidate.list3")}</span>
                 </div>
               </div>
-              {!hasUser && (
+              {isLoading && !userStore?.user && (
                 <div className="mt-8">
                   <Link
                     href="/register?role=candidate"
@@ -81,7 +77,7 @@ const CTASection = observer(({ t }: { t: any }) => {
                   <span>{t("home.cta.employer.list3")}</span>
                 </div>
               </div>
-              {!hasUser && (
+              {isLoading && !userStore?.user && (
                 <div className="mt-8">
                   <Link
                     href="/register?role=employer"

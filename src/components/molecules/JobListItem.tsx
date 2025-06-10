@@ -9,6 +9,8 @@ import Image from "next/image";
 import { applicationStore } from "@/stores/applicationStore";
 import { userStore } from "@/stores/userStore";
 import { candidateStore } from "@/stores/candidateStore";
+import { APPLICATION_STATUS } from "@/utils/constant";
+import { useTranslations } from "next-intl";
 
 const JobListItem = ({
   job,
@@ -18,6 +20,7 @@ const JobListItem = ({
   tagKeysByJobs: any[];
 }) => {
   const router = useRouter();
+  const t = useTranslations();
   const [applicationStatus, setApplicationStatus] = useState<string | null>(
     null
   );
@@ -71,11 +74,11 @@ const JobListItem = ({
     const date = new Date(dateString);
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-    if (diffDays === 0) return "Today";
-    if (diffDays === 1) return "Yesterday";
-    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays === 0) return t("all.time.today");
+    if (diffDays === 1) return t("all.time.yesterday");
+    if (diffDays < 7) return t("all.time.days_ago", { count: diffDays });
 
     return formatDate(date);
   };
@@ -99,15 +102,20 @@ const JobListItem = ({
   // Generate status badge color based on status
   const getStatusBadgeColor = (status: string) => {
     switch (status.toLowerCase()) {
-      case "pending":
+      case APPLICATION_STATUS.PENDING:
         return "bg-yellow-100 text-yellow-800";
-      case "approved":
+      case APPLICATION_STATUS.APPROVED:
         return "bg-green-100 text-green-800";
-      case "rejected":
+      case APPLICATION_STATUS.REJECTED:
         return "bg-red-100 text-red-800";
       default:
         return "bg-gray-100 text-gray-800";
     }
+  };
+
+  // Get translated status text
+  const getStatusText = (status: string) => {
+    return t(`application.status.${status.toLowerCase()}`);
   };
 
   return (
@@ -127,8 +135,7 @@ const JobListItem = ({
               applicationStatus
             )}`}
           >
-            {applicationStatus.charAt(0).toUpperCase() +
-              applicationStatus.slice(1)}
+            {getStatusText(applicationStatus)}
           </span>
         )}
       </div>
@@ -197,7 +204,7 @@ const JobListItem = ({
           ))}
           {relevantTags.length > 3 && (
             <span className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
-              +{relevantTags.length - 3} more
+              +{relevantTags.length - 3} {t("all.more")}
             </span>
           )}
         </div>

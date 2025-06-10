@@ -18,7 +18,7 @@ const FilterSection = ({
         className="flex justify-between items-center cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <h3 className="font-medium text-gray-700">{title}</h3>
+        <h3 className="font-semibold">{title}</h3>
         <RotateUpDownArrow expanded={expanded} />
       </div>
 
