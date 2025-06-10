@@ -4,7 +4,6 @@ import { IApplication } from "@/stores/applicationStore";
 import Image from "next/image";
 import { formatDistance } from "date-fns";
 import { vi, enUS } from "date-fns/locale";
-import { useRouter } from "next/router";
 
 interface ApplicationListItemProps {
   application: IApplication;

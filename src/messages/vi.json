@@ -427,6 +427,71 @@
       }
     }
   },
+  "myapplies": {
+    "title": "Đơn ứng tuyển của tôi",
+    "filters": {
+      "all": "Tất cả đơn",
+      "pending": "Đang xử lý",
+      "approved": "Đã duyệt",
+      "rejected": "Bị từ chối"
+    },
+    "card": {
+      "applied": "Đã ứng tuyển",
+      "unknown_status": "Không xác định"
+    },
+    "empty": {
+      "title": "Không tìm thấy đơn ứng tuyển",
+      "description": "Bạn chưa ứng tuyển vào công việc nào hoặc không có đơn nào phù hợp với bộ lọc."
+    },
+    "loading": "Đang tải đơn ứng tuyển...",
+    "application_detail": {
+      "back_to_applications": "Quay lại danh sách đơn ứng tuyển",
+      "not_found": "Không tìm thấy đơn ứng tuyển",
+      "not_specified": "Không xác định",
+      "not_found_message": "Đơn ứng tuyển bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
+      "job_unavailable": "Thông tin công việc không khả dụng",
+      "job_unavailable_message": "Không thể tải thông tin chi tiết công việc cho đơn ứng tuyển này.",
+      "go_back": "Quay lại",
+      "job_information": "Thông tin công việc",
+      "location": "Địa điểm",
+      "salary": "Mức lương",
+      "job_type": "Loại công việc",
+      "posted_on": "Ngày đăng",
+      "application_timeline": "Tiến trình ứng tuyển",
+      "application_submitted": "Đã nộp đơn ứng tuyển",
+      "application_submitted_desc": "Đơn ứng tuyển của bạn đã được nộp thành công.",
+      "application_approved": "Đơn ứng tuyển được chấp nhận",
+      "application_approved_desc": "Chúc mừng! Đơn ứng tuyển của bạn đã được nhà tuyển dụng chấp nhận.",
+      "application_rejected": "Đơn ứng tuyển bị từ chối",
+      "application_rejected_desc": "Rất tiếc, nhà tuyển dụng đã quyết định không tiếp tục với đơn ứng tuyển của bạn.",
+      "under_review": "Đang xem xét",
+      "under_review_desc": "Đơn ứng tuyển của bạn đang được nhà tuyển dụng xem xét.",
+      "cover_letter": "Thư xin việc của bạn",
+      "application_summary": "Tóm tắt đơn ứng tuyển",
+      "application_id": "Mã đơn ứng tuyển:",
+      "applied_on": "Ngày nộp đơn:",
+      "status": "Trạng thái:",
+      "time_in_review": "Thời gian xem xét:",
+      "submitted_resume": "Hồ sơ đã nộp",
+      "download": "Tải xuống",
+      "whats_next": "Bước tiếp theo là gì?",
+      "pending_message": "Đơn ứng tuyển của bạn đang được nhà tuyển dụng xem xét. Bạn sẽ nhận được thông báo khi có cập nhật.",
+      "average_response": "Thời gian phản hồi trung bình: 1-2 tuần",
+      "pending_tip": "Mẹo: Tiếp tục ứng tuyển vào các vị trí khác trong khi chờ đợi để tăng cơ hội tìm được công việc phù hợp.",
+      "approved_message": "Chúc mừng! Nhà tuyển dụng đã chấp nhận đơn ứng tuyển của bạn.",
+      "approved_next_steps": "Các bước tiếp theo:",
+      "approved_step1": "Kiểm tra email để biết hướng dẫn thêm",
+      "approved_step2": "Chuẩn bị cho các cuộc phỏng vấn tiềm năng",
+      "approved_step3": "Tìm hiểu thêm về công ty",
+      "approved_tip": "Mẹo: Phản hồi nhanh chóng với mọi liên lạc từ nhà tuyển dụng để thể hiện sự quan tâm liên tục của bạn.",
+      "rejected_message": "Rất tiếc, nhà tuyển dụng đã quyết định không tiếp tục với đơn ứng tuyển của bạn vào lúc này.",
+      "rejected_next": "Đừng nản lòng! Đây là những gì bạn có thể làm:",
+      "rejected_step1": "Xem lại và cập nhật hồ sơ của bạn",
+      "rejected_step2": "Tiếp tục ứng tuyển vào các vị trí khác",
+      "rejected_step3": "Xem xét các vai trò phù hợp hơn với kỹ năng của bạn",
+      "rejected_tip": "Mẹo: Mỗi đơn ứng tuyển là một trải nghiệm học hỏi. Hãy sử dụng cơ hội này để cải thiện cách tiếp cận cho các đơn ứng tuyển trong tương lai."
+    }
+  },
   "employer": {
     "myjobs": {
       "create_button": "Tạo mới",

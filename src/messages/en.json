@@ -427,6 +427,71 @@
       }
     }
   },
+  "myapplies": {
+    "title": "My Applications",
+    "filters": {
+      "all": "All Applications",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "card": {
+      "applied": "Applied",
+      "unknown_status": "Unknown"
+    },
+    "empty": {
+      "title": "No applications found",
+      "description": "You haven't applied to any jobs yet or no applications match your filter."
+    },
+    "loading": "Loading applications...",
+    "application_detail": {
+      "back_to_applications": "Back to My Applications",
+      "not_found": "Application Not Found",
+      "not_specified": "Not Specified",
+      "not_found_message": "The application you're looking for does not exist or has been removed.",
+      "job_unavailable": "Job Information Not Available",
+      "job_unavailable_message": "Job details could not be loaded for this application.",
+      "go_back": "Go Back",
+      "job_information": "Job Information",
+      "location": "Location",
+      "salary": "Salary",
+      "job_type": "Job Type",
+      "posted_on": "Posted On",
+      "application_timeline": "Application Timeline",
+      "application_submitted": "Application Submitted",
+      "application_submitted_desc": "Your application was successfully submitted.",
+      "application_approved": "Application Approved",
+      "application_approved_desc": "Congratulations! Your application has been approved by the employer.",
+      "application_rejected": "Application Rejected",
+      "application_rejected_desc": "We're sorry, the employer has decided not to proceed with your application.",
+      "under_review": "Under Review",
+      "under_review_desc": "Your application is currently being reviewed by the employer.",
+      "cover_letter": "Your Cover Letter",
+      "application_summary": "Application Summary",
+      "application_id": "Application ID:",
+      "applied_on": "Applied On:",
+      "status": "Status:",
+      "time_in_review": "Time in Review:",
+      "submitted_resume": "Submitted Resume",
+      "download": "Download",
+      "whats_next": "What's Next?",
+      "pending_message": "Your application is currently being reviewed by the employer. You will be notified when there is an update.",
+      "average_response": "Average response time: 1-2 weeks",
+      "pending_tip": "Tip: Continue applying to other positions while you wait to increase your chances of finding the right job.",
+      "approved_message": "Congratulations! The employer has approved your application.",
+      "approved_next_steps": "Next steps:",
+      "approved_step1": "Check your email for further instructions",
+      "approved_step2": "Prepare for potential interviews",
+      "approved_step3": "Research more about the company",
+      "approved_tip": "Tip: Respond promptly to any communication from the employer to show your continued interest.",
+      "rejected_message": "We're sorry, but the employer has decided not to proceed with your application at this time.",
+      "rejected_next": "Don't be discouraged! Here's what you can do:",
+      "rejected_step1": "Review and update your resume",
+      "rejected_step2": "Continue applying to other positions",
+      "rejected_step3": "Consider roles that better match your skills",
+      "rejected_tip": "Tip: Each application is a learning experience. Use this opportunity to refine your approach for future applications."
+    }
+  },
   "employer": {
     "myjobs": {
       "create_button": "Create",
