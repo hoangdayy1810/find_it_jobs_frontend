@@ -234,6 +234,51 @@
       "go-back": "Quay lại"
     }
   },
+
+  "payment": {
+    "title": "Lịch sử thanh toán",
+    "subtitle": "Xem và quản lý tất cả các giao dịch trước đây của bạn",
+    "filter": {
+      "label": "Lọc theo trạng thái:",
+      "all": "Tất cả trạng thái"
+    },
+    "status": {
+      "completed": "Hoàn thành",
+      "success": "Thành công",
+      "pending": "Đang xử lý",
+      "failed": "Thất bại"
+    },
+    "empty": {
+      "title": "Không tìm thấy lịch sử thanh toán",
+      "description": "Bạn chưa thực hiện thanh toán nào. Khi bạn mua các gói đăng tin tuyển dụng, chúng sẽ xuất hiện tại đây."
+    },
+    "try_again": "Thử lại",
+    "job_id": "Mã công việc",
+    "transaction_id": "Mã giao dịch",
+    "table": {
+      "date": "Ngày",
+      "transaction_id": "Mã giao dịch",
+      "package": "Gói dịch vụ",
+      "amount": "Số tiền",
+      "status": "Trạng thái"
+    },
+    "pagination": {
+      "showing": "Hiển thị {count} của {total} giao dịch"
+    }
+  },
+  "payment_details": {
+    "title": "Chi Tiết Thanh Toán",
+    "back_to_history": "Quay lại Lịch sử thanh toán",
+    "payment_info": "Thông tin thanh toán",
+    "job_details": "Thông tin công việc",
+    "job_title": "Tên công việc",
+    "receipt": "Biên lai thanh toán",
+    "total": "Tổng cộng",
+    "error": {
+      "title": "Không thể tải thông tin thanh toán",
+      "message": "Chúng tôi không thể tải thông tin thanh toán. Vui lòng thử lại."
+    }
+  },
   "pagination": {
     "previous": "Trước",
     "next": "Sau"

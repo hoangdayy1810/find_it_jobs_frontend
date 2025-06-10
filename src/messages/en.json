@@ -234,6 +234,50 @@
       "go-back": "Go Back"
     }
   },
+  "payment": {
+    "title": "Payment History",
+    "subtitle": "View and manage all your past transactions",
+    "filter": {
+      "label": "Filter by Status:",
+      "all": "All Statuses"
+    },
+    "status": {
+      "completed": "Completed",
+      "success": "Success",
+      "pending": "Pending",
+      "failed": "Failed"
+    },
+    "empty": {
+      "title": "No payment history found",
+      "description": "You haven't made any payments yet. When you purchase job postings or promotions, they'll appear here."
+    },
+    "try_again": "Try Again",
+    "job_id": "Job ID",
+    "transaction_id": "Transaction ID",
+    "table": {
+      "date": "Date",
+      "transaction_id": "Transaction ID",
+      "package": "Package",
+      "amount": "Amount",
+      "status": "Status"
+    },
+    "pagination": {
+      "showing": "Showing {count} of {total} payments"
+    }
+  },
+  "payment_details": {
+    "title": "Payment Details",
+    "back_to_history": "Back to Payment History",
+    "payment_info": "Payment Information",
+    "job_details": "Job Details",
+    "job_title": "Job Title",
+    "receipt": "Payment Receipt",
+    "total": "Total",
+    "error": {
+      "title": "We couldn't load the payment details",
+      "message": "We couldn't load the payment details. Please try again."
+    }
+  },
   "pagination": {
     "previous": "Prev",
     "next": "Next"
@@ -244,7 +288,7 @@
       "name": "University of Transport and Communications",
       "phone": "Phone: (84.24) 37663311 - Fax: (84.24)37669613",
       "email": "Email: dhgtvt@utc.edu.vn",
-      "description": "FindITJobs, where you can search for jobs that match your passions or find talent for your company or business."
+      "description": "FindITJobs, where you can search for jobs that find talent for your company or business."
     },
     "footer-right": {
       "service": {

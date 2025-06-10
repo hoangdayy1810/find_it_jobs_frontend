@@ -31,6 +31,12 @@ export const APPLICATION_STATUS = {
   REJECTED: "rejected",
 };
 
+export const PAYMENT_STATUS = {
+  COMPLETED: "completed",
+  PENDING: "pending",
+  FAILED: "failed",
+};
+
 export const COMPANYSIZE = [
   { value: "1-10", label: "application.company.size.1-10" },
   { value: "11-50", label: "application.company.size.11-50" },
