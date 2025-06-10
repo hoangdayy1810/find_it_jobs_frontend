@@ -1,11 +1,13 @@
 import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useTranslations } from "next-intl";
 
 interface IPaymentMethod {
   handlePaymentSuccess: (details: any) => void;
   handlePaymentError: (error: any) => void;
   handlePaymentCancel: () => void;
   onCancel: () => void;
+  t: any;
 }
 
 const PaymentMethod = ({
@@ -13,8 +15,13 @@ const PaymentMethod = ({
   handlePaymentError,
   handlePaymentCancel,
   onCancel,
+  t: propT,
 }: IPaymentMethod) => {
-  //Options Paypal
+  // Get default translations if not passed as prop
+  const defaultT = useTranslations();
+  const t = propT || defaultT;
+
+  // Options Paypal
   const options = {
     clientId:
       "AWa7Z_Uj81NjV36f1oB9aw3GWj7ab0ztxnqBbuUAa044LNRcowbZNVR6SmMO_oMcdy4DYx3Qbd2ZHQdc",
@@ -22,13 +29,12 @@ const PaymentMethod = ({
     intent: "capture",
     "disable-funding": "card",
   };
+
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-xl font-bold mb-4">Complete Payment to Publish</h2>
-        <p className="mb-4">
-          Your job will be published after successful payment of $2.00 USD.
-        </p>
+        <h2 className="text-xl font-bold mb-4">{t("payment.modal.title")}</h2>
+        <p className="mb-4">{t("payment.modal.description")}</p>
 
         <PayPalScriptProvider options={options}>
           <PayPalButtons
@@ -68,7 +74,7 @@ const PaymentMethod = ({
           className="mt-4 w-full py-2 px-4 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
           onClick={onCancel}
         >
-          Cancel
+          {t("payment.modal.cancel")}
         </button>
       </div>
     </div>

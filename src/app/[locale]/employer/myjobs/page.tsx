@@ -1,17 +1,17 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { useJob } from "@/contexts/AppContext";
 import { observer } from "mobx-react-lite";
 import { toJS } from "mobx";
-import FilterButton from "@/components/atoms/FilterButton";
 import JobCard from "@/components/molecules/JobCard";
 import Modal_YesNo from "@/components/atoms/Modal_YesNo";
 import { useRouter } from "next/navigation";
 import AdvancedPagination from "@/components/molecules/AdvancedPagination";
 import { useTranslations } from "next-intl";
-
-// Define filter options
-type FilterType = "all" | "active" | "inactive" | "closed";
+import FilterNavigation, {
+  FilterType,
+} from "@/components/molecules/FilterNavigation";
 
 const EmployerJobs = observer(() => {
   const t = useTranslations();
@@ -153,70 +153,81 @@ const EmployerJobs = observer(() => {
     setJobToDelete(null);
   };
 
+  // Calculate counts for each filter type
+  const getFilterCounts = () => {
+    if (!jobStore?.jobsEmployer)
+      return { all: 0, active: 0, inactive: 0, closed: 0 };
+
+    const plainArray = toJS(jobStore?.jobsEmployer);
+
+    const activeJobs = plainArray.filter(
+      (job) => job.isShow && new Date(job.expiresAt || Date.now()) >= new Date()
+    );
+
+    const inactiveJobs = plainArray.filter(
+      (job) =>
+        !job.isShow &&
+        new Date(job.expiresAt || Date.now()) >= new Date() &&
+        job.applicationCount === 0
+    );
+
+    const closedJobs = plainArray.filter(
+      (job) =>
+        !job.isShow &&
+        (new Date(job.expiresAt || Date.now()) < new Date() ||
+          (job.applicationCount && job.applicationCount > 0))
+    );
+
+    return {
+      all: plainArray.length,
+      active: activeJobs.length,
+      inactive: inactiveJobs.length,
+      closed: closedJobs.length,
+    };
+  };
+
+  const filterCounts = getFilterCounts();
+
   return (
     <div className="md:p-4 pt-0">
       <div className="flex justify-end items-center mb-4">
         <button
           onClick={handleCreate}
-          className="px-10 py-1 bg-blue-400 text-white rounded hover:bg-blue-600 transition-colors"
+          className="px-10 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors font-medium"
         >
-          Create
+          {t("employer.myjobs.create_button")}
         </button>
       </div>
 
-      {/* Filter navigation */}
-      <div className="bg-white rounded-lg shadow-sm mb-6">
-        <div className="flex overflow-x-auto">
-          <FilterButton
-            label="All"
-            isActive={currentFilter === "all"}
-            onClick={() => {
-              setCurrentFilter("all");
-              setCurrentPage(1);
-            }}
-          />
-          <FilterButton
-            label="Active"
-            isActive={currentFilter === "active"}
-            onClick={() => {
-              setCurrentFilter("active");
-              setCurrentPage(1);
-            }}
-          />
-          <FilterButton
-            label="Inactive"
-            isActive={currentFilter === "inactive"}
-            onClick={() => {
-              setCurrentFilter("inactive");
-              setCurrentPage(1);
-            }}
-          />
-          <FilterButton
-            label="Closed"
-            isActive={currentFilter === "closed"}
-            onClick={() => {
-              setCurrentFilter("closed");
-              setCurrentPage(1);
-            }}
-          />
-        </div>
-      </div>
+      {/* Use the new FilterNavigation component */}
+      <FilterNavigation
+        currentFilter={currentFilter}
+        setFilter={setCurrentFilter}
+        setCurrentPage={setCurrentPage}
+        counts={filterCounts}
+      />
 
       {/* Job listings */}
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+          <span className="ml-3 text-gray-600">
+            {t("employer.myjobs.loading")}
+          </span>
         </div>
       ) : (
         <>
           {currentJobs.length === 0 ? (
             <div className="bg-white p-8 rounded-lg shadow-sm text-center">
-              <p className="text-lg text-gray-600">No jobs found</p>
+              <p className="text-lg text-gray-600">
+                {t("employer.myjobs.no_jobs_found")}
+              </p>
             </div>
           ) : (
             <div className="space-y-4">
               {currentJobs.map((job) => (
                 <JobCard
+                  t={t}
                   key={job._id}
                   job={job}
                   status={getStatusDisplay(job)}

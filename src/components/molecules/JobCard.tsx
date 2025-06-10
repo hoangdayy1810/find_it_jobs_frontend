@@ -3,12 +3,14 @@ import { formatDate } from "@/utils/fommat_date";
 import React from "react";
 
 const JobCard = ({
+  t,
   job,
   status,
   onClose,
   onDelete,
   onClick,
 }: {
+  t: any;
   job: IJob;
   status?: string;
   onClose: () => void;
@@ -24,19 +26,19 @@ const JobCard = ({
   const getStatusDisplay = () => {
     if (status === "inactive") {
       return {
-        text: "Inactive",
+        text: t("employer.myjobs.filters.inactive"),
         bgColor: "bg-yellow-100",
         textColor: "text-yellow-700",
       };
     } else if (status === "closed") {
       return {
-        text: "Closed",
+        text: t("employer.myjobs.filters.closed"),
         bgColor: "bg-gray-400",
         textColor: "text-white",
       };
     } else if (status === "active") {
       return {
-        text: "Active",
+        text: t("employer.myjobs.filters.active"),
         bgColor: "bg-green-100",
         textColor: "text-green-800",
       };
@@ -69,7 +71,7 @@ const JobCard = ({
                 <span className="mr-1">💰</span>
                 <span>
                   {job.salary.min.toLocaleString()} {" - "}
-                  {job.salary.max.toLocaleString()}
+                  {job.salary.max.toLocaleString()} {t("all.VND")}
                 </span>
               </div>
             )}
@@ -99,21 +101,24 @@ const JobCard = ({
           {/* Status Badge */}
           {statusDisplay && (
             <div
-              className={`md:ml-auto mb-2 w-[100px] px-2 py-1 rounded-md text-xs text-center font-medium ${statusDisplay.bgColor} ${statusDisplay.textColor}`}
+              className={`md:ml-auto mb-2 max-w-[120px] px-2 py-1 rounded-md text-xs text-center font-medium ${statusDisplay.bgColor} ${statusDisplay.textColor}`}
             >
               {statusDisplay.text}
             </div>
           )}
           <div className="text-gray-500 text-sm">
-            Posted on {formatDate(new Date(job.postedAt))}
+            {t("employer.myjobs.posted_on")}{" "}
+            {formatDate(new Date(job.postedAt))}
           </div>
           {job.expiresAt && (
             <div className="text-gray-500 text-sm">
-              Expired on {formatDate(new Date(job.expiresAt))}
+              {t("employer.myjobs.expires_on")}{" "}
+              {formatDate(new Date(job.expiresAt))}
             </div>
           )}
           <div className="text-gray-500 text-sm mt-1">
-            {job.applicationCount || 0} applicants • {job.views} views
+            {job.applicationCount || 0} {t("employer.myjobs.applicants")} •{" "}
+            {job.views} {t("employer.myjobs.views")}
           </div>
 
           {/* Tags */}
@@ -123,7 +128,7 @@ const JobCard = ({
                 key={i}
                 className="px-2 py-1 text-xs border border-gray-300 rounded-full text-gray-600"
               >
-                {"more" in tag ? `+${tag.more} more` : tag.value}
+                {"more" in tag ? `+${tag.more} ${t("all.more")}` : tag.value}
               </div>
             ))}
           </div>
@@ -138,7 +143,7 @@ const JobCard = ({
             onClick={onClose}
             className="px-3 py-1 text-sm text-yellow-600 border border-yellow-600 rounded hover:bg-yellow-50 transition-colors"
           >
-            Close
+            {t("employer.myjobs.close_button")}
           </button>
         )}
 
@@ -148,7 +153,7 @@ const JobCard = ({
             onClick={onDelete}
             className="px-3 py-1 text-sm text-red-600 border border-red-600 rounded hover:bg-red-50 transition-colors"
           >
-            Delete
+            {t("employer.myjobs.delete_button")}
           </button>
         )}
       </div>

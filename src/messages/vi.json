@@ -6,6 +6,22 @@
       "today": "Hôm nay",
       "yesterday": "Hôm qua",
       "days_ago": "{count} ngày trước"
+    },
+    "experience": {
+      "intern": "Thực tập sinh",
+      "fresher": "Mới tốt nghiệp",
+      "junior": "Junior",
+      "mid": "Middle",
+      "senior": "Senior",
+      "lead": "Lead",
+      "manager": "Quản lý",
+      "not_specified": "Không xác định"
+    },
+    "job_type": {
+      "full_time": "Toàn thời gian",
+      "part_time": "Bán thời gian",
+      "contract": "Hợp đồng",
+      "freelance": "Freelance"
     }
   },
   "application": {
@@ -234,6 +250,109 @@
       "go-back": "Quay lại"
     }
   },
+  "employer": {
+    "myjobs": {
+      "create_button": "Tạo mới",
+      "no_jobs_found": "Không tìm thấy công việc nào",
+      "loading": "Đang tải công việc...",
+      "posted_on": "Đăng vào",
+      "expires_on": "Hết hạn vào",
+      "applicants": "ứng viên",
+      "views": "lượt xem",
+      "close_button": "Đóng",
+      "delete_button": "Xóa",
+      "filters": {
+        "all": "Tất cả công việc",
+        "active": "Đang hoạt động",
+        "inactive": "Tạm dừng",
+        "closed": "Đã đóng"
+      },
+      "detail": {
+        "not_found": "Không Tìm Thấy Công Việc",
+        "go_back": "Quay Lại",
+        "view_candidates": "Xem Danh Sách Ứng Viên",
+        "edit": "Chỉnh Sửa",
+        "status": {
+          "published": "Đã Đăng",
+          "draft": "Bản Nháp"
+        },
+        "labels": {
+          "salary_range": "Mức Lương",
+          "job_type": "Loại Công Việc",
+          "posted_on": "Ngày Đăng",
+          "specialization": "Chuyên Ngành",
+          "experience": "Kinh Nghiệm",
+          "expires_on": "Ngày Hết Hạn",
+          "skills": "Kỹ Năng & Công Nghệ",
+          "description": "Mô Tả Công Việc",
+          "applications": "{count, plural, one {Ứng Viên} other {Ứng Viên}}",
+          "not_specified": "Chưa xác định"
+        },
+        "actions": {
+          "read_more": "Xem thêm",
+          "show_less": "Thu gọn"
+        }
+      },
+      "create": {
+        "title": "Tạo Công Việc Mới"
+      },
+      "form": {
+        "validation": {
+          "title_required": "Vui lòng nhập tiêu đề công việc",
+          "description_required": "Vui lòng nhập mô tả công việc",
+          "location_required": "Vui lòng nhập địa điểm làm việc",
+          "salary_min_number": "Lương tối thiểu phải là một số",
+          "salary_min_required": "Vui lòng nhập lương tối thiểu",
+          "salary_max_number": "Lương tối đa phải là một số",
+          "salary_max_required": "Vui lòng nhập lương tối đa",
+          "salary_positive": "Lương phải là số dương",
+          "salary_max_greater": "Lương tối đa phải lớn hơn lương tối thiểu",
+          "experience_required": "Vui lòng chọn ít nhất một cấp độ kinh nghiệm",
+          "job_type_required": "Vui lòng chọn loại công việc",
+          "tag_key_required": "Vui lòng chọn danh mục kỹ năng",
+          "tag_value_required": "Vui lòng chọn kỹ năng",
+          "tags_required": "Vui lòng thêm ít nhất một kỹ năng",
+          "specialization_required": "Vui lòng chọn chuyên ngành"
+        },
+        "labels": {
+          "title": "Tiêu Đề Công Việc",
+          "location": "Địa Điểm",
+          "salary_range": "Mức Lương",
+          "experience": "Kinh Nghiệm",
+          "job_type": "Loại Công Việc",
+          "expires_at": "Ngày Hết Hạn",
+          "specialization": "Chuyên Ngành",
+          "tags": "Kỹ Năng & Công Nghệ",
+          "description": "Mô Tả Công Việc"
+        },
+        "placeholders": {
+          "title": "Ví dụ: Senior React Developer",
+          "location": "Ví dụ: Quận 1, TP Hồ Chí Minh",
+          "salary_min": "Lương tối thiểu",
+          "salary_max": "Lương tối đa",
+          "job_type": "Chọn loại công việc",
+          "specialization": "Chọn chuyên ngành",
+          "tag_category": "Chọn danh mục",
+          "tag_value": "Chọn giá trị",
+          "description": "Mô tả trách nhiệm công việc, yêu cầu, phúc lợi, v.v."
+        },
+        "buttons": {
+          "cancel": "Hủy",
+          "save_draft": "Lưu Nháp",
+          "save_publish": "Lưu & Đăng",
+          "update_publish": "Cập Nhật & Đăng",
+          "add_tag": "Thêm Kỹ Năng/Công Nghệ",
+          "remove_tag": "Xóa kỹ năng"
+        },
+        "loading_specializations": "Đang tải chuyên ngành...",
+        "loading_tags": "Đang tải kỹ năng...",
+        "loading_error": "Không thể tải một số tùy chọn của biểu mẫu. Vui lòng làm mới trang.",
+        "payment_success": "Thanh toán thành công! Công việc của bạn đã được đăng.",
+        "payment_error": "Đã xảy ra lỗi khi đăng công việc của bạn.",
+        "payment_failed": "Thanh toán thất bại. Công việc của bạn chưa được đăng."
+      }
+    }
+  },
   "payment": {
     "title": "Lịch sử thanh toán",
     "subtitle": "Xem và quản lý tất cả các giao dịch trước đây của bạn",
@@ -263,6 +382,11 @@
     },
     "pagination": {
       "showing": "Hiển thị {count} của {total} giao dịch"
+    },
+    "modal": {
+      "title": "Hoàn tất thanh toán để đăng",
+      "description": "Công việc của bạn sẽ được đăng sau khi thanh toán thành công 2.00 USD.",
+      "cancel": "Hủy"
     }
   },
   "payment_details": {

@@ -9,11 +9,13 @@ import { formatDate } from "@/utils/fommat_date";
 import VectorLeftIcon from "@/components/atoms/icons/VectorLeftIcon";
 import { EXPERIENCE } from "@/utils/constant";
 import UsersIcon from "@/components/atoms/icons/UsersIcon";
+import { useTranslations } from "next-intl";
 
 const PrivateDetailJob = observer(() => {
   const params = useParams();
   const router = useRouter();
   const jobStore = useJob();
+  const t = useTranslations();
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState(false);
   const [isEditAllowed, setIsEditAllowed] = useState(false);
@@ -53,6 +55,9 @@ const PrivateDetailJob = observer(() => {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <span className="ml-3 text-gray-600">
+          {t("employer.myjobs.loading")}
+        </span>
       </div>
     );
   }
@@ -60,12 +65,14 @@ const PrivateDetailJob = observer(() => {
   if (!jobStore?.jobDetail) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
+        <h1 className="text-2xl font-bold mb-4">
+          {t("employer.myjobs.detail.not_found")}
+        </h1>
         <button
           onClick={() => router.back()}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Go Back
+          {t("employer.myjobs.detail.go_back")}
         </button>
       </div>
     );
@@ -111,7 +118,7 @@ const PrivateDetailJob = observer(() => {
               className="px-6 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors flex items-center"
             >
               <UsersIcon className="w-4 h-4 mr-2" />
-              View Candidate List
+              {t("employer.myjobs.detail.view_candidates")}
             </button>
           )}
 
@@ -120,7 +127,7 @@ const PrivateDetailJob = observer(() => {
               onClick={handleEdit}
               className="px-10 py-1 bg-blue-400 text-white rounded hover:bg-blue-600 transition-colors"
             >
-              Edit
+              {t("employer.myjobs.detail.edit")}
             </button>
           )}
         </div>
@@ -155,12 +162,15 @@ const PrivateDetailJob = observer(() => {
             {isShow ||
             (applicationCount && applicationCount > 0) ||
             new Date(expiresAt || Date.now()) < new Date()
-              ? "Published"
-              : "Draft"}
+              ? t("employer.myjobs.detail.status.published")
+              : t("employer.myjobs.detail.status.draft")}
           </span>
 
           <span className="ml-2 px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
-            {applicationCount} Application{applicationCount !== 1 ? "s" : ""}
+            {applicationCount}{" "}
+            {t("employer.myjobs.detail.labels.applications", {
+              count: applicationCount ? applicationCount : 0,
+            })}
           </span>
         </div>
 
@@ -185,19 +195,25 @@ const PrivateDetailJob = observer(() => {
         {/* First line of attributes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           <div>
-            <p className="text-gray-500 text-sm">Salary Range</p>
+            <p className="text-gray-500 text-sm">
+              {t("employer.myjobs.detail.labels.salary_range")}
+            </p>
             <p className="font-medium">
               {salary.min.toLocaleString()}đ - {salary.max.toLocaleString()}đ
             </p>
           </div>
 
           <div>
-            <p className="text-gray-500 text-sm">Job Type</p>
+            <p className="text-gray-500 text-sm">
+              {t("employer.myjobs.detail.labels.job_type")}
+            </p>
             <p className="font-medium">{jobType}</p>
           </div>
 
           <div>
-            <p className="text-gray-500 text-sm">Posted On</p>
+            <p className="text-gray-500 text-sm">
+              {t("employer.myjobs.detail.labels.posted_on")}
+            </p>
             <p className="font-medium">{formatDate(new Date(postedAt))}</p>
           </div>
         </div>
@@ -205,7 +221,9 @@ const PrivateDetailJob = observer(() => {
         {/* Second line of attributes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 border-gray-200">
           <div>
-            <p className="text-gray-500 text-sm">Specialization</p>
+            <p className="text-gray-500 text-sm">
+              {t("employer.myjobs.detail.labels.specialization")}
+            </p>
             <p className="font-medium">
               {typeof specializationId === "object"
                 ? specializationId.name
@@ -214,7 +232,9 @@ const PrivateDetailJob = observer(() => {
           </div>
 
           <div>
-            <p className="text-gray-500 text-sm">Experience</p>
+            <p className="text-gray-500 text-sm">
+              {t("employer.myjobs.detail.labels.experience")}
+            </p>
             <div className="flex flex-wrap gap-2 mt-1">
               {experience && experience.length > 0 ? (
                 <p>
@@ -225,13 +245,15 @@ const PrivateDetailJob = observer(() => {
                     .join(", ")}
                 </p>
               ) : (
-                <span>Not specified</span>
+                <span>{t("employer.myjobs.detail.labels.not_specified")}</span>
               )}
             </div>
           </div>
 
           <div>
-            <p className="text-gray-500 text-sm">Expires On</p>
+            <p className="text-gray-500 text-sm">
+              {t("employer.myjobs.detail.labels.expires_on")}
+            </p>
             <p className="font-medium">
               {expiresAt ? formatDate(new Date(expiresAt)) : "N/A"}
             </p>
@@ -257,7 +279,9 @@ const PrivateDetailJob = observer(() => {
 
       {/* Description - with clear separation */}
       <div className="mt-4 mx-auto p-4 bg-white shadow-md rounded-lg">
-        <h3 className="font-semibold text-lg mb-3">Job Description</h3>
+        <h3 className="font-semibold text-lg mb-3">
+          {t("employer.myjobs.detail.labels.description")}
+        </h3>
         <div
           className={`prose max-w-none overflow-hidden transition-all duration-300 ${
             expanded ? "" : "max-h-[300px]"
@@ -275,7 +299,9 @@ const PrivateDetailJob = observer(() => {
             onClick={() => setExpanded(!expanded)}
             className="mt-4 text-blue-500 hover:text-blue-700 font-medium flex items-center"
           >
-            {expanded ? "Show less" : "Read more"}
+            {expanded
+              ? t("employer.myjobs.detail.actions.show_less")
+              : t("employer.myjobs.detail.actions.read_more")}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className={`h-5 w-5 ml-1 transition-transform duration-200 ${

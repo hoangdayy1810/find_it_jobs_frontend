@@ -1,19 +1,19 @@
 export const EXPERIENCE: Record<string, string> = {
-  intern: "Intern",
-  fresher: "Fresher",
-  junior: "Junior",
-  mid: "Middle",
-  senior: "Senior",
-  lead: "Lead",
-  manager: "Manager",
-  not_specified: "Not Specified",
+  intern: "all.experience.intern",
+  fresher: "all.experience.fresher",
+  junior: "all.experience.junior",
+  mid: "all.experience.mid",
+  senior: "all.experience.senior",
+  lead: "all.experience.lead",
+  manager: "all.experience.manager",
+  not_specified: "all.experience.not_specified",
 };
 
 export const JOBTYPE = [
-  { value: "Full-time", label: "Full-time" },
-  { value: "Part-time", label: "Part-time" },
-  { value: "Contract", label: "Contract" },
-  { value: "Freelance", label: "Freelance" },
+  { value: "Full-time", label: "all.job_type.full_time" },
+  { value: "Part-time", label: "all.job_type.part_time" },
+  { value: "Contract", label: "all.job_type.contract" },
+  { value: "Freelance", label: "all.job_type.freelance" },
 ];
 
 export const SALARY_RANGE = [

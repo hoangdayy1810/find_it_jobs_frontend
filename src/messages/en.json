@@ -6,6 +6,22 @@
       "today": "Today",
       "yesterday": "Yesterday",
       "days_ago": "{count} days ago"
+    },
+    "experience": {
+      "intern": "Intern",
+      "fresher": "Fresher",
+      "junior": "Junior",
+      "mid": "Middle",
+      "senior": "Senior",
+      "lead": "Lead",
+      "manager": "Manager",
+      "not_specified": "Not Specified"
+    },
+    "job_type": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance"
     }
   },
   "application": {
@@ -234,6 +250,109 @@
       "go-back": "Go Back"
     }
   },
+  "employer": {
+    "myjobs": {
+      "create_button": "Create",
+      "no_jobs_found": "No jobs found",
+      "loading": "Loading jobs...",
+      "posted_on": "Posted on",
+      "expires_on": "Expires on",
+      "applicants": "applicants",
+      "views": "views",
+      "close_button": "Close",
+      "delete_button": "Delete",
+      "filters": {
+        "all": "All Jobs",
+        "active": "Active",
+        "inactive": "Inactive",
+        "closed": "Closed"
+      },
+      "detail": {
+        "not_found": "Job Not Found",
+        "go_back": "Go Back",
+        "view_candidates": "View Candidate List",
+        "edit": "Edit",
+        "status": {
+          "published": "Published",
+          "draft": "Draft"
+        },
+        "labels": {
+          "salary_range": "Salary Range",
+          "job_type": "Job Type",
+          "posted_on": "Posted On",
+          "specialization": "Specialization",
+          "experience": "Experience",
+          "expires_on": "Expires On",
+          "skills": "Skills & Technologies",
+          "description": "Job Description",
+          "applications": "{count, plural, one {Application} other {Applications}}",
+          "not_specified": "Not specified"
+        },
+        "actions": {
+          "read_more": "Read more",
+          "show_less": "Show less"
+        }
+      },
+      "create": {
+        "title": "Create New Job"
+      },
+      "form": {
+        "validation": {
+          "title_required": "Job title is required",
+          "description_required": "Job description is required",
+          "location_required": "Location is required",
+          "salary_min_number": "Minimum salary must be a number",
+          "salary_min_required": "Minimum salary is required",
+          "salary_max_number": "Maximum salary must be a number",
+          "salary_max_required": "Maximum salary is required",
+          "salary_positive": "Salary must be positive",
+          "salary_max_greater": "Maximum salary must be greater than minimum salary",
+          "experience_required": "At least one experience level is required",
+          "job_type_required": "Job type is required",
+          "tag_key_required": "Tag category is required",
+          "tag_value_required": "Tag value is required",
+          "tags_required": "At least one tag is required",
+          "specialization_required": "Specialization is required"
+        },
+        "labels": {
+          "title": "Job Title",
+          "location": "Location",
+          "salary_range": "Salary Range",
+          "experience": "Experience Level",
+          "job_type": "Job Type",
+          "expires_at": "Expiration Date",
+          "specialization": "Specialization",
+          "tags": "Skills & Technologies",
+          "description": "Job Description"
+        },
+        "placeholders": {
+          "title": "e.g. Senior React Developer",
+          "location": "e.g. District 1, Ho Chi Minh City",
+          "salary_min": "Minimum salary",
+          "salary_max": "Maximum salary",
+          "job_type": "Select job type",
+          "specialization": "Select specialization",
+          "tag_category": "Select category",
+          "tag_value": "Select value",
+          "description": "Describe the job responsibilities, requirements, benefits, etc."
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "save_draft": "Save as Draft",
+          "save_publish": "Save & Publish",
+          "update_publish": "Update & Publish",
+          "add_tag": "Add Skill/Technology",
+          "remove_tag": "Remove tag"
+        },
+        "loading_specializations": "Loading specializations...",
+        "loading_tags": "Loading skills and technologies...",
+        "loading_error": "Failed to load some form options. Please refresh the page.",
+        "payment_success": "Payment successful! Your job has been published.",
+        "payment_error": "There was an error publishing your job.",
+        "payment_failed": "Payment failed. Your job was not published."
+      }
+    }
+  },
   "payment": {
     "title": "Payment History",
     "subtitle": "View and manage all your past transactions",
@@ -263,6 +382,11 @@
     },
     "pagination": {
       "showing": "Showing {count} of {total} payments"
+    },
+    "modal": {
+      "title": "Complete Payment to Publish",
+      "description": "Your job will be published after successful payment of $2.00 USD.",
+      "cancel": "Cancel"
     }
   },
   "payment_details": {
