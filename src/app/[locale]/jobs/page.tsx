@@ -233,7 +233,10 @@ const JobsPage = observer(() => {
             <FilterSection title="Job Type">
               <RadioFilterGroup
                 name="jobType"
-                options={JOBTYPE}
+                options={JOBTYPE.map((type) => ({
+                  value: type.value,
+                  label: t(type.label),
+                }))}
                 selectedValue={filters.jobType}
                 onChange={(value) => handleFilterChange("jobType", value)}
               />
@@ -245,7 +248,7 @@ const JobsPage = observer(() => {
                 name="experience"
                 options={Object.entries(EXPERIENCE).map(([key, label]) => ({
                   value: key,
-                  label,
+                  label: t(label),
                 }))}
                 selectedValue={filters.experience || ""}
                 onChange={(value) => handleFilterChange("experience", value)}
@@ -256,7 +259,10 @@ const JobsPage = observer(() => {
             <FilterSection title="Salary Range">
               <RadioFilterGroup
                 name="salaryRange"
-                options={SALARY_RANGE}
+                options={SALARY_RANGE.map((item) => ({
+                  label: item.label,
+                  value: item.value,
+                }))}
                 selectedValue={filters.salaryRange}
                 onChange={(value) => handleFilterChange("salaryRange", value)}
               />

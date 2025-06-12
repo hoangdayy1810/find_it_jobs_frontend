@@ -203,7 +203,7 @@ const JobDetailPage = observer(() => {
                     <p>
                       {experience
                         .map((exp) => {
-                          if (exp) return EXPERIENCE[exp];
+                          if (exp) return t(EXPERIENCE[exp]);
                         })
                         .join(", ")}
                     </p>

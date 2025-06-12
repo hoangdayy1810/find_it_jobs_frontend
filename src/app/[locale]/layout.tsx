@@ -62,7 +62,7 @@ async function LocaleLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F8FAFC]`}
-        data-new-gr-c-s-check-loaded="14.1104.0"
+        data-new-gr-c-s-check-loaded="14.1106.0"
         data-gr-ext-installed=""
         cz-shortcut-listen="true"
       >
