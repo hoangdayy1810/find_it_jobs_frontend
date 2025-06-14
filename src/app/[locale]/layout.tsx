@@ -62,9 +62,9 @@ async function LocaleLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#F8FAFC]`}
-        data-new-gr-c-s-check-loaded="14.1106.0"
-        data-gr-ext-installed=""
-        cz-shortcut-listen="true"
+        // data-new-gr-c-s-check-loaded="14.1106.0"
+        // data-gr-ext-installed=""
+        // cz-shortcut-listen="true"
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AppProvider>
@@ -89,7 +89,8 @@ const getMessages = async (locale: string) => {
   try {
     const messages = (await import(`../../messages/${locale}.json`)).default;
     return messages;
-  } catch {
-    notFound(); // nếu không tìm thấy file locale thì trả về 404
+  } catch (error) {
+    console.error(`Failed to load messages for locale: ${locale}`, error);
+    return (await import(`../../messages/vi.json`)).default;
   }
 };
