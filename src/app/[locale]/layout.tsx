@@ -43,6 +43,10 @@ export default async function RootLayout({
   return <LocaleLayout locale={locale}>{children}</LocaleLayout>;
 }
 
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "vi" }];
+}
+
 async function LocaleLayout({
   children,
   locale,
