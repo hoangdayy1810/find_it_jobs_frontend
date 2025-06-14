@@ -41,11 +41,11 @@
     "react-hook-form": "^7.55.0",
     "react-hot-toast": "^2.5.2",
     "socket.io-client": "^4.8.1",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "@tailwindcss/postcss": "^4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
