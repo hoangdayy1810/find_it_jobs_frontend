@@ -43,7 +43,7 @@ const SearchResults: React.FC<{
 
       {tagResults.length === 0 && jobResults.length === 0 && (
         <div className="p-4 py-10 text-center text-gray-500">
-          {t("search.no-results")} "{query}"
+          {t("search.no-results")} {`"${query}"`}
         </div>
       )}
     </div>

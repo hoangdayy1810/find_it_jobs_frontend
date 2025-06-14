@@ -6,7 +6,6 @@ const JobCard2 = ({
   job,
   onClick,
   t,
-  locale,
 }: {
   job: IJob;
   onClick: () => void;

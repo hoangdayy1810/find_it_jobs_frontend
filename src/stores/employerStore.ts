@@ -52,11 +52,7 @@ class EmployerStore {
     }
   }
 
-  async getEmployerDetailsWithJobs(
-    employerId: string,
-    page: number = 1,
-    limit: number = 5
-  ) {
+  async getEmployerDetailsWithJobs(employerId: string) {
     try {
       const response = await axiosInstance.get(
         `/api/jobs/employer/${employerId}`

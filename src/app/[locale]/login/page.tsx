@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import HideEye from "@/components/atoms/icons/HideEye";
 import ShowEye from "@/components/atoms/icons/ShowEye";
-import Facebook from "@/components/atoms/icons/Facebook";
 import Google from "@/components/atoms/icons/Google";
 import { useUser } from "@/contexts/AppContext";
 import { useRouter } from "next/navigation";

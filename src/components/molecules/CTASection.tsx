@@ -6,7 +6,6 @@ import GreenSuccessList from "../atoms/icons/GreenSuccessList";
 import PurpleSuccessList from "../atoms/icons/PurpleSuccessList";
 import { observer } from "mobx-react-lite";
 import { useUser } from "@/contexts/AppContext";
-import { set } from "lodash";
 
 const CTASection = observer(({ t }: { t: any }) => {
   const [isLoading, setIsLoading] = useState(false);

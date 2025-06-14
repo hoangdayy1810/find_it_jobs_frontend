@@ -120,8 +120,8 @@ function processDayRange(rangeString: string, allDays: string[]): string[] {
   if (parts.length !== 2) return [];
 
   // Find the start and end days
-  let startDay = findDayInString(parts[0], allDays);
-  let endDay = findDayInString(parts[1], allDays);
+  const startDay = findDayInString(parts[0], allDays);
+  const endDay = findDayInString(parts[1], allDays);
 
   if (!startDay || !endDay) return [];
 

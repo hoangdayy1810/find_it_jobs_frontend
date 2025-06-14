@@ -94,7 +94,7 @@ const Input_Address: React.FC<InputAddressProps> = ({ onChange, value }) => {
   const updateAddress = useCallback(() => {
     if (!selectedProvince) return;
 
-    let addressParts = [];
+    const addressParts = [];
 
     if (selectedWard) addressParts.push(selectedWard);
     if (selectedDistrict) addressParts.push(selectedDistrict);

@@ -45,7 +45,7 @@ const MyApplicationList = observer(() => {
     };
 
     fetchApplications();
-  }, [applicationStore]);
+  }, [applicationStore, currentFilter]);
 
   // Apply status filters
   const applyFilters = (apps: IApplication[], filter: string) => {

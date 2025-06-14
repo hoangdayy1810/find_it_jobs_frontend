@@ -457,7 +457,7 @@ const JobApplicationModal = observer(
                   <Controller
                     name="cvFile"
                     control={control}
-                    render={({ field: { onChange, value, ...field } }) => {
+                    render={({ field: { onChange, value } }) => {
                       let displayFileName = null;
                       if (value instanceof FileList && value.length > 0) {
                         displayFileName = value[0]?.name;

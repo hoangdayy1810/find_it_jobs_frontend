@@ -90,7 +90,7 @@ const Setting = observer(() => {
         setModalMessage(response?.message || t("settings.password.error"));
         setIsModalOpen(true);
       }
-    } catch (error) {
+    } catch {
       setSuccess(false);
       setModalMessage(t("settings.password.system_error"));
       setIsModalOpen(true);

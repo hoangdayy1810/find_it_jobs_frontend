@@ -1,6 +1,4 @@
 import api from "@/utils/axios_catch_error_token";
-import axiosInstance from "@/utils/axiosInstance";
-import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
 export interface IExperience {

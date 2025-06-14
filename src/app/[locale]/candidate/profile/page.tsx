@@ -254,7 +254,7 @@ const CandidateProfile = observer(() => {
       setTagKeyOptions(keys);
 
       // Create mapping from key names to their values
-      let valuesByKey: Record<string, string[]> = {};
+      const valuesByKey: Record<string, string[]> = {};
       tagStore.tagKeys.forEach((tagKey) => {
         if (tagKey.children && tagKey.children.length > 0) {
           valuesByKey[tagKey.name] = tagKey.children.map((child) => child.name);
@@ -375,9 +375,7 @@ const CandidateProfile = observer(() => {
                             <Controller
                               name="avatar"
                               control={control}
-                              render={({
-                                field: { onChange, value, ...field },
-                              }) => (
+                              render={({ field: { onChange, ...field } }) => (
                                 <input
                                   {...field}
                                   onChange={(e) => {

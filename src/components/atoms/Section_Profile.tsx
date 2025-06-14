@@ -1,5 +1,4 @@
 import React from "react";
-import Add_Circle from "./icons/Add_Circle";
 
 interface Section_ProfileProps {
   title: string;

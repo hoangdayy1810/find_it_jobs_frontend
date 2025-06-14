@@ -181,7 +181,7 @@ const JobForm = ({
       setTagKeyOptions(keys);
 
       // Create mapping from key names to their values
-      let valuesByKey: Record<string, string[]> = {};
+      const valuesByKey: Record<string, string[]> = {};
       tagStore.tagKeys.forEach((tagKey) => {
         if (tagKey.children && tagKey.children.length > 0) {
           valuesByKey[tagKey.name] = tagKey.children.map((child) => child.name);
@@ -197,7 +197,7 @@ const JobForm = ({
   const tagsArray = watch("tags");
 
   // Form submission handlers
-  const onSubmitDraft = async (data: any) => {
+  const onSubmitDraft = async () => {
     await handleSubmit((formData) => submit(formData, false))();
   };
 
@@ -244,11 +244,11 @@ const JobForm = ({
         }
 
         // Fetch specializations with proper error handling
-        const specResult = await specializationStore?.getSpecialization();
+        await specializationStore?.getSpecialization();
         setIsSpecializationsLoading(false);
 
         // Fetch tags with proper error handling
-        const tagResult = await tagStore?.getTagKeys();
+        await tagStore?.getTagKeys();
 
         // Process tag data
         if (tagStore?.tagKeys) {
@@ -257,7 +257,7 @@ const JobForm = ({
           setTagKeyOptions(keys);
 
           // Create mapping from key names to their values
-          let valuesByKey: Record<string, string[]> = {};
+          const valuesByKey: Record<string, string[]> = {};
           tagStore.tagKeys.forEach((tagKey) => {
             if (tagKey.children && tagKey.children.length > 0) {
               valuesByKey[tagKey.name] = tagKey.children.map(
