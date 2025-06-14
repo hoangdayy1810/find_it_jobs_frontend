@@ -32,10 +32,6 @@ export const metadata: Metadata = {
   ],
 };
 
-export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "vi" }];
-}
-
 export default async function RootLayout({
   children,
   params,
@@ -95,6 +91,6 @@ const getMessages = async (locale: string) => {
     return messages;
   } catch (error) {
     console.error(`Failed to load messages for locale: ${locale}`, error);
-    return {};
+    return (await import(`../../messages/vi.json`)).default;
   }
 };
