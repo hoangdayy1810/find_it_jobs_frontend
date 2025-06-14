@@ -91,6 +91,6 @@ const getMessages = async (locale: string) => {
     return messages;
   } catch (error) {
     console.error(`Failed to load messages for locale: ${locale}`, error);
-    return (await import(`../../messages/vi.json`)).default;
+    return {};
   }
 };
