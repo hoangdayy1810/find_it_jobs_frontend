@@ -1,0 +1,828 @@
+{
+  "all": {
+    "VND": "đ",
+    "more": "thêm",
+    "time": {
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua",
+      "days_ago": "{count} ngày trước"
+    },
+    "experience": {
+      "intern": "Thực tập sinh",
+      "fresher": "Mới tốt nghiệp",
+      "junior": "Junior",
+      "mid": "Middle",
+      "senior": "Senior",
+      "lead": "Lead",
+      "manager": "Quản lý",
+      "not_specified": "Không xác định"
+    },
+    "job_type": {
+      "full_time": "Toàn thời gian",
+      "part_time": "Bán thời gian",
+      "contract": "Hợp đồng",
+      "freelance": "Freelance"
+    }
+  },
+  "application": {
+    "status": {
+      "pending": "Đang xử lý",
+      "approved": "Chấp nhận",
+      "rejected": "Từ chối"
+    },
+    "company": {
+      "size": {
+        "1-10": "1-10 nhân viên",
+        "11-50": "11-50 nhân viên",
+        "51-200": "51-200 nhân viên",
+        "201-500": "201-500 nhân viên",
+        "500+": "Trên 500 nhân viên"
+      },
+      "type": {
+        "product": "Product",
+        "outsourcing": "Outsourcing",
+        "startup": "Startup",
+        "other": "Khác"
+      },
+      "workingDays": {
+        "monday": "Thứ Hai",
+        "tuesday": "Thứ Ba",
+        "wednesday": "Thứ Tư",
+        "thursday": "Thứ Năm",
+        "friday": "Thứ Sáu",
+        "saturday": "Thứ Bảy",
+        "sunday": "Chủ Nhật",
+        "none": "Không xác định"
+      }
+    },
+    "gender": {
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác"
+    },
+    "degree": {
+      "high_school": "Trung học phổ thông",
+      "associate": "Cao đẳng",
+      "bachelor": "Cử nhân",
+      "master": "Thạc sĩ",
+      "phd": "Tiến sĩ"
+    },
+    "position": {
+      "intern": "Thực tập sinh",
+      "fresher": "Fresher",
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior",
+      "team_lead": "Team Lead",
+      "manager": "Manager"
+    },
+    "duration": {
+      "less_than_1": "Dưới 1 năm",
+      "1_3": "1-3 năm",
+      "3_5": "3-5 năm",
+      "more_than_5": "Trên 5 năm"
+    }
+  },
+  "search": {
+    "results-for": "Tìm kết quả cho: ",
+    "tags": "Thẻ",
+    "jobs": "Công việc",
+    "no-results": "Không tìm thấy kết quả của "
+  },
+  "home": {
+    "hero": {
+      "title": "FindItJob - Nơi kết nối việc làm",
+      "subtitle": "Kết nối với các công ty công nghệ hàng đầu và khám phá cơ hội nghề nghiệp tiếp theo của bạn",
+      "popularSearches": "Tìm kiếm phổ biến"
+    },
+    "featuredJobs": {
+      "title": "Công việc mới",
+      "viewAll": "Xem tất cả công việc →",
+      "noJobs": "Hiện tại không có công việc nào phù hợp với bạn."
+    },
+    "categories": {
+      "title": "Duyệt theo chuyên ngành",
+      "description": "Khám phá các cơ hội trên các chuyên ngành CNTT khác nhau",
+      "jobs": "Công việc",
+      "viewAll": "Xem tất cả chuyên ngành"
+    },
+    "howItWorks": {
+      "title": "Các bước hoạt động",
+      "description": "FindItJob giúp quá trình tìm kiếm việc làm trở nên đơn giản và hiệu quả",
+      "step1": {
+        "title": "Tìm kiếm việc làm",
+        "description": "Duyệt qua hàng nghìn công việc công nghệ trên toàn quốc"
+      },
+      "step2": {
+        "title": "Nộp đơn trực tuyến",
+        "description": "Nộp đơn cho các công việc mà bạn quan tâm chỉ với một vài cú nhấp chuột"
+      },
+      "step3": {
+        "title": "Nhận phỏng vấn",
+        "description": "Các công ty sẽ liên hệ với bạn để tiến hành các bước tiếp theo"
+      },
+      "step4": {
+        "title": "Nhận việc",
+        "description": "Nhận các lời mời làm việc và bắt đầu sự nghiệp mới của bạn"
+      }
+    },
+    "stats": {
+      "title": "Theo số liệu thống kê",
+      "description": " Chúng tôi đã giúp hàng nghìn chuyên gia công nghệ tìm được công việc mơ ước của họ",
+      "jobs": "Công việc",
+      "companies": "Công ty",
+      "candidates": "Ứng viên",
+      "placements": "Việc làm thành công"
+    },
+    "cta": {
+      "candidate": {
+        "title": "Bạn đang tìm việc?",
+        "description": "Tham gia với chúng tôi để tìm công việc IT mơ ước của bạn",
+        "list1": "Truy cập hàng nghìn công việc công nghệ độc quyền",
+        "list2": "Được các nhà tuyển dụng tìm",
+        "list3": "Theo dõi tất cả các đơn ứng tuyển của bạn tại một nơi",
+        "button": "Tìm việc làm"
+      },
+      "employer": {
+        "title": "Bạn đang tìm kiếm nhân tài?",
+        "description": "Đăng tin tuyển dụng của bạn và kết nối với các ứng viên hàng đầu",
+        "list1": "Đăng tin tuyển dụng không giới hạn",
+        "list2": "Tiếp cận hàng nghìn ứng viên công nghệ",
+        "list3": "Quản lý tất cả các công việc được đăng tải của bạn tại một nơi",
+        "button": "Đăng tin tuyển dụng"
+      }
+    }
+  },
+  "header": {
+    "search_placeholder": "Tìm kiếm...",
+    "notification": "Thông báo",
+    "user": "Người dùng",
+    "vi": "Tiếng Việt",
+    "en": "Tiếng Anh"
+  },
+  "login": {
+    "title": "Đăng nhập",
+    "you_are": "Bạn là",
+    "candidate": "Ứng viên",
+    "employer": "Nhà tuyển dụng",
+    "userName": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "login_button": "Đăng nhập",
+    "login_loading": "Đang đăng nhập...",
+    "username_required": "Vui lòng nhập tên đăng nhập",
+    "password_required": "Vui lòng nhập mật khẩu",
+    "role_required": "Vui lòng chọn vai trò",
+    "userName_placeholder": "Nhập tên đăng nhập",
+    "password_placeholder": "Nhập mật khẩu",
+    "or": "Hoặc",
+    "login_facebook": "Đăng nhập bằng Facebook",
+    "login_google": "Đăng nhập bằng Google",
+    "havent_account": "Bạn chưa có tài khoản? ",
+    "register_now": "Đăng kí ngay"
+  },
+  "register": {
+    "title": "Đăng kí",
+    "you_are": "Bạn là",
+    "candidate": "Ứng viên",
+    "employer": "Nhà tuyển dụng",
+    "userName": "Tên đăng nhập",
+    "password": "Mật khẩu",
+    "password_confirm": "Xác nhận mật khẩu",
+    "username_required": "Vui lòng nhập tên đăng nhập",
+    "username_length": "Độ dài tên đăng nhập phải từ 8 đến 50 ký tự",
+    "username_alphanumeric": "Tên đăng nhập chỉ được chứa chữ cái và số",
+    "password_required": "Vui lòng nhập mật khẩu",
+    "password_length": "Độ dài mật khẩu phải từ 8 đến 50 ký tự",
+    "password_requirements": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số",
+    "password_confirm_required": "Vui lòng xác nhận mật khẩu",
+    "match_password": "Mật khẩu không khớp",
+    "role_required": "Vui lòng chọn vai trò",
+    "userName_placeholder": "Nhập tên đăng nhập",
+    "password_placeholder": "Nhập mật khẩu",
+    "password_confirm_placeholder": "Nhập lại mật khẩu",
+    "register_button": "Đăng kí",
+    "register_loading": "Đang đăng kí...",
+    "already_have_account": "Bạn đã có tài khoản? ",
+    "login_now": "Đăng nhập ngay"
+  },
+  "navigation": {
+    "hello": "Xin chào",
+    "candidate": {
+      "profile": "Hồ sơ của tôi",
+      "my_jobs": "Việc làm của tôi",
+      "settings": "Cài đặt",
+      "logout": "Đăng xuất"
+    },
+    "employer": {
+      "info": "Thông tin công ty",
+      "jobs": "Danh sách công việc",
+      "payment": "Lịch sử thanh toán",
+      "setting": "Cài đặt",
+      "logout": "Đăng xuất"
+    }
+  },
+  "profile": {
+    "candidate": {
+      "title": "Hồ sơ của tôi",
+      "edit": "Chỉnh sửa",
+      "save": "Lưu thông tin",
+      "upload": "Tải lên",
+      "change": "Thay đổi",
+      "remove": "Xóa",
+      "add_education": "Thêm học vấn",
+      "add_experience": "Thêm kinh nghiệm làm việc",
+      "add_skill": "Thêm kỹ năng",
+      "sections": {
+        "personal": "Thông tin cá nhân",
+        "about": "Giới thiệu bản thân",
+        "about_description": "Giới thiệu điểm mạnh và những gì bạn muốn chia sẻ thêm",
+        "education": "Học vấn",
+        "education_description": "Chia sẻ trình độ học vấn của bạn",
+        "experience": "Kinh nghiệm làm việc",
+        "experience_description": "Chia sẻ kinh nghiệm làm việc của bạn",
+        "skills": "Kỹ năng",
+        "skills_description": "Liệt kê các kỹ năng chuyên môn của bạn",
+        "achievements": "Thành tựu",
+        "achievements_description": "Chia sẻ các chứng chỉ, dự án và thành tựu nổi bật của bạn"
+      },
+      "fields": {
+        "full_name": "Họ và tên",
+        "job_title": "Chức danh",
+        "email": "Email",
+        "phone": "Số điện thoại",
+        "date_of_birth": "Ngày sinh",
+        "gender": "Giới tính",
+        "address": "Địa chỉ",
+        "cv": "Tải lên CV của bạn",
+        "school": "Trường học",
+        "degree": "Bằng cấp",
+        "year": "Năm tốt nghiệp",
+        "company": "Công ty",
+        "position": "Vị trí",
+        "duration": "Thời gian làm việc",
+        "category": "Danh mục",
+        "skill": "Kỹ năng"
+      },
+      "placeholders": {
+        "full_name": "Nhập họ và tên của bạn",
+        "job_title": "Nhập chức danh của bạn",
+        "email": "Nhập email của bạn",
+        "phone": "Nhập số điện thoại của bạn",
+        "address": "Nhập địa chỉ của bạn",
+        "about": "Giới thiệu bản thân của bạn",
+        "achievements": "Liệt kê các thành tựu của bạn",
+        "no_education": "Chưa có thông tin học vấn",
+        "no_experience": "Chưa có thông tin kinh nghiệm làm việc",
+        "no_skills": "Chưa có thông tin kỹ năng",
+        "no_about": "Chưa có thông tin giới thiệu",
+        "no_achievements": "Chưa có thông tin thành tựu",
+        "select_school": "Nhập tên trường học",
+        "select_degree": "Chọn bằng cấp",
+        "select_year": "Chọn năm",
+        "select_company": "Nhập tên công ty",
+        "select_position": "Chọn vị trí",
+        "select_duration": "Chọn thời gian",
+        "select_category": "Chọn danh mục",
+        "select_skill": "Chọn kỹ năng"
+      },
+      "validation": {
+        "full_name_required": "Họ và tên là bắt buộc",
+        "job_title_required": "Chức danh là bắt buộc",
+        "email_required": "Email là bắt buộc",
+        "email_invalid": "Email không hợp lệ",
+        "phone_required": "Số điện thoại là bắt buộc",
+        "phone_format": "Số điện thoại phải từ 6-15 chữ số",
+        "date_required": "Ngày sinh là bắt buộc",
+        "date_future": "Ngày sinh không thể là ngày trong tương lai",
+        "gender_required": "Giới tính là bắt buộc",
+        "address_required": "Địa chỉ là bắt buộc",
+        "school_required": "Tên trường là bắt buộc",
+        "degree_required": "Bằng cấp là bắt buộc",
+        "year_required": "Năm tốt nghiệp là bắt buộc",
+        "company_required": "Tên công ty là bắt buộc",
+        "position_required": "Vị trí là bắt buộc",
+        "duration_required": "Thời gian làm việc là bắt buộc",
+        "skills_required": "Ít nhất một kỹ năng là bắt buộc",
+        "category_required": "Danh mục là bắt buộc",
+        "value_required": "Giá trị là bắt buộc"
+      },
+      "gender_options": {
+        "male": "Nam",
+        "female": "Nữ",
+        "other": "Khác"
+      }
+    },
+    "employer": {
+      "placeholder": {
+        "company-code": "Nhập mã số thuế công ty",
+        "company-name": "Nhập tên công ty",
+        "company-type": "Chọn loại hình công ty",
+        "company-size": "Chọn quy mô công ty",
+        "email": "Nhập email công ty",
+        "website": "Nhập trang web công ty",
+        "address": "Nhập địa chỉ công ty",
+        "description": "Giới thiệu về công ty của bạn"
+      },
+      "about-title": "Giới thiệu công ty",
+      "about-description": "Giới thiệu về công ty và những gì bạn muốn chia sẻ thêm",
+      "no-description": "Chưa có thông tin giới thiệu",
+      "save-button": "Lưu thông tin"
+    }
+  },
+  "jobs-list": {
+    "title": "Tìm Cơ Hội Tiếp Theo Của Bạn",
+    "count-1": "Tìm thấy",
+    "count-2": "công việc phù hợp với bạn",
+    "no-jobs-found": "Hiện tại không có công việc nào phù hợp với bạn.",
+    "specializations": "Chuyên ngành",
+    "filters": "Bộ lọc",
+    "reset-filters": "Đặt lại bộ lọc"
+  },
+  "detail-job": {
+    "apply": {
+      "title": "Nộp Đơn Ngay",
+      "salary-range": "Khoảng lương",
+      "job-type": "Loại công việc",
+      "specialization": "Chuyên ngành",
+      "not-specified": "Không xác định",
+      "experience": "Kinh nghiệm",
+      "posted-on": "Đăng vào",
+      "expires-on": "Hết hạn vào",
+      "login-error": "Vui lòng đăng nhập để nộp đơn",
+      "role-error": "Chỉ ứng viên mới có thể nộp đơn",
+      "form-error": "Vui lòng điền đầy đủ thông tin trước khi nộp đơn",
+      "skill-technologies": "Kỹ năng và Công nghệ",
+      "job-description": "Mô tả công việc",
+      "job-description-placeholder": "<p>Không có mô tả nào được cung cấp</p>",
+      "company": {
+        "title": "Thông tin công ty",
+        "company-name": "Tên công ty",
+        "company-type": "Loại hình công ty",
+        "address": "Địa chỉ",
+        "company-size": "Quy mô công ty",
+        "working-days": "Ngày làm việc",
+        "website": "Trang web",
+        "button": "Xem nhiều công việc hơn tại công ty"
+      },
+      "similar-jobs": "Công việc tương tự"
+    },
+    "job-not-found": {
+      "title": "Không Tìm Thấy Công Việc",
+      "go-back": "Quay lại"
+    }
+  },
+  "job_application": {
+    "modal": {
+      "tabs": {
+        "profile": "Thông tin ứng viên",
+        "application": "Nộp đơn ứng tuyển"
+      },
+      "applying_as": "Bạn đang ứng tuyển với tư cách <bold>{name}</bold>. Vui lòng tải lên CV và thêm thư xin việc (tuỳ chọn) để hoàn tất đơn ứng tuyển.",
+      "job_info": "Thông tin công việc",
+      "personal_info": {
+        "email": "Email",
+        "phone": "Điện thoại",
+        "birth_date": "Ngày sinh",
+        "gender": "Giới tính",
+        "address": "Địa chỉ"
+      },
+      "skills": {
+        "title": "Kỹ năng",
+        "no_skills": "Chưa có thông tin kỹ năng"
+      },
+      "education": {
+        "title": "Học vấn"
+      },
+      "experience": {
+        "title": "Kinh nghiệm làm việc"
+      },
+      "about": {
+        "title": "Giới thiệu bản thân",
+        "no_info": "Chưa có thông tin giới thiệu"
+      },
+      "achievements": {
+        "title": "Thành tựu",
+        "no_info": "Chưa có thông tin thành tựu"
+      },
+      "cv": {
+        "title": "CV/Resume",
+        "current": "Đang sử dụng CV từ hồ sơ: {filename}",
+        "download": "Tải xuống",
+        "upload_different": "Tải lên CV khác cho đơn ứng tuyển này (tuỳ chọn)",
+        "upload_new": "Tải lên CV của bạn cho đơn ứng tuyển này",
+        "select_file": "Chọn tệp",
+        "delete": "Xoá"
+      },
+      "cover_letter": {
+        "title": "Thư xin việc (Tuỳ chọn)",
+        "description": "Giới thiệu bản thân và giải thích lý do bạn phù hợp với vị trí này.",
+        "placeholder": "Viết thư xin việc của bạn tại đây..."
+      },
+      "buttons": {
+        "continue": "Tiếp tục nộp đơn",
+        "back": "Quay lại thông tin",
+        "cancel": "Huỷ",
+        "submit": "Nộp đơn ứng tuyển",
+        "submitting": "Đang gửi..."
+      }
+    }
+  },
+  "myapplies": {
+    "title": "Đơn ứng tuyển của tôi",
+    "filters": {
+      "all": "Tất cả đơn",
+      "pending": "Đang xử lý",
+      "approved": "Đã duyệt",
+      "rejected": "Bị từ chối"
+    },
+    "card": {
+      "applied": "Đã ứng tuyển",
+      "unknown_status": "Không xác định"
+    },
+    "empty": {
+      "title": "Không tìm thấy đơn ứng tuyển",
+      "description": "Bạn chưa ứng tuyển vào công việc nào hoặc không có đơn nào phù hợp với bộ lọc."
+    },
+    "loading": "Đang tải đơn ứng tuyển...",
+    "application_detail": {
+      "back_to_applications": "Quay lại danh sách đơn ứng tuyển",
+      "not_found": "Không tìm thấy đơn ứng tuyển",
+      "not_specified": "Không xác định",
+      "not_found_message": "Đơn ứng tuyển bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
+      "job_unavailable": "Thông tin công việc không khả dụng",
+      "job_unavailable_message": "Không thể tải thông tin chi tiết công việc cho đơn ứng tuyển này.",
+      "go_back": "Quay lại",
+      "job_information": "Thông tin công việc",
+      "location": "Địa điểm",
+      "salary": "Mức lương",
+      "job_type": "Loại công việc",
+      "posted_on": "Ngày đăng",
+      "application_timeline": "Tiến trình ứng tuyển",
+      "application_submitted": "Đã nộp đơn ứng tuyển",
+      "application_submitted_desc": "Đơn ứng tuyển của bạn đã được nộp thành công.",
+      "application_approved": "Đơn ứng tuyển được chấp nhận",
+      "application_approved_desc": "Chúc mừng! Đơn ứng tuyển của bạn đã được nhà tuyển dụng chấp nhận.",
+      "application_rejected": "Đơn ứng tuyển bị từ chối",
+      "application_rejected_desc": "Rất tiếc, nhà tuyển dụng đã quyết định không tiếp tục với đơn ứng tuyển của bạn.",
+      "under_review": "Đang xem xét",
+      "under_review_desc": "Đơn ứng tuyển của bạn đang được nhà tuyển dụng xem xét.",
+      "cover_letter": "Thư xin việc của bạn",
+      "application_summary": "Tóm tắt đơn ứng tuyển",
+      "application_id": "Mã đơn ứng tuyển:",
+      "applied_on": "Ngày nộp đơn:",
+      "status": "Trạng thái:",
+      "time_in_review": "Thời gian xem xét:",
+      "submitted_resume": "Hồ sơ đã nộp",
+      "download": "Tải xuống",
+      "whats_next": "Bước tiếp theo là gì?",
+      "pending_message": "Đơn ứng tuyển của bạn đang được nhà tuyển dụng xem xét. Bạn sẽ nhận được thông báo khi có cập nhật.",
+      "average_response": "Thời gian phản hồi trung bình: 1-2 tuần",
+      "pending_tip": "Mẹo: Tiếp tục ứng tuyển vào các vị trí khác trong khi chờ đợi để tăng cơ hội tìm được công việc phù hợp.",
+      "approved_message": "Chúc mừng! Nhà tuyển dụng đã chấp nhận đơn ứng tuyển của bạn.",
+      "approved_next_steps": "Các bước tiếp theo:",
+      "approved_step1": "Kiểm tra email để biết hướng dẫn thêm",
+      "approved_step2": "Chuẩn bị cho các cuộc phỏng vấn tiềm năng",
+      "approved_step3": "Tìm hiểu thêm về công ty",
+      "approved_tip": "Mẹo: Phản hồi nhanh chóng với mọi liên lạc từ nhà tuyển dụng để thể hiện sự quan tâm liên tục của bạn.",
+      "rejected_message": "Rất tiếc, nhà tuyển dụng đã quyết định không tiếp tục với đơn ứng tuyển của bạn vào lúc này.",
+      "rejected_next": "Đừng nản lòng! Đây là những gì bạn có thể làm:",
+      "rejected_step1": "Xem lại và cập nhật hồ sơ của bạn",
+      "rejected_step2": "Tiếp tục ứng tuyển vào các vị trí khác",
+      "rejected_step3": "Xem xét các vai trò phù hợp hơn với kỹ năng của bạn",
+      "rejected_tip": "Mẹo: Mỗi đơn ứng tuyển là một trải nghiệm học hỏi. Hãy sử dụng cơ hội này để cải thiện cách tiếp cận cho các đơn ứng tuyển trong tương lai."
+    }
+  },
+  "employer": {
+    "myjobs": {
+      "create_button": "Tạo mới",
+      "no_jobs_found": "Không tìm thấy công việc nào",
+      "loading": "Đang tải công việc...",
+      "posted_on": "Đăng vào",
+      "expires_on": "Hết hạn vào",
+      "applicants": "ứng viên",
+      "views": "lượt xem",
+      "close_button": "Đóng",
+      "delete_button": "Xóa",
+      "filters": {
+        "all": "Tất cả công việc",
+        "active": "Đang hoạt động",
+        "inactive": "Tạm dừng",
+        "closed": "Đã đóng"
+      },
+      "detail": {
+        "not_found": "Không Tìm Thấy Công Việc",
+        "go_back": "Quay Lại",
+        "view_candidates": "Xem Danh Sách Ứng Viên",
+        "edit": "Chỉnh Sửa",
+        "status": {
+          "published": "Đã Đăng",
+          "draft": "Bản Nháp"
+        },
+        "labels": {
+          "salary_range": "Mức Lương",
+          "job_type": "Loại Công Việc",
+          "posted_on": "Ngày Đăng",
+          "specialization": "Chuyên Ngành",
+          "experience": "Kinh Nghiệm",
+          "expires_on": "Ngày Hết Hạn",
+          "skills": "Kỹ Năng & Công Nghệ",
+          "description": "Mô Tả Công Việc",
+          "applications": "{count, plural, one {Ứng Viên} other {Ứng Viên}}",
+          "not_specified": "Chưa xác định"
+        },
+        "actions": {
+          "read_more": "Xem thêm",
+          "show_less": "Thu gọn"
+        }
+      },
+      "create": {
+        "title": "Tạo Công Việc Mới"
+      },
+      "form": {
+        "validation": {
+          "title_required": "Vui lòng nhập tiêu đề công việc",
+          "description_required": "Vui lòng nhập mô tả công việc",
+          "location_required": "Vui lòng nhập địa điểm làm việc",
+          "salary_min_number": "Lương tối thiểu phải là một số",
+          "salary_min_required": "Vui lòng nhập lương tối thiểu",
+          "salary_max_number": "Lương tối đa phải là một số",
+          "salary_max_required": "Vui lòng nhập lương tối đa",
+          "salary_positive": "Lương phải là số dương",
+          "salary_max_greater": "Lương tối đa phải lớn hơn lương tối thiểu",
+          "experience_required": "Vui lòng chọn ít nhất một cấp độ kinh nghiệm",
+          "job_type_required": "Vui lòng chọn loại công việc",
+          "tag_key_required": "Vui lòng chọn danh mục kỹ năng",
+          "tag_value_required": "Vui lòng chọn kỹ năng",
+          "tags_required": "Vui lòng thêm ít nhất một kỹ năng",
+          "specialization_required": "Vui lòng chọn chuyên ngành"
+        },
+        "labels": {
+          "title": "Tiêu Đề Công Việc",
+          "location": "Địa Điểm",
+          "salary_range": "Mức Lương",
+          "experience": "Kinh Nghiệm",
+          "job_type": "Loại Công Việc",
+          "expires_at": "Ngày Hết Hạn",
+          "specialization": "Chuyên Ngành",
+          "tags": "Kỹ Năng & Công Nghệ",
+          "description": "Mô Tả Công Việc"
+        },
+        "placeholders": {
+          "title": "Ví dụ: Senior React Developer",
+          "location": "Ví dụ: Quận 1, TP Hồ Chí Minh",
+          "salary_min": "Lương tối thiểu",
+          "salary_max": "Lương tối đa",
+          "job_type": "Chọn loại công việc",
+          "specialization": "Chọn chuyên ngành",
+          "tag_category": "Chọn danh mục",
+          "tag_value": "Chọn giá trị",
+          "description": "Mô tả trách nhiệm công việc, yêu cầu, phúc lợi, v.v."
+        },
+        "buttons": {
+          "cancel": "Hủy",
+          "save_draft": "Lưu Nháp",
+          "save_publish": "Lưu & Đăng",
+          "update_publish": "Cập Nhật & Đăng",
+          "add_tag": "Thêm Kỹ Năng/Công Nghệ",
+          "remove_tag": "Xóa kỹ năng"
+        },
+        "loading_specializations": "Đang tải chuyên ngành...",
+        "loading_tags": "Đang tải kỹ năng...",
+        "loading_error": "Không thể tải một số tùy chọn của biểu mẫu. Vui lòng làm mới trang.",
+        "payment_success": "Thanh toán thành công! Công việc của bạn đã được đăng.",
+        "payment_error": "Đã xảy ra lỗi khi đăng công việc của bạn.",
+        "payment_failed": "Thanh toán thất bại. Công việc của bạn chưa được đăng."
+      },
+      "applications": {
+        "title": "Ứng viên cho {jobTitle}",
+        "filter_section": "Lọc Ứng Viên",
+        "status": "Trạng thái",
+        "school": "Trường học",
+        "degree": "Bằng cấp",
+        "company": "Công ty trước đây",
+        "position": "Vị trí trước đây",
+        "all_statuses": "Tất cả trạng thái",
+        "all_schools": "Tất cả trường học",
+        "all_degrees": "Tất cả bằng cấp",
+        "all_companies": "Tất cả công ty",
+        "all_positions": "Tất cả vị trí",
+        "all_category": "Tất cả {category}",
+        "reset_filters": "Đặt lại bộ lọc",
+        "no_applications": "Không tìm thấy ứng viên nào",
+        "candidate": "Ứng viên",
+        "applicant": "Người ứng tuyển",
+        "applied": "Đã ứng tuyển"
+      },
+      "application_detail": {
+        "title": "Chi Tiết Đơn Ứng Tuyển",
+        "not_found": "Không Tìm Thấy Đơn Ứng Tuyển",
+        "not_found_message": "Đơn ứng tuyển bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.",
+        "candidate_unavailable": "Thông Tin Ứng Viên Không Khả Dụng",
+        "candidate_unavailable_message": "Không thể tải thông tin chi tiết của ứng viên cho đơn ứng tuyển này.",
+        "go_back": "Quay Lại",
+        "for_position": "Cho vị trí: {jobTitle}",
+        "status": {
+          "pending": "Đang Xem Xét",
+          "approved": "Đã Chấp Nhận",
+          "rejected": "Đã Từ Chối",
+          "unknown": "Không Xác Định"
+        },
+        "actions": {
+          "accept": "Chấp Nhận",
+          "reject": "Từ Chối"
+        },
+        "sections": {
+          "application_details": "Chi Tiết Đơn Ứng Tuyển",
+          "applied_on": "Ngày nộp đơn:",
+          "status": "Trạng thái:",
+          "resume": "Hồ sơ/CV",
+          "download": "Tải xuống",
+          "cover_letter": "Thư Xin Việc",
+          "skills": "Kỹ Năng",
+          "no_skills": "Không có thông tin về kỹ năng",
+          "education": "Học Vấn",
+          "work_experience": "Kinh Nghiệm Làm Việc",
+          "about": "Giới Thiệu",
+          "achievements": "Thành Tích"
+        }
+      }
+    }
+  },
+  "payment": {
+    "title": "Lịch sử thanh toán",
+    "subtitle": "Xem và quản lý tất cả các giao dịch trước đây của bạn",
+    "filter": {
+      "label": "Lọc theo trạng thái:",
+      "all": "Tất cả trạng thái"
+    },
+    "status": {
+      "completed": "Hoàn thành",
+      "success": "Thành công",
+      "pending": "Đang xử lý",
+      "failed": "Thất bại"
+    },
+    "empty": {
+      "title": "Không tìm thấy lịch sử thanh toán",
+      "description": "Bạn chưa thực hiện thanh toán nào. Khi bạn mua các gói đăng tin tuyển dụng, chúng sẽ xuất hiện tại đây."
+    },
+    "try_again": "Thử lại",
+    "job_id": "Mã công việc",
+    "transaction_id": "Mã giao dịch",
+    "table": {
+      "date": "Ngày",
+      "transaction_id": "Mã giao dịch",
+      "package": "Gói dịch vụ",
+      "amount": "Số tiền",
+      "status": "Trạng thái"
+    },
+    "pagination": {
+      "showing": "Hiển thị {count} của {total} giao dịch"
+    },
+    "modal": {
+      "title": "Hoàn tất thanh toán để đăng",
+      "description": "Công việc của bạn sẽ được đăng sau khi thanh toán thành công 2.00 USD.",
+      "cancel": "Hủy"
+    }
+  },
+  "payment_details": {
+    "title": "Chi Tiết Thanh Toán",
+    "back_to_history": "Quay lại Lịch sử thanh toán",
+    "payment_info": "Thông tin thanh toán",
+    "job_details": "Thông tin công việc",
+    "job_title": "Tên công việc",
+    "receipt": "Biên lai thanh toán",
+    "total": "Tổng cộng",
+    "error": {
+      "title": "Không thể tải thông tin thanh toán",
+      "message": "Chúng tôi không thể tải thông tin thanh toán. Vui lòng thử lại."
+    }
+  },
+  "settings": {
+    "title": "Cài đặt tài khoản",
+    "password": {
+      "title": "Thay đổi mật khẩu",
+      "current": "Mật khẩu hiện tại",
+      "new": "Mật khẩu mới",
+      "confirm": "Xác nhận mật khẩu mới",
+      "button": "Thay đổi mật khẩu",
+      "processing": "Đang xử lý...",
+      "success": "Thay đổi mật khẩu thành công!",
+      "error": "Không thể thay đổi mật khẩu. Vui lòng thử lại.",
+      "new_different": "Mật khẩu mới phải khác với mật khẩu hiện tại",
+      "system_error": "Đã xảy ra lỗi. Vui lòng thử lại sau.",
+      "current_required": "Vui lòng nhập mật khẩu hiện tại",
+      "new_required": "Vui lòng nhập mật khẩu mới",
+      "new_min": "Mật khẩu phải có ít nhất 8 ký tự",
+      "new_format": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường và một số",
+      "confirm_required": "Vui lòng xác nhận mật khẩu",
+      "confirm_match": "Mật khẩu không khớp"
+    },
+    "google_account": {
+      "title": "Tài khoản Google",
+      "message": "Bạn đang đăng nhập bằng Google, vì vậy bạn không thể thay đổi mật khẩu tại đây. Để quản lý mật khẩu tài khoản Google, vui lòng truy cập cài đặt tài khoản Google của bạn."
+    }
+  },
+  "employer_detail": {
+    "back": "Quay lại",
+    "job_openings": "Việc làm đang tuyển ({count})",
+    "company_info": {
+      "company_type": "Loại hình công ty",
+      "address": "Địa chỉ",
+      "company_size": "Quy mô công ty",
+      "working_days": "Ngày làm việc",
+      "website": "Trang web",
+      "email": "Email",
+      "about": "Giới thiệu công ty",
+      "no_description": "Chưa có thông tin giới thiệu"
+    },
+    "job_card": {
+      "posted": "Đăng vào",
+      "expires": "Hết hạn vào",
+      "more_tags": "+{count} thêm"
+    },
+    "empty_jobs": {
+      "title": "Không tìm thấy việc làm nào",
+      "description": "Nhà tuyển dụng này hiện không có việc làm đang tuyển."
+    },
+    "error": {
+      "title": "Không tìm thấy nhà tuyển dụng",
+      "description": "Chúng tôi không thể tìm thấy thông tin nhà tuyển dụng bạn đang tìm kiếm.",
+      "go_back": "Quay lại"
+    }
+  },
+  "notifications": {
+    "title": "Thông báo",
+    "mark_all_read": "Đánh dấu tất cả là đã đọc",
+    "loading": "Đang tải thông báo...",
+    "no_notifications": "Chưa có thông báo nào",
+    "error_loading": "Lỗi khi tải thông báo"
+  },
+  "modal": {
+    "close": "Đóng"
+  },
+  "modal-yes-no": {
+    "logout": {
+      "title": "Đăng xuất",
+      "message": "Bạn có muốn đăng xuất?"
+    },
+    "delete-job": {
+      "title": "Xóa công việc",
+      "message": "Bạn có chắc chắn muốn xóa công việc này? Hành động này không thể hoàn tác."
+    },
+    "close-job": {
+      "title": "Đóng công việc",
+      "message": "Bạn có chắc chắn muốn đóng công việc này? Hành động này sẽ không cho phép ứng viên nộp đơn nữa."
+    },
+    "accept-application": {
+      "title": "Chấp nhận đơn ứng tuyển",
+      "message": "Bạn có chắc chắn muốn chấp nhận đơn ứng tuyển này? Ứng viên sẽ được thông báo về quyết định của bạn."
+    },
+    "reject-application": {
+      "title": "Từ chối đơn ứng tuyển",
+      "message": "Bạn có chắc chắn muốn từ chối đơn ứng tuyển này? Ứng viên sẽ được thông báo về quyết định của bạn."
+    },
+    "yes": "Đồng ý",
+    "no": "Hủy"
+  },
+  "pagination": {
+    "previous": "Trước",
+    "next": "Sau"
+  },
+  "footer": {
+    "footer-left": {
+      "address": "Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội",
+      "name": "Trường Đại Học Giao Thông Vận Tải",
+      "phone": "Điện thoại: (84.24) 37663311 - Fax: (84.24)37669613",
+      "email": "Email: dhgtvt@utc.edu.vn",
+      "description": "FindITJobs, nơi bạn có thể tìm kiếm công việc phù hợp với yêu thích của bạn hoặc nơi tìm kiếm tài năng dành cho các công ty và doanh nghiệp."
+    },
+    "footer-right": {
+      "service": {
+        "name": "Dịch vụ",
+        "item-1": "Điều khoản sử dụng",
+        "item-2": "Chính sách bảo mật thông tin cá nhân",
+        "item-3": "Chính sách bảo mật thanh toán",
+        "item-4": "Giới thiệu FindItJobs"
+      },
+      "support": {
+        "name": "Hỗ trợ",
+        "item-1": "Chính sách đổi - trả - hoàn tiền",
+        "item-2": "Chính sách bảo hành - bồi hoàn",
+        "item-3": "Chính sách tư vấn"
+      },
+      "my-account": {
+        "name": "Tài khoản của tôi",
+        "item-1": "Đăng nhập/Tạo mới tài khoản",
+        "item-2": "Thay đổi địa chỉ khách hàng",
+        "item-3": "Chi tiết tài khoản",
+        "item-4": "Lịch sử thanh toán"
+      },
+      "contact": {
+        "name": "Liên hệ",
+        "item-1": "Số 3 phố Cầu Giấy, P.Láng Thượng, Q.Đống Đa, Hà Nội",
+        "item-2": "(84.24) 37663311",
+        "item-3": "dhgtvt@utc.edu.vn"
+      }
+    }
+  }
+}

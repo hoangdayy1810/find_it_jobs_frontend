@@ -1,0 +1,828 @@
+{
+  "all": {
+    "VND": "đ",
+    "more": "more",
+    "time": {
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "days_ago": "{count} days ago"
+    },
+    "experience": {
+      "intern": "Intern",
+      "fresher": "Fresher",
+      "junior": "Junior",
+      "mid": "Middle",
+      "senior": "Senior",
+      "lead": "Lead",
+      "manager": "Manager",
+      "not_specified": "Not Specified"
+    },
+    "job_type": {
+      "full_time": "Full-time",
+      "part_time": "Part-time",
+      "contract": "Contract",
+      "freelance": "Freelance"
+    }
+  },
+  "application": {
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "company": {
+      "size": {
+        "1-10": "1-10 employees",
+        "11-50": "11-50 employees",
+        "51-200": "51-200 employees",
+        "201-500": "201-500 employees",
+        "500+": "Over 500 employees"
+      },
+      "type": {
+        "product": "Product",
+        "outsourcing": "Outsourcing",
+        "startup": "Startup",
+        "other": "Other"
+      },
+      "workingDays": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday",
+        "none": "Not specified"
+      }
+    },
+    "gender": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "degree": {
+      "high_school": "High School",
+      "associate": "Associate Degree",
+      "bachelor": "Bachelor's Degree",
+      "master": "Master's Degree",
+      "phd": "PhD"
+    },
+    "position": {
+      "intern": "Intern",
+      "fresher": "Fresher",
+      "junior": "Junior",
+      "middle": "Middle",
+      "senior": "Senior",
+      "team_lead": "Team Lead",
+      "manager": "Manager"
+    },
+    "duration": {
+      "less_than_1": "Less than 1 year",
+      "1_3": "1-3 years",
+      "3_5": "3-5 years",
+      "more_than_5": "More than 5 years"
+    }
+  },
+  "search": {
+    "results-for": "Search results for: ",
+    "tags": "Tags",
+    "jobs": "Jobs",
+    "no-results": "No results found for "
+  },
+  "home": {
+    "hero": {
+      "title": "Find Your Dream IT Job",
+      "subtitle": "Connect with top tech companies and discover your next career opportunity",
+      "popularSearches": "Popular Searches"
+    },
+    "featuredJobs": {
+      "title": "New Jobs",
+      "viewAll": "View All Jobs →",
+      "noJobs": "New jobs will appear here."
+    },
+    "categories": {
+      "title": "Browse by Specialization",
+      "description": "Explore opportunities across different IT specializations",
+      "jobs": "Jobs",
+      "viewAll": "View All Specializations"
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "description": "Find IT Jobs makes the job search process simple and efficient",
+      "step1": {
+        "title": "Search Jobs",
+        "description": "Find jobs that match your skills and interests"
+      },
+      "step2": {
+        "title": "Apply Online",
+        "description": "Apply for jobs you're interested in with just a few clicks"
+      },
+      "step3": {
+        "title": "Get Interviews",
+        "description": "Companies will contact you for the next steps"
+      },
+      "step4": {
+        "title": "Get Hired",
+        "description": "Receive job offers and start your new career"
+      }
+    },
+    "stats": {
+      "title": "By the Numbers",
+      "description": " We've helped thousands of tech professionals find their dream jobs",
+      "jobs": "Jobs",
+      "companies": "Companies",
+      "candidates": "Candidates",
+      "placements": "Placements"
+    },
+    "cta": {
+      "candidate": {
+        "title": "Looking for a job?",
+        "description": "Join us to find your dream IT job",
+        "list1": "Access to thousands of exclusive tech jobs",
+        "list2": "Get discovered by hiring managers",
+        "list3": "Track all your applications in one place",
+        "button": "Find Jobs"
+      },
+      "employer": {
+        "title": "Looking for talent?",
+        "description": "Post your job openings and connect with top candidates",
+        "list1": "Post unlimited job listings",
+        "list2": "Search through thousands of tech resumes",
+        "list3": "Track and manage your recruitment process",
+        "button": "Post a Job"
+      }
+    }
+  },
+  "header": {
+    "search_placeholder": "Search...",
+    "notification": "Notification",
+    "user": "User",
+    "vi": "Vietnamese",
+    "en": "English"
+  },
+  "login": {
+    "title": "Log In",
+    "you_are": "You are",
+    "candidate": "Candidate",
+    "employer": "Employer",
+    "userName": "User Name",
+    "password": "Password",
+    "login_button": "Log In",
+    "login_loading": "Logging in...",
+    "username_required": "Please enter your username",
+    "password_required": "Please enter your password",
+    "role_required": "Please select a role",
+    "userName_placeholder": "Enter username",
+    "password_placeholder": "Enter password",
+    "or": "Or",
+    "login_facebook": "Log in with Facebook",
+    "login_google": "Log in with Google",
+    "havent_account": "Don't have an account? ",
+    "register_now": "Register Now"
+  },
+  "register": {
+    "title": "Register",
+    "you_are": "You are",
+    "candidate": "Candidate",
+    "employer": "Employer",
+    "userName": "User Name",
+    "password": "Password",
+    "password_confirm": "Confirm Password",
+    "username_required": "Please enter your username",
+    "username_length": "Username length must be between 8 and 50 characters",
+    "username_alphanumeric": "Username can only contain letters and numbers",
+    "password_required": "Please enter your password",
+    "password_length": "Password length must be between 8 and 50 characters",
+    "password_requirements": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+    "role_required": "Please select a role",
+    "password_confirm_required": "Please confirm your password",
+    "match_password": "Passwords do not match",
+    "userName_placeholder": "Enter username",
+    "password_placeholder": "Enter password",
+    "password_confirm_placeholder": "Re-enter password",
+    "register_button": "Register",
+    "register_loading": "Registering...",
+    "already_have_account": "Already have an account? ",
+    "login_now": "Log in now"
+  },
+  "navigation": {
+    "hello": "Hello",
+    "candidate": {
+      "profile": "My Profile",
+      "my_jobs": "My Jobs",
+      "settings": "Settings",
+      "logout": "Logout"
+    },
+    "employer": {
+      "info": "Company Information",
+      "jobs": "Job Listings",
+      "payment": "Payment History",
+      "setting": "Settings",
+      "logout": "Log Out"
+    }
+  },
+  "profile": {
+    "candidate": {
+      "title": "My Profile",
+      "edit": "Edit",
+      "save": "Save Information",
+      "upload": "Upload",
+      "change": "Change",
+      "remove": "Remove",
+      "add_education": "Add Education",
+      "add_experience": "Add Work Experience",
+      "add_skill": "Add Skill",
+      "sections": {
+        "personal": "Personal Information",
+        "about": "About Me",
+        "about_description": "Introduce your strengths and what you want to share",
+        "education": "Education",
+        "education_description": "Share your educational background",
+        "experience": "Work Experience",
+        "experience_description": "Share your work experience",
+        "skills": "Skills",
+        "skills_description": "List your professional skills",
+        "achievements": "Achievements",
+        "achievements_description": "Share your certificates, projects, and notable achievements"
+      },
+      "fields": {
+        "full_name": "Full Name",
+        "job_title": "Job Title",
+        "email": "Email",
+        "phone": "Phone Number",
+        "date_of_birth": "Date of Birth",
+        "gender": "Gender",
+        "address": "Address",
+        "cv": "Upload your CV",
+        "school": "School",
+        "degree": "Degree",
+        "year": "Graduation Year",
+        "company": "Company",
+        "position": "Position",
+        "duration": "Working Duration",
+        "category": "Category",
+        "skill": "Skill"
+      },
+      "placeholders": {
+        "full_name": "Enter your full name",
+        "job_title": "Enter your job title",
+        "email": "Enter your email",
+        "phone": "Enter your phone number",
+        "address": "Enter your address",
+        "about": "Introduce yourself",
+        "achievements": "List your achievements",
+        "no_education": "No education information available",
+        "no_experience": "No work experience information available",
+        "no_skills": "No skills information available",
+        "no_about": "No introduction information available",
+        "no_achievements": "No achievements information available",
+        "select_school": "Enter school name",
+        "select_degree": "Select degree",
+        "select_year": "Select year",
+        "select_company": "Enter company name",
+        "select_position": "Select position",
+        "select_duration": "Select duration",
+        "select_category": "Select category",
+        "select_skill": "Select skill"
+      },
+      "validation": {
+        "full_name_required": "Full name is required",
+        "job_title_required": "Job title is required",
+        "email_required": "Email is required",
+        "email_invalid": "Invalid email format",
+        "phone_required": "Phone number is required",
+        "phone_format": "Phone number must contain 6-15 digits",
+        "date_required": "Date of birth is required",
+        "date_future": "Date of birth cannot be in the future",
+        "gender_required": "Gender is required",
+        "address_required": "Address is required",
+        "school_required": "School name is required",
+        "degree_required": "Degree is required",
+        "year_required": "Graduation year is required",
+        "company_required": "Company name is required",
+        "position_required": "Position is required",
+        "duration_required": "Working duration is required",
+        "skills_required": "At least one skill is required",
+        "category_required": "Tag category is required",
+        "value_required": "Tag value is required"
+      },
+      "gender_options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      }
+    },
+    "employer": {
+      "placeholder": {
+        "company-code": "Enter company tax code",
+        "company-name": "Enter company name",
+        "email": "Enter company email",
+        "company-type": "Select company type",
+        "company-size": "Select company size",
+        "website": "Enter company website",
+        "address": "Enter company address",
+        "description": "Introduce your company"
+      },
+      "about-title": "Company Introduction",
+      "about-description": "Introduce your company to potential candidates",
+      "no-description": "No description for introduce",
+      "save-button": "Save Changes"
+    }
+  },
+  "jobs-list": {
+    "title": "Find Your Next Opportunity",
+    "count-1": "Found",
+    "count-2": "job matching your criteria",
+    "no-jobs-found": "No jobs found matching your criteria",
+    "specializations": "Specializations",
+    "filters": "Filters",
+    "reset-filters": "Reset Filters"
+  },
+  "detail-job": {
+    "apply": {
+      "title": "Apply Now",
+      "salary-range": "Salary range",
+      "job-type": "Job type",
+      "specialization": "Specialization",
+      "not-specified": "Not specified",
+      "experience": "Experience",
+      "posted-on": "Posted on",
+      "expires-on": "Expires on",
+      "login-error": "Please log in to apply for this job",
+      "role-error": "Only candidates can apply for jobs",
+      "form-error": "Please complete your profile before applying",
+      "skill-technologies": "Skills and Technologies",
+      "job-description": "Job Description",
+      "job-description-placeholder": "<p>No description provided</p>",
+      "company": {
+        "title": "Company Information",
+        "company-name": "Company Name",
+        "company-type": "Company Type",
+        "address": "Address",
+        "company-size": "Company Size",
+        "working-days": "Working Days",
+        "website": "Website",
+        "button": "View More Jobs From This Company"
+      },
+      "similar-jobs": "Similar Jobs You May Like"
+    },
+    "job-not-found": {
+      "title": "Job Not Found",
+      "go-back": "Go Back"
+    }
+  },
+  "job_application": {
+    "modal": {
+      "tabs": {
+        "profile": "Candidate Information",
+        "application": "Submit Application"
+      },
+      "applying_as": "You are applying as <bold>{name}</bold>. Please upload your CV and add a cover letter (optional) to complete your application.",
+      "job_info": "Job Information",
+      "personal_info": {
+        "email": "Email",
+        "phone": "Phone",
+        "birth_date": "Date of Birth",
+        "gender": "Gender",
+        "address": "Address"
+      },
+      "skills": {
+        "title": "Skills",
+        "no_skills": "No skills information available"
+      },
+      "education": {
+        "title": "Education"
+      },
+      "experience": {
+        "title": "Work Experience"
+      },
+      "about": {
+        "title": "About Me",
+        "no_info": "No information provided"
+      },
+      "achievements": {
+        "title": "Achievements",
+        "no_info": "No achievements information provided"
+      },
+      "cv": {
+        "title": "CV/Resume",
+        "current": "Currently using CV from profile: {filename}",
+        "download": "Download",
+        "upload_different": "Upload a different CV for this application (optional)",
+        "upload_new": "Upload your CV for this application",
+        "select_file": "Select file",
+        "delete": "Delete"
+      },
+      "cover_letter": {
+        "title": "Cover Letter (Optional)",
+        "description": "Introduce yourself and explain why you're a good fit for this position.",
+        "placeholder": "Write your cover letter here..."
+      },
+      "buttons": {
+        "continue": "Continue to Application",
+        "back": "Back to Profile",
+        "cancel": "Cancel",
+        "submit": "Submit Application",
+        "submitting": "Submitting..."
+      }
+    }
+  },
+  "myapplies": {
+    "title": "My Applications",
+    "filters": {
+      "all": "All Applications",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "card": {
+      "applied": "Applied",
+      "unknown_status": "Unknown"
+    },
+    "empty": {
+      "title": "No applications found",
+      "description": "You haven't applied to any jobs yet or no applications match your filter."
+    },
+    "loading": "Loading applications...",
+    "application_detail": {
+      "back_to_applications": "Back to My Applications",
+      "not_found": "Application Not Found",
+      "not_specified": "Not Specified",
+      "not_found_message": "The application you're looking for does not exist or has been removed.",
+      "job_unavailable": "Job Information Not Available",
+      "job_unavailable_message": "Job details could not be loaded for this application.",
+      "go_back": "Go Back",
+      "job_information": "Job Information",
+      "location": "Location",
+      "salary": "Salary",
+      "job_type": "Job Type",
+      "posted_on": "Posted On",
+      "application_timeline": "Application Timeline",
+      "application_submitted": "Application Submitted",
+      "application_submitted_desc": "Your application was successfully submitted.",
+      "application_approved": "Application Approved",
+      "application_approved_desc": "Congratulations! Your application has been approved by the employer.",
+      "application_rejected": "Application Rejected",
+      "application_rejected_desc": "We're sorry, the employer has decided not to proceed with your application.",
+      "under_review": "Under Review",
+      "under_review_desc": "Your application is currently being reviewed by the employer.",
+      "cover_letter": "Your Cover Letter",
+      "application_summary": "Application Summary",
+      "application_id": "Application ID:",
+      "applied_on": "Applied On:",
+      "status": "Status:",
+      "time_in_review": "Time in Review:",
+      "submitted_resume": "Submitted Resume",
+      "download": "Download",
+      "whats_next": "What's Next?",
+      "pending_message": "Your application is currently being reviewed by the employer. You will be notified when there is an update.",
+      "average_response": "Average response time: 1-2 weeks",
+      "pending_tip": "Tip: Continue applying to other positions while you wait to increase your chances of finding the right job.",
+      "approved_message": "Congratulations! The employer has approved your application.",
+      "approved_next_steps": "Next steps:",
+      "approved_step1": "Check your email for further instructions",
+      "approved_step2": "Prepare for potential interviews",
+      "approved_step3": "Research more about the company",
+      "approved_tip": "Tip: Respond promptly to any communication from the employer to show your continued interest.",
+      "rejected_message": "We're sorry, but the employer has decided not to proceed with your application at this time.",
+      "rejected_next": "Don't be discouraged! Here's what you can do:",
+      "rejected_step1": "Review and update your resume",
+      "rejected_step2": "Continue applying to other positions",
+      "rejected_step3": "Consider roles that better match your skills",
+      "rejected_tip": "Tip: Each application is a learning experience. Use this opportunity to refine your approach for future applications."
+    }
+  },
+  "employer": {
+    "myjobs": {
+      "create_button": "Create",
+      "no_jobs_found": "No jobs found",
+      "loading": "Loading jobs...",
+      "posted_on": "Posted on",
+      "expires_on": "Expires on",
+      "applicants": "applicants",
+      "views": "views",
+      "close_button": "Close",
+      "delete_button": "Delete",
+      "filters": {
+        "all": "All Jobs",
+        "active": "Active",
+        "inactive": "Inactive",
+        "closed": "Closed"
+      },
+      "detail": {
+        "not_found": "Job Not Found",
+        "go_back": "Go Back",
+        "view_candidates": "View Candidate List",
+        "edit": "Edit",
+        "status": {
+          "published": "Published",
+          "draft": "Draft"
+        },
+        "labels": {
+          "salary_range": "Salary Range",
+          "job_type": "Job Type",
+          "posted_on": "Posted On",
+          "specialization": "Specialization",
+          "experience": "Experience",
+          "expires_on": "Expires On",
+          "skills": "Skills & Technologies",
+          "description": "Job Description",
+          "applications": "{count, plural, one {Application} other {Applications}}",
+          "not_specified": "Not specified"
+        },
+        "actions": {
+          "read_more": "Read more",
+          "show_less": "Show less"
+        }
+      },
+      "create": {
+        "title": "Create New Job"
+      },
+      "form": {
+        "validation": {
+          "title_required": "Job title is required",
+          "description_required": "Job description is required",
+          "location_required": "Location is required",
+          "salary_min_number": "Minimum salary must be a number",
+          "salary_min_required": "Minimum salary is required",
+          "salary_max_number": "Maximum salary must be a number",
+          "salary_max_required": "Maximum salary is required",
+          "salary_positive": "Salary must be positive",
+          "salary_max_greater": "Maximum salary must be greater than minimum salary",
+          "experience_required": "At least one experience level is required",
+          "job_type_required": "Job type is required",
+          "tag_key_required": "Tag category is required",
+          "tag_value_required": "Tag value is required",
+          "tags_required": "At least one tag is required",
+          "specialization_required": "Specialization is required"
+        },
+        "labels": {
+          "title": "Job Title",
+          "location": "Location",
+          "salary_range": "Salary Range",
+          "experience": "Experience Level",
+          "job_type": "Job Type",
+          "expires_at": "Expiration Date",
+          "specialization": "Specialization",
+          "tags": "Skills & Technologies",
+          "description": "Job Description"
+        },
+        "placeholders": {
+          "title": "e.g. Senior React Developer",
+          "location": "e.g. District 1, Ho Chi Minh City",
+          "salary_min": "Minimum salary",
+          "salary_max": "Maximum salary",
+          "job_type": "Select job type",
+          "specialization": "Select specialization",
+          "tag_category": "Select category",
+          "tag_value": "Select value",
+          "description": "Describe the job responsibilities, requirements, benefits, etc."
+        },
+        "buttons": {
+          "cancel": "Cancel",
+          "save_draft": "Save as Draft",
+          "save_publish": "Save & Publish",
+          "update_publish": "Update & Publish",
+          "add_tag": "Add Skill/Technology",
+          "remove_tag": "Remove tag"
+        },
+        "loading_specializations": "Loading specializations...",
+        "loading_tags": "Loading skills and technologies...",
+        "loading_error": "Failed to load some form options. Please refresh the page.",
+        "payment_success": "Payment successful! Your job has been published.",
+        "payment_error": "There was an error publishing your job.",
+        "payment_failed": "Payment failed. Your job was not published."
+      },
+      "applications": {
+        "title": "Candidates for {jobTitle}",
+        "filter_section": "Filter Applications",
+        "status": "Status",
+        "school": "School",
+        "degree": "Degree",
+        "company": "Previous Company",
+        "position": "Previous Position",
+        "all_statuses": "All statuses",
+        "all_schools": "All schools",
+        "all_degrees": "All degrees",
+        "all_companies": "All companies",
+        "all_positions": "All positions",
+        "all_category": "All {category}",
+        "reset_filters": "Reset Filters",
+        "no_applications": "No applications found",
+        "candidate": "Candidate",
+        "applicant": "Applicant",
+        "applied": "Applied"
+      },
+      "application_detail": {
+        "title": "Application Details",
+        "not_found": "Application Not Found",
+        "not_found_message": "The application you're looking for does not exist or has been removed.",
+        "candidate_unavailable": "Candidate Information Not Available",
+        "candidate_unavailable_message": "Candidate details could not be loaded for this application.",
+        "go_back": "Go Back",
+        "for_position": "For position: {jobTitle}",
+        "status": {
+          "pending": "Pending Review",
+          "approved": "Approved",
+          "rejected": "Rejected",
+          "unknown": "Unknown"
+        },
+        "actions": {
+          "accept": "Accept",
+          "reject": "Reject"
+        },
+        "sections": {
+          "application_details": "Application Details",
+          "applied_on": "Applied on:",
+          "status": "Status:",
+          "resume": "Resume/CV",
+          "download": "Download",
+          "cover_letter": "Cover Letter",
+          "skills": "Skills",
+          "no_skills": "No skills information available",
+          "education": "Education",
+          "work_experience": "Work Experience",
+          "about": "About",
+          "achievements": "Achievements"
+        }
+      }
+    }
+  },
+  "payment": {
+    "title": "Payment History",
+    "subtitle": "View and manage all your past transactions",
+    "filter": {
+      "label": "Filter by Status:",
+      "all": "All Statuses"
+    },
+    "status": {
+      "completed": "Completed",
+      "success": "Success",
+      "pending": "Pending",
+      "failed": "Failed"
+    },
+    "empty": {
+      "title": "No payment history found",
+      "description": "You haven't made any payments yet. When you purchase job postings or promotions, they'll appear here."
+    },
+    "try_again": "Try Again",
+    "job_id": "Job ID",
+    "transaction_id": "Transaction ID",
+    "table": {
+      "date": "Date",
+      "transaction_id": "Transaction ID",
+      "package": "Package",
+      "amount": "Amount",
+      "status": "Status"
+    },
+    "pagination": {
+      "showing": "Showing {count} of {total} payments"
+    },
+    "modal": {
+      "title": "Complete Payment to Publish",
+      "description": "Your job will be published after successful payment of $2.00 USD.",
+      "cancel": "Cancel"
+    }
+  },
+  "payment_details": {
+    "title": "Payment Details",
+    "back_to_history": "Back to Payment History",
+    "payment_info": "Payment Information",
+    "job_details": "Job Details",
+    "job_title": "Job Title",
+    "receipt": "Payment Receipt",
+    "total": "Total",
+    "error": {
+      "title": "We couldn't load the payment details",
+      "message": "We couldn't load the payment details. Please try again."
+    }
+  },
+  "settings": {
+    "title": "Account Settings",
+    "password": {
+      "title": "Change Password",
+      "current": "Current Password",
+      "new": "New Password",
+      "confirm": "Confirm New Password",
+      "button": "Change Password",
+      "processing": "Processing...",
+      "success": "Password changed successfully!",
+      "error": "Failed to change password. Please try again.",
+      "new_different": "New password must be different from current password",
+      "system_error": "An error occurred. Please try again later.",
+      "current_required": "Current password is required",
+      "new_required": "New password is required",
+      "new_min": "Password must be at least 8 characters",
+      "new_format": "Password must contain at least one uppercase letter, one lowercase letter, and one number",
+      "confirm_required": "Confirm password is required",
+      "confirm_match": "Passwords must match"
+    },
+    "google_account": {
+      "title": "Google Account",
+      "message": "You're logged in with Google, so you can't change your password here. To manage your Google account password, please visit your Google account settings."
+    }
+  },
+  "employer_detail": {
+    "back": "Back",
+    "job_openings": "Job Openings ({count})",
+    "company_info": {
+      "company_type": "Company Type",
+      "address": "Address",
+      "company_size": "Company Size",
+      "working_days": "Working Days",
+      "website": "Website",
+      "email": "Email",
+      "about": "About the Company",
+      "no_description": "No description provided"
+    },
+    "job_card": {
+      "posted": "Posted",
+      "expires": "Expires",
+      "more_tags": "+{count} more"
+    },
+    "empty_jobs": {
+      "title": "No job listings found",
+      "description": "This employer doesn't have any active job postings at the moment."
+    },
+    "error": {
+      "title": "Employer not found",
+      "description": "We couldn't find the employer information you're looking for.",
+      "go_back": "Go Back"
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "mark_all_read": "Mark all as read",
+    "loading": "Loading notifications...",
+    "no_notifications": "No notifications yet",
+    "error_loading": "Error loading notifications"
+  },
+  "modal": {
+    "close": "Close"
+  },
+  "modal-yes-no": {
+    "logout": {
+      "title": "Log Out",
+      "message": "Are you sure you want to log out?"
+    },
+    "delete-job": {
+      "title": "Delete Job",
+      "message": "Are you sure you want to delete this job? This action cannot be undone."
+    },
+    "close-job": {
+      "title": "Close Job",
+      "message": "Are you sure you want to close this job? Candidates will no longer be able to apply."
+    },
+    "accept-application": {
+      "title": "Accept Application",
+      "message": "Are you sure you want to accept this application? The candidate will be notified of your decision."
+    },
+    "reject-application": {
+      "title": "Reject Application",
+      "message": "Are you sure you want to reject this application? The candidate will be notified of your decision."
+    },
+    "yes": "Yes",
+    "no": "No"
+  },
+  "pagination": {
+    "previous": "Prev",
+    "next": "Next"
+  },
+  "footer": {
+    "footer-left": {
+      "address": "No. 3 Cau Giay Street, Lang Thuong Ward, Dong Da District, Hanoi.",
+      "name": "University of Transport and Communications",
+      "phone": "Phone: (84.24) 37663311 - Fax: (84.24)37669613",
+      "email": "Email: dhgtvt@utc.edu.vn",
+      "description": "FindITJobs, where you can search for jobs that find talent for your company or business."
+    },
+    "footer-right": {
+      "service": {
+        "name": "Services",
+        "item-1": "Terms of Use",
+        "item-2": "Personal Information Privacy Policy",
+        "item-3": "Payment Privacy Policy",
+        "item-4": "About FindITJobs"
+      },
+      "support": {
+        "name": "Support",
+        "item-1": "Return and Refund Policy",
+        "item-2": "Warranty and Compensation Policy",
+        "item-3": "Consulting Policy"
+      },
+      "my-account": {
+        "name": "My Account",
+        "item-1": "Login/Create New Account",
+        "item-2": "Change Customer Address",
+        "item-3": "Account Details",
+        "item-4": "Payment History"
+      },
+      "contact": {
+        "name": "Contact",
+        "item-1": "No. 3 Cau Giay Street, Lang Thuong Ward, Dong Da District, Hanoi.",
+        "item-2": "(84.24) 37663311",
+        "item-3": "dhgtvt@utc.edu.vn"
+      }
+    }
+  }
+}
