@@ -7,6 +7,7 @@ import { auth } from "../firebase/firebaseConfig";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { employerStore } from "./employerStore";
 import { candidateStore } from "./candidateStore";
+import { notificationStore } from "./notificationStore";
 
 export interface IUser {
   _id: string;
@@ -185,6 +186,10 @@ class UserStore {
         if (response.data.user) {
           runInAction(() => {
             this.user = response.data.user;
+            notificationStore.initSocket(
+              this.user?._id || "",
+              this.user?.role || ""
+            );
           });
         }
         if (response.data.personalInfo) {
