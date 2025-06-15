@@ -203,9 +203,10 @@ const CandidateProfile = observer(() => {
     appendSkill({ key: "", value: "" });
   };
 
-  // Reset form with candidate data when available
-  const resetValues = candidateStore?.candidate
-    ? {
+  useEffect(() => {
+    // Set loading state only once
+    if (candidateStore?.candidate) {
+      reset({
         fullName: candidateStore.candidate.fullName || "",
         jobTitle: candidateStore.candidate.jobTitle || "",
         email: candidateStore.candidate.email || "",
@@ -226,14 +227,8 @@ const CandidateProfile = observer(() => {
         other: candidateStore.candidate.other || "",
         skills: candidateStore.candidate.skills || [],
         achievement: candidateStore.candidate.achievement || "",
-      }
-    : undefined;
-
-  useEffect(() => {
-    // Set loading state only once
-    if (isLoading) {
+      });
       setIsLoading(false);
-      reset(resetValues);
     }
   }, [candidateStore?.candidate, reset]);
 
@@ -343,7 +338,7 @@ const CandidateProfile = observer(() => {
                   type="button"
                   onClick={() => {
                     setIsEditing(!isEditing);
-                    reset(resetValues);
+                    reset();
                   }}
                 >
                   <Edit />
