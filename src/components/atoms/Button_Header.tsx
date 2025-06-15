@@ -38,7 +38,7 @@ const Button_Header: React.FC<MyComponentProps> = observer(
       fetchData();
 
       setIsClient(true);
-    }, [userStore]);
+    }, [userStore, notificationStore]);
 
     const handleButton_Header = () => {
       if (userStore && userStore.user) {
