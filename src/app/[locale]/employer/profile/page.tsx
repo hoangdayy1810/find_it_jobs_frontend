@@ -212,11 +212,11 @@ const EmployerProfile = observer(() => {
                           <Controller
                             name="logo"
                             control={control}
-                            render={({
-                              field: { onChange, value, ...field },
-                            }) => (
+                            render={({ field: { onChange, ...field } }) => (
                               <input
-                                {...field}
+                                name={field.name}
+                                ref={field.ref}
+                                onBlur={field.onBlur}
                                 onChange={(e) => {
                                   if (
                                     e.target.files &&
