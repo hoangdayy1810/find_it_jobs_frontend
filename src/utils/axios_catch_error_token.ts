@@ -6,6 +6,18 @@ const api = axios.create({
   withCredentials: true,
 });
 
+// Lấy token từ cookie và thêm vào Authorization header
+api.interceptors.request.use((config) => {
+  const cookies = nookies.get(); // get tất cả cookies
+  const token = cookies.token;
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 // Interceptor để kiểm tra lỗi 401 và 403
 api.interceptors.response.use(
   (response) => {
