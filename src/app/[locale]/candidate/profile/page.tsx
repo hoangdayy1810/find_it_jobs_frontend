@@ -375,7 +375,9 @@ const CandidateProfile = observer(() => {
                             <Controller
                               name="avatar"
                               control={control}
-                              render={({ field: { onChange, ...field } }) => (
+                              render={({
+                                field: { onChange, value, ...field },
+                              }) => (
                                 <input
                                   {...field}
                                   onChange={(e) => {
