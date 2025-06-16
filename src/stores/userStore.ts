@@ -47,6 +47,10 @@ class UserStore {
         if (response.data.user) {
           runInAction(() => {
             this.user = response.data.user;
+            notificationStore.initSocket(
+              this.user?._id || "",
+              this.user?.role || ""
+            );
           });
         }
 
@@ -97,6 +101,10 @@ class UserStore {
         if (response.data.user) {
           runInAction(() => {
             this.user = response.data.user;
+            notificationStore.initSocket(
+              this.user?._id || "",
+              this.user?.role || ""
+            );
           });
         }
 

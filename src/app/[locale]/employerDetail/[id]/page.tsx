@@ -10,6 +10,9 @@ import EmptyState from "@/components/atoms/EmptyState";
 import JobCard2 from "@/components/molecules/JobCard2";
 import CompanyInfoCard from "@/components/organisms/CompanyInfoCard";
 import LoadingState from "@/components/atoms/LoadingState";
+import { formatWorkingDays, parseWorkingDays } from "@/utils/formatWorkingDays";
+import { IEmployer } from "@/stores/employerStore";
+import { COMPANYSIZE } from "@/utils/constant";
 
 const EmployerDetailPage = observer(() => {
   const t = useTranslations();
@@ -21,6 +24,35 @@ const EmployerDetailPage = observer(() => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const getTranslatedWorkingDays = (days: string[]) => {
+    // First get the formatted string with the original function
+    const formattedDays = formatWorkingDays(days);
+
+    if (!formattedDays) return "";
+
+    // Create a mapping for day name translations
+    const dayTranslations: Record<string, string> = {
+      "Thứ Hai": t("application.company.workingDays.monday"),
+      "Thứ Ba": t("application.company.workingDays.tuesday"),
+      "Thứ Tư": t("application.company.workingDays.wednesday"),
+      "Thứ Năm": t("application.company.workingDays.thursday"),
+      "Thứ Sáu": t("application.company.workingDays.friday"),
+      "Thứ Bảy": t("application.company.workingDays.saturday"),
+      "Chủ Nhật": t("application.company.workingDays.sunday"),
+    };
+
+    // Replace each Vietnamese day name with its translation
+    let translatedString = formattedDays;
+    for (const [vietDay, translatedDay] of Object.entries(dayTranslations)) {
+      translatedString = translatedString.replace(
+        new RegExp(vietDay, "g"),
+        translatedDay
+      );
+    }
+
+    return translatedString;
+  };
 
   useEffect(() => {
     const fetchEmployerDetails = async () => {
@@ -58,7 +90,14 @@ const EmployerDetailPage = observer(() => {
   }
 
   // Use values from the store
-  const employer = employerStore?.currentEmployer;
+  const employer = {
+    ...employerStore?.currentEmployer,
+    workingDays: employerStore?.currentEmployer?.workingDays
+      ? getTranslatedWorkingDays(
+          parseWorkingDays(employerStore?.currentEmployer?.workingDays)
+        )
+      : employerStore?.currentEmployer?.workingDays || "",
+  };
   const jobs = employerStore?.employerJobs || [];
   const totalJobs = employerStore?.totalJobs || 0;
 
@@ -99,7 +138,7 @@ const EmployerDetailPage = observer(() => {
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Left column - Company Info (now 2/3 of the page) */}
         <div className="w-full lg:w-2/3">
-          <CompanyInfoCard employer={employer} t={t} />
+          <CompanyInfoCard employer={employer as IEmployer} t={t} />
         </div>
 
         {/* Right column - Job Listings (now 1/3 of the page) */}
