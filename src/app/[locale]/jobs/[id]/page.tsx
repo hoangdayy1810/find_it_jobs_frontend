@@ -6,7 +6,7 @@ import { observer } from "mobx-react-lite";
 import { useJob, useTag, useUser, useCandidate } from "@/contexts/AppContext";
 import Image from "next/image";
 import { formatDate } from "@/utils/fommat_date";
-import { EXPERIENCE } from "@/utils/constant";
+import { COMPANYSIZE, EXPERIENCE } from "@/utils/constant";
 import VectorLeftIcon from "@/components/atoms/icons/VectorLeftIcon";
 import RotateUpDownArrow from "@/components/atoms/icons/RotateUpDownArrow";
 import JobIcon from "@/components/atoms/icons/JobIcon";
@@ -18,6 +18,7 @@ import JobListItem from "@/components/molecules/JobListItem";
 import JobApplicationModal from "@/components/molecules/JobApplicationModal";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { formatWorkingDays, parseWorkingDays } from "@/utils/formatWorkingDays";
 
 const JobDetailPage = observer(() => {
   const t = useTranslations();
@@ -43,6 +44,35 @@ const JobDetailPage = observer(() => {
 
     fetchJobDetail();
   }, [jobId, jobStore]);
+
+  const getTranslatedWorkingDays = (days: string[]) => {
+    // First get the formatted string with the original function
+    const formattedDays = formatWorkingDays(days);
+
+    if (!formattedDays) return "";
+
+    // Create a mapping for day name translations
+    const dayTranslations: Record<string, string> = {
+      "Thứ Hai": t("application.company.workingDays.monday"),
+      "Thứ Ba": t("application.company.workingDays.tuesday"),
+      "Thứ Tư": t("application.company.workingDays.wednesday"),
+      "Thứ Năm": t("application.company.workingDays.thursday"),
+      "Thứ Sáu": t("application.company.workingDays.friday"),
+      "Thứ Bảy": t("application.company.workingDays.saturday"),
+      "Chủ Nhật": t("application.company.workingDays.sunday"),
+    };
+
+    // Replace each Vietnamese day name with its translation
+    let translatedString = formattedDays;
+    for (const [vietDay, translatedDay] of Object.entries(dayTranslations)) {
+      translatedString = translatedString.replace(
+        new RegExp(vietDay, "g"),
+        translatedDay
+      );
+    }
+
+    return translatedString;
+  };
 
   // Handle apply button click
   const handleApplyClick = () => {
@@ -342,7 +372,13 @@ const JobDetailPage = observer(() => {
                     <p className="text-sm text-gray-500">
                       {t("detail-job.apply.company.company-size")}
                     </p>
-                    <p>{companyInfo.companySize}</p>
+                    <p>
+                      {t(
+                        COMPANYSIZE.find(
+                          (option) => option.value === companyInfo.companySize
+                        )?.label || "company.size.not-specified"
+                      )}
+                    </p>
                   </div>
                 </div>
               )}
@@ -356,7 +392,11 @@ const JobDetailPage = observer(() => {
                     <p className="text-sm text-gray-500">
                       {t("detail-job.apply.company.working-days")}
                     </p>
-                    <p>{companyInfo.workingDays}</p>
+                    <p>
+                      {getTranslatedWorkingDays(
+                        parseWorkingDays(companyInfo.workingDays)
+                      )}
+                    </p>
                   </div>
                 </div>
               )}
