@@ -262,7 +262,10 @@ const JobDetailPage = observer(() => {
                   {tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm"
+                      className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm hover:cursor-pointer hover:ring-2 transition-colors"
+                      onClick={() => {
+                        router.push(`/jobs?${tag.key}=${tag.value}`);
+                      }}
                     >
                       {tag.value}
                     </span>

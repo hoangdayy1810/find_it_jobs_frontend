@@ -12,7 +12,6 @@ import CompanyInfoCard from "@/components/organisms/CompanyInfoCard";
 import LoadingState from "@/components/atoms/LoadingState";
 import { formatWorkingDays, parseWorkingDays } from "@/utils/formatWorkingDays";
 import { IEmployer } from "@/stores/employerStore";
-import { COMPANYSIZE } from "@/utils/constant";
 
 const EmployerDetailPage = observer(() => {
   const t = useTranslations();

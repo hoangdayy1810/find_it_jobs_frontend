@@ -6,15 +6,18 @@ import Logo from "../atoms/Logo";
 import NavBar from "../organisms/NavBar";
 import LanguageSwitcher from "../atoms/LanguageSwitcher";
 import { useTranslations } from "next-intl";
-import { useCandidate, useEmployer } from "@/contexts/AppContext";
+import { useCandidate, useEmployer, useTag } from "@/contexts/AppContext";
 import { observer } from "mobx-react-lite";
+import ProvinceSelect from "../molecules/ProvineSelect";
 
 const Header = observer(() => {
   const t = useTranslations();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentProvine, setCurrentProvine] = useState("all");
   const candidateStore = useCandidate();
   const employerStore = useEmployer();
+  const tagStore = useTag();
 
   let srcImg;
   if (candidateStore && candidateStore.candidate?.avatar) {
@@ -30,11 +33,24 @@ const Header = observer(() => {
     };
 
     window.addEventListener("scroll", handleScroll);
+    const savedProvine = localStorage.getItem("currentProvine");
+    if (savedProvine) {
+      setCurrentProvine(savedProvine);
+    }
     setIsLoading(true);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("currentProvine", currentProvine);
+    const fetchData = async () => {
+      const result = await tagStore?.postCurrentProvine(currentProvine);
+      console.log("result", result);
+    };
+    fetchData();
+  }, [currentProvine]);
 
   return (
     <div className="bg-[#FFFFFF]">
@@ -44,8 +60,19 @@ const Header = observer(() => {
             <Logo style="w-64" src="/images/Logo.png" />
           </div>
           <div className="w-full flex justify-between items-center">
-            <div className="w-3/4 p-3">
-              <Search_Header />
+            <div className="w-3/4 p-3 flex space-x-4">
+              <div className="w-1/6">
+                <ProvinceSelect
+                  value={currentProvine}
+                  onChange={(selectedValue: any, option: any) => {
+                    console.log(selectedValue);
+                    setCurrentProvine(selectedValue);
+                  }}
+                />
+              </div>
+              <div className="w-full">
+                <Search_Header />
+              </div>
             </div>
 
             <div className="w-1/5 flex justify-around items-center py-2 text-center">

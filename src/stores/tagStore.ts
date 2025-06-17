@@ -27,6 +27,7 @@ class TagStore {
   tagKeys: ITagKey[] | null = null;
   tagKeysByJobs: ITagKey[] | null = null;
   tagValuesBySearch: ITagBySearch[] | null = null;
+  currentProvine: string = "hanoi";
 
   constructor() {
     makeAutoObservable(this);
@@ -55,13 +56,19 @@ class TagStore {
     runInAction(() => {
       this.tagKeysByJobs = data;
     });
-    console.log("tagKeysByJobs", this.tagKeysByJobs);
   }
 
   getTagValuesBySearch(data: any) {
     runInAction(() => {
       this.tagValuesBySearch = data;
     });
+  }
+
+  postCurrentProvine(currentProvine: string) {
+    runInAction(() => {
+      this.currentProvine = currentProvine;
+    });
+    return this.currentProvine;
   }
 }
 
