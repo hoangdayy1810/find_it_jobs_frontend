@@ -11,6 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
     "@paypal/react-paypal-js": "^8.8.3",
+    "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.16",
     "@tiptap/extension-bold": "^2.11.7",
     "@tiptap/extension-bullet-list": "^2.11.7",
@@ -23,6 +24,7 @@
     "@tiptap/react": "^2.11.7",
     "@tiptap/starter-kit": "^2.11.7",
     "@types/lodash": "^4.17.16",
+    "antd": "^5.26.1",
     "axios": "^1.8.4",
     "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
@@ -41,8 +43,7 @@
     "react-hook-form": "^7.55.0",
     "react-hot-toast": "^2.5.2",
     "socket.io-client": "^4.8.1",
-    "yup": "^1.6.1",
-    "@tailwindcss/postcss": "^4"
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

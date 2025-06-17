@@ -27,21 +27,23 @@ const JobsPage = observer(() => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalJobs, setTotalJobs] = useState(0);
   const jobsPerPage = 10;
+  const [filters, setFilters] = useState({} as any);
 
   // Parse filters from URL
-  const getInitialFilters = () => {
-    const params = new URLSearchParams(searchParams);
-    return {
-      specializationId: params.get("specializationId") || "",
-      location: params.get("location") || "",
-      jobType: params.get("jobType") || "",
-      salaryRange: params.get("salaryRange") || "",
-      experience: params.get("experience") || "",
-      tags: Object.fromEntries(
-        Array.from(params.entries())
-          .filter(
+  useEffect(() => {
+    const init = async () => {
+      const provine = await tagStore?.currentProvine;
+      const params = new URLSearchParams(searchParams);
+
+      const newFilters = {
+        specializationId: params.get("specializationId") || "",
+        location: provine || "all",
+        jobType: params.get("jobType") || "",
+        salaryRange: params.get("salaryRange") || "",
+        experience: params.get("experience") || "",
+        tags: Object.fromEntries(
+          Array.from(params.entries()).filter(
             ([key]) =>
-              key &&
               ![
                 "specializationId",
                 "location",
@@ -52,12 +54,14 @@ const JobsPage = observer(() => {
                 "limit",
               ].includes(key)
           )
-          .map(([key, value]) => [key, value])
-      ),
-    };
-  };
+        ),
+      };
 
-  const [filters, setFilters] = useState(getInitialFilters());
+      setFilters(newFilters);
+    };
+
+    init();
+  }, [searchParams, tagStore?.currentProvine]);
 
   // Handle filter changes
   const handleFilterChange = (filterType: string, value: any) => {
@@ -77,7 +81,7 @@ const JobsPage = observer(() => {
     }
 
     if (currentFilters.location) {
-      params.set("location", currentFilters.location);
+      params.set("location", tagStore?.currentProvine || "");
     }
 
     if (currentFilters.jobType) {
@@ -113,7 +117,7 @@ const JobsPage = observer(() => {
       page,
       limit: jobsPerPage,
       specializationId: filters.specializationId || "",
-      location: filters.location || "",
+      location: filters.location !== "all" ? filters.location : "",
       jobType: filters.jobType || "",
       salaryRange: filters.salaryRange || "",
       experience: filters.experience || "",
@@ -144,13 +148,15 @@ const JobsPage = observer(() => {
 
   // Fetch jobs when filters or page changes
   useEffect(() => {
-    fetchJobs(currentPage);
+    if (filters.location) {
+      fetchJobs(currentPage);
+    }
   }, [filters, currentPage]);
 
   // Re-initialize filters when URL changes
-  useEffect(() => {
-    setFilters(getInitialFilters());
-  }, [searchParams]);
+  // useEffect(() => {
+  //   setFilters(getInitialFilters());
+  // }, [searchParams, provine]);
 
   // Handle page change from pagination
   const handlePageChange = (pageNumber: number) => {
@@ -292,7 +298,9 @@ const JobsPage = observer(() => {
             {/* Reset Filters Button */}
             <button
               onClick={() => {
-                setFilters(getInitialFilters());
+                setFilters({
+                  location: tagStore?.currentProvine || "",
+                });
                 router.push("/jobs");
               }}
               className="w-full mt-6 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded transition-colors"
